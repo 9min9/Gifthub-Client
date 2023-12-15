@@ -1,20 +1,20 @@
-import ImageCardWrapper from "../ui/image-card/ImageCardWrapper";
+import ProductCard from "../ui/image-card/ProductCard";
 
 function InputWithLabel({id, placeholder}) {
   return <>
     <label htmlFor={id}></label>
     <input className="input-text input-text--border-radius input-text--style-1" type="text"
-           id={id} placeholder={placeholder}/>
+      id={id} placeholder={placeholder}/>
   </>;
 }
 
-export default function ProductList(props) {
+export default function Product({product}) {
   return (
     <div className="section__content" id="product-area-div">
       <div className="container">
         <div className="u-s-p-y-20" style={{display: "flex", justifyContent: "end",}}>
           <form className="main-form">
-            <InputWithLabel id={"main-search"} placeholder={"검색"}/>
+            <InputWithLabel id="main-search" placeholder="검색"/>
             <button className="btn btn--icon fas fa-search main-search-button" type="submit"></button>
           </form>
         </div>
@@ -23,9 +23,9 @@ export default function ProductList(props) {
             <div className="u-s-m-t-30">
               <div id="row-product-div" className="row">
                 ...
-                <ImageCardWrapper />
+                <ProductCard />
                 {/*  id={props.}/>*/}
-                {/*{props.map(product => <ImageCardWrapper key={product.id} />)}*/}
+                {/*{props.map(product => <ProductCard key={product.id} />)}*/}
               </div>
             </div>
           </div>

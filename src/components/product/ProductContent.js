@@ -1,23 +1,29 @@
 import ProductHeader from "./ProductHeader";
-import ProductList from "./ProductList";
+import Product from "./Product";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
 export default function ProductContent({categoryContent}) {
   const [brand, setBrand] = useState([]);
-
+  const [productList, setProductList] = useState([]);
   useEffect(() => {
     fetchBrandName();
   }, [categoryContent]);
 
+  let token = "eyJyZWdEYXRlIjoxNzAyNDU1NzIxNDA2LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50VHlwZSI6IktBS0FPIiwidXNlcklkIjoyLCJ1c2VybmFtZSI6ImppY211QG5hdmVyLmNvbSIsImV4cCI6MTcwMjQ1OTMyMX0.yQOiF2W2Qk8Mc0DbrTW1IJ4-x-TsTEuboGGrwvnL4oU";
+  let category = categoryContent.filter((category) => category.checked)[0].name.engName.replaceAll("/", "-").toLowerCase();
+  let url = "http://localhost:8081/api/product/" + category + "/brands";
+
+  const handleClick = () => {
+    const res = axios.get("http://localhost:8081/api/product/page/search/${category}/${brand}/${name}")
+    // if(res) {
+      // setProductList(res.productList);
+    // }
+  }
   const fetchBrandName = async () => {
     if (categoryContent.length > 0) {
       let brandList = [];
 
-      let token = "eyJyZWdEYXRlIjoxNzAyNDU1NzIxNDA2LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50VHlwZSI6IktBS0FPIiwidXNlcklkIjoyLCJ1c2VybmFtZSI6ImppY211QG5hdmVyLmNvbSIsImV4cCI6MTcwMjQ1OTMyMX0.yQOiF2W2Qk8Mc0DbrTW1IJ4-x-TsTEuboGGrwvnL4oU";
-      let category = categoryContent.filter((category) => category.checked)[0].name.engName.replaceAll("/", "-").toLowerCase();
-
-      let url = "http://localhost:8081/api/product/" + category + "/brands";
 
       await axios
         .get(url, {headers: {Authorization: token,}})
@@ -26,15 +32,18 @@ export default function ProductContent({categoryContent}) {
             brandList.push({brandName: r, checked: false});
           }
         });
-
       setBrand(brandList);
     }
   }
 
   return (
     <div className="u-s-p-y-30" id="show-product-div">
-      <ProductHeader brand={brand} setBrand={setBrand}/>
-      <ProductList/>
+      <ProductHeader brand={brand} setBrand={setBrand} onClick={handleClick}/>
+      {
+      productList.map(product => (
+        <Product product={product}/>
+      ))
+      }
     </div>
   );
 }
