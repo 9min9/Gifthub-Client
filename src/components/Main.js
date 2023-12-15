@@ -1,6 +1,6 @@
 import "../css/custom/index.css";
-import CategoryBar from "./main/CategoryBar";
-import ProductContent from "./main/ProductContent";
+import CategoryBar from "./product/CategoryBar";
+import ProductContent from "./product/ProductContent";
 import {useEffect, useRef, useState} from "react";
 import axios from "axios";
 
