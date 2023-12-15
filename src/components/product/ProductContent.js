@@ -2,20 +2,15 @@ import ProductHeader from "./ProductHeader";
 import ProductList from "./ProductList";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import Brand from "./Brand";
 
 export default function ProductContent({categoryContent}) {
-
   const [brand, setBrand] = useState([]);
 
   useEffect(() => {
-    getBrandName();
+    fetchBrandName();
   }, [categoryContent]);
 
-  const getBrandName = () => {
-    console.log("ProductHeader | getBrandName")
-    console.log(categoryContent)
-
+  const fetchBrandName = async () => {
     if (categoryContent.length > 0) {
       let brandList = [];
 
@@ -24,7 +19,7 @@ export default function ProductContent({categoryContent}) {
 
       let url = "http://localhost:8081/api/product/" + category + "/brands";
 
-      axios
+      await axios
         .get(url, {headers: {Authorization: token,}})
         .then((result) => {
           for (let r of result.data) {
@@ -38,8 +33,8 @@ export default function ProductContent({categoryContent}) {
 
     return (
         <div className="u-s-p-y-30" id="show-product-div">
-            <ProductHeader categoryContent={categoryContent} brand={brand}/>
-            <ProductList/>
+          <ProductHeader brand={brand}/>
+          <ProductList/>
         </div>
     );
 }

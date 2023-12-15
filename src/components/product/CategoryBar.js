@@ -3,8 +3,6 @@ import {useRef} from "react";
 export default function CategoryBar({categoryContent, setCategoryContent}) {
 
     const selectorRef = useRef([]);
-    console.log("categoryBar")
-    console.log(categoryContent)
 
     function handleClick(event) {
         let categoryListCopy = [...categoryContent];
