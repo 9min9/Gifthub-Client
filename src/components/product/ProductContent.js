@@ -5,7 +5,8 @@ export default function ProductContent({categoryContent}) {
 
     return (
         <div className="u-s-p-y-30" id="show-product-div">
-            <ProductHeader categoryContent={categoryContent}/><ProductList/>
+            <ProductHeader categoryContent={categoryContent}/>
+            <ProductList/>
         </div>
     );
 }
