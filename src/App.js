@@ -1,6 +1,4 @@
-import logo from './logo.svg';
 import './App.css';
-import Preloader from "./components/common/Preloader";
 import Header from "./components/common/Header";
 import {BrowserRouter} from "react-router-dom";
 import Router from "./components/Router";
