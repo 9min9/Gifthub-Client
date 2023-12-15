@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
+import Brand from "./Brand";
 
 export default function ProductHeader({categoryContent}) {
     let brandDivs;
@@ -22,13 +23,9 @@ export default function ProductHeader({categoryContent}) {
             axios
                 .get(url, {headers: {Authorization: token,}})
                 .then((result) => {
-
                     brandDivs = result.data.map((brand) => {
-
-                        return(
-                            <div className="filter__category-wrapper">
-                                <button className="btn filter__btn filter__btn--style-1 brand-filter total-filter" type="button" data-filter="*">{brand}</button>
-                            </div>
+                        return (
+                            <Brand brand={brand}></Brand>
                         )
                     });
                 });
