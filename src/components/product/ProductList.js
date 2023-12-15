@@ -1,12 +1,18 @@
+function InputWithLabel({id, placeholder}) {
+  return <>
+    <label htmlFor={id}></label>
+    <input className="input-text input-text--border-radius input-text--style-1" type="text"
+           id={id} placeholder={placeholder}/>
+  </>;
+}
+
 export default function ProductList() {
   return (
     <div className="section__content" id="product-area-div">
       <div className="container">
         <div className="u-s-p-y-20" style={{display: "flex", justifyContent: "end",}}>
           <form className="main-form">
-            <label htmlFor="main-search"></label>
-            <input className="input-text input-text--border-radius input-text--style-1" type="text"
-                   id="main-search" placeholder="검색"/>
+            <InputWithLabel id={"main-search"} placeholder={"검색"}/>
             <button className="btn btn--icon fas fa-search main-search-button" type="submit"></button>
           </form>
         </div>

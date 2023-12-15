@@ -33,7 +33,7 @@ export default function ProductWrapper() {
     }
 
     const setContent = () => {
-        let imagePath = "/images/categorylogo/";
+        const imagePath = `/images/categorylogo/`;
         let updatedCategoryContent = categoryList.map(category => ({
             name: category,
             checked: category.engName === "ALL",
