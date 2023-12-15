@@ -31,10 +31,10 @@ export default function ProductContent({categoryContent}) {
     }
   }
 
-    return (
-        <div className="u-s-p-y-30" id="show-product-div">
-          <ProductHeader brand={brand}/>
-          <ProductList/>
-        </div>
-    );
+  return (
+    <div className="u-s-p-y-30" id="show-product-div">
+      <ProductHeader brand={brand} setBrand={setBrand}/>
+      <ProductList/>
+    </div>
+  );
 }
