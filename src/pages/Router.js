@@ -1,6 +1,6 @@
 import {Route, Routes} from "react-router-dom";
 import App from "../App";
-import Header from "./common/Header";
+import Header from "../components/common/Header";
 import Main from "./Main";
 
 export default function Router() {

@@ -1,5 +1,5 @@
 import "../css/custom/index.css";
-import ProductWrapper from "./product/ProductWrapper";
+import ProductWrapper from "../components/product/ProductWrapper";
 
 export default function Main() {
     return(
