@@ -1,3 +1,5 @@
+import ImageCardWrapper from "../ui/image-card/ImageCardWrapper";
+
 function InputWithLabel({id, placeholder}) {
   return <>
     <label htmlFor={id}></label>
@@ -6,7 +8,7 @@ function InputWithLabel({id, placeholder}) {
   </>;
 }
 
-export default function ProductList() {
+export default function ProductList(props) {
   return (
     <div className="section__content" id="product-area-div">
       <div className="container">
@@ -20,6 +22,10 @@ export default function ProductList() {
           <div className="col-lg-12">
             <div className="u-s-m-t-30">
               <div id="row-product-div" className="row">
+                ...
+                <ImageCardWrapper />
+                {/*  id={props.}/>*/}
+                {/*{props.map(product => <ImageCardWrapper key={product.id} />)}*/}
               </div>
             </div>
           </div>
