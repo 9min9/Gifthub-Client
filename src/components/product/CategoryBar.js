@@ -3,7 +3,7 @@ import {useRef} from "react";
 export default function CategoryBar({categoryContent, setCategoryContent}) {
 
     const selectorRef = useRef([]);
-////
+
     function handleClick(event) {
         let categoryListCopy = [...categoryContent];
 
@@ -22,16 +22,21 @@ export default function CategoryBar({categoryContent, setCategoryContent}) {
 
         if (category.checked) {
             return (
-                <span key={category.name.engName} className="product-selector-container category-active" ref={(el) => selectorRef.current[index] = el}>
-                    <span key={category.name.engName}  className="product-selector" data-index={index} style={{backgroundImage: `url(${category.image})`}} onClick={handleClick}></span>
+                <span key={category.name.engName} className="product-selector-container category-active"
+                      ref={(el) => selectorRef.current[index] = el}>
+                    <span key={category.name.engName} className="product-selector" data-index={index}
+                          style={{backgroundImage: `url(${category.image})`}} onClick={handleClick}></span>
                     <br/>
                     <span className="product-name">{category.name.korName}</span>
                 </span>
             );
         } else {
             return (
-                <span className="product-selector-container" key={category.name.engName} ref={(el) => selectorRef.current[index] = el}>
-                    <span className="product-selector" data-index={index} style={{backgroundImage: `url(${category.image})`}} key={category.name.engName} onClick={handleClick}></span>
+                <span className="product-selector-container" key={category.name.engName}
+                      ref={(el) => selectorRef.current[index] = el}>
+                    <span className="product-selector" data-index={index}
+                          style={{backgroundImage: `url(${category.image})`}} key={category.name.engName}
+                          onClick={handleClick}></span>
                 <br/>
                     <span className="product-name">{category.name.korName}</span>
                 </span>

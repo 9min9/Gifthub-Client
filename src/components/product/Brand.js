@@ -1,4 +1,4 @@
-export default function Brand({brand, checked = false}) {
+export default function Brand({brand, checked, handleClick}) {
   if (checked) {
     return <div className="filter__category-wrapper">
       <button className="btn filter__btn filter__btn--style-1 brand-filter total-filter js-checked" type="button"
