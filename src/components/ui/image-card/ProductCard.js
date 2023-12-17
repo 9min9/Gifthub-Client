@@ -1,7 +1,7 @@
-import ImageContent from "./ImageContent";
 import {useState} from "react";
 
-function ImageCardWrapper(props){
+
+function ProductCard({product}){
     const [id, setId] = useState();
 
     return (
@@ -11,10 +11,11 @@ function ImageCardWrapper(props){
                 <a className="aspect aspect--bg-grey aspect--square u-d-block">
                     <img className="aspect__img" src="/images/noproductimage/no-image-departmentstore.png"/>
                 </a>
-                <ImageContent/>
+                {product.brandName} <br/>
+                {product.name}
             </div>
         </div>
 
     );
 }
-export default ImageCardWrapper;
+export default ProductCard;
