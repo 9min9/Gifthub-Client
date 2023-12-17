@@ -1,17 +1,28 @@
-import RadioButton from "../ui/form/RadioButton";
+import OrderSummary from "./OrderSummary";
+import {useState} from "react";
 
-export default function Payment(props) {
-  let {money} = props;
+export default function Payment() {
+    const [points, setPoints] = useState([
+        {point: 5000, checked: true},
+        {point: 10000, checked: false},
+        {point: 20000, checked: false},
+        {point: 30000, checked: false},
+        {point: 40000, checked: false},
+        {point: 50000, checked: false},
+    ]);
 
-  let element = money.map((m) => {
-    return <div className="radio-box">
-      <RadioButton id={`point-${m}`} name={`point`} value={m} checked={false}/>
-      <div className="radio-box__state radio-box__state--primary">
-        <label className="radio-box__label" htmlFor="point-5000">5000</label>
-      </div>
-    </div>
-  });
-
-  return {element}
-
+    return (
+        <div class="section__content">
+            <div class="container">
+                <div class="checkout-f">
+                    <div class="row">
+                        <div class="col-lg">
+                            <h1 class="checkout-f__h1">결제 금액 선택</h1>
+                            <OrderSummary points={points} setPoints={setPoints} totalPrice={1000}/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
