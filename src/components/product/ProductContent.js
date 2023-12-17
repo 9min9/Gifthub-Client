@@ -1,86 +1,136 @@
-import ProductHeader from "./ProductHeader";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import ProductCard from "../ui/image-card/ProductCard";
+import Brand from "./Brand";
+import * as PropTypes from "prop-types";
+
 
 
 export default function ProductContent({categoryContent}) {
-  let token = "eyJyZWdEYXRlIjoxNzAyNDU1NzIxNDA2LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50VHlwZSI6IktBS0FPIiwidXNlcklkIjoyLCJ1c2VybmFtZSI6ImppY211QG5hdmVyLmNvbSIsImV4cCI6MTcwMjQ1OTMyMX0.yQOiF2W2Qk8Mc0DbrTW1IJ4-x-TsTEuboGGrwvnL4oU";
+    let token = "eyJyZWdEYXRlIjoxNzAyNDU1NzIxNDA2LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50VHlwZSI6IktBS0FPIiwidXNlcklkIjoyLCJ1c2VybmFtZSI6ImppY211QG5hdmVyLmNvbSIsImV4cCI6MTcwMjQ1OTMyMX0.yQOiF2W2Qk8Mc0DbrTW1IJ4-x-TsTEuboGGrwvnL4oU";
+    const [brand, setBrand] = useState();
+    const [brandList, setBrandList] = useState([]);
+    const [productList, setProductList] = useState([]);
+    useEffect(() => {
+        fetchBrandName();
+    }, [categoryContent]);
 
-  const [brand, setBrand] = useState([]);
-  const [productList, setProductList] = useState([]);
-  useEffect(() => {
-    fetchBrandName();
-  }, [categoryContent]);
+    useEffect(() => {
+        fetchProductListByBrand();
+    }, [brand]);
 
-
-  // 브랜드 네임 클릭 -> 해당 브랜드 list -> productList 배열속 elements들이 바뀜
-  const handleClick = () => {
-    const res = axios.get("http://localhost:8081/api/product/page/search/${category}/${brand}/${name}", {headers: {Authorization: token}})
-    if(res) {
-      console.log(1);
-      setProductList(res.productList);
-    } else {
-      alert("error occured");
+    const fetchProductListByBrand = async () => {
+        console.log(brand);
+        await axios.get(`http://localhost:8081/api/product/brands/${brand}`)
+            .then(function (res){
+                setProductList(res.data)
+            })
+            .catch(function (e){
+                console.log(e)
+            })
     }
-  }
-  const fetchBrandName = async () => {
-    if (categoryContent.length > 0) {
-      let brandList = [];
 
-      let category = categoryContent.filter((category) => category.checked)[0].name.engName.replaceAll("/", "-").toLowerCase();
-      let url = "http://localhost:8081/api/product/" + category + "/brands";
-
-
-      await axios
-        .get(url, {headers: {Authorization: token,}})
-        .then((result) => {
-          for (let r of result.data) {
-            brandList.push({brandName: r, checked: false});
-          }
-        });
-      setBrand(brandList);
+    // useEffect(() => {
+    //     fetchProductList();
+    // }, [productList]);
+    //
+    // const fetchProductList = async () => {
+    //     await axios.get("http://localhost:8081/api/product/products")
+    //         .then(function (res){
+    //             setProductList(res.data);
+    //         })
+    //         .catch(function (error){
+    //             console.log(error);
+    //         })
+    // }
+    const selectBrand = (brandName) => {
+        setBrand(brandName);
     }
-  }
 
-  return (
-    <div className="u-s-p-y-30" id="show-product-div">
-      <ProductHeader brand={brand} setBrand={setBrand} onClick={handleClick}/>
+    const fetchBrandName = async () => {
+        if (categoryContent.length > 0) {
+            let brandLists = [];
 
-      <div className="section__content" id="product-area-div">
-        <div className="container">
-          <div className="u-s-p-y-20" style={{display: "flex", justifyContent: "end",}}>
-            <form className="main-form">
-              <InputWithLabel id="main-search" placeholder="검색"/>
-              <button className="btn btn--icon fas fa-search main-search-button" type="submit"></button>
-            </form>
-          </div>
+            let category = categoryContent.filter((category) => category.checked)[0].name.engName.replaceAll("/", "-").toLowerCase();
+            let url = "http://localhost:8081/api/product/" + category + "/brands";
 
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="u-s-m-t-30">
-                <div id="row-product-div" className="row">
-                  ...
 
-                  {
-                    productList.map(product => (
-                        <ProductCard
-                            product={product}
-                            // onClick={handleClick()}
-                        />
-                    ))
-                  }
+            await axios
+                .get(url, {headers: {Authorization: token,}})
+                .then((result) => {
+                    for (let r of result.data) {
+                        brandLists.push({brandName: r, checked: false});
+                    }
+                });
+            setBrandList(brandLists);
+        }
+    }
+
+    return (
+        <div className="u-s-p-y-30" id="show-product-div">
+
+            <ProductHeader brand={brandList} callbackfn={b =>
+                <Brand
+                    key={b.brandName}
+                    brand={b.brandName}
+                    checked={b.checked}
+                    brandClick={selectBrand}
+                />}/>
+
+            <div className="section__content" id="product-area-div">
+                <div className="container">
+                    <div className="u-s-p-y-20" style={{display: "flex", justifyContent: "end",}}>
+                        <form className="main-form">
+                            <InputWithLabel id="main-search" placeholder="검색"/>
+                            <button className="btn btn--icon fas fa-search main-search-button" type="submit"></button>
+                        </form>
+                    </div>
+
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="u-s-m-t-30">
+                                <div id="row-product-div" className="row">
+                                    {
+                                        productList.map(product => (
+                                            <ProductCard
+                                                key={product.id}
+                                                product={product}
+                                                // onClick={handleProductClick()}
+                                            />
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-
-
-    </div>
-  );
+    );
 }
+
+function ProductHeader(props) {
+    return <div className="section__content" id="sticky-header">
+        <div className="container">
+            <div className="row">
+                <div className="col-lg-12">
+                    <div className="filter-category-container" id="filter-category-container">
+                        <Brand
+                            brand={"전체"}
+                            checked={true}
+                            // brandClick={selectBrand}
+                        />
+                        {props.brand.map(props.callbackfn)}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>;
+}
+ProductHeader.propTypes = {
+    brand: PropTypes.arrayOf(PropTypes.any),
+    callbackfn: PropTypes.func
+};
 
 function InputWithLabel({id, placeholder}) {
     return <>

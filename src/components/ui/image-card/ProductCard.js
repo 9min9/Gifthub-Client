@@ -1,7 +1,7 @@
-import ProductContent from "./ProductContent";
 import {useState} from "react";
 
-function ProductCard(props){
+
+function ProductCard({product}){
     const [id, setId] = useState();
 
     return (
@@ -11,10 +11,8 @@ function ProductCard(props){
                 <a className="aspect aspect--bg-grey aspect--square u-d-block">
                     <img className="aspect__img" src="/images/noproductimage/no-image-departmentstore.png"/>
                 </a>
-                {/* <ProductContenxt
-                    productName={}
-                    brandName={}
-                /> */}
+                {product.brandName} <br/>
+                {product.name}
             </div>
         </div>
 
