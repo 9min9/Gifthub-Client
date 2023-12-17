@@ -9,6 +9,7 @@ import * as PropTypes from "prop-types";
 export default function ProductContent({categoryContent}) {
     let token = "eyJyZWdEYXRlIjoxNzAyNDU1NzIxNDA2LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50VHlwZSI6IktBS0FPIiwidXNlcklkIjoyLCJ1c2VybmFtZSI6ImppY211QG5hdmVyLmNvbSIsImV4cCI6MTcwMjQ1OTMyMX0.yQOiF2W2Qk8Mc0DbrTW1IJ4-x-TsTEuboGGrwvnL4oU";
     const [brand, setBrand] = useState();
+    const [category, setCategory] = useState("all");
     const [brandList, setBrandList] = useState([]);
     const [productList, setProductList] = useState([]);
     useEffect(() => {
@@ -18,6 +19,10 @@ export default function ProductContent({categoryContent}) {
     useEffect(() => {
         fetchProductListByBrand();
     }, [brand]);
+
+    useEffect(() => {
+        fetchProductListByCategory();
+    }, [category]);
 
     const fetchProductListByBrand = async () => {
         console.log(brand);
@@ -30,19 +35,6 @@ export default function ProductContent({categoryContent}) {
             })
     }
 
-    // useEffect(() => {
-    //     fetchProductList();
-    // }, [productList]);
-    //
-    // const fetchProductList = async () => {
-    //     await axios.get("http://localhost:8081/api/product/products")
-    //         .then(function (res){
-    //             setProductList(res.data);
-    //         })
-    //         .catch(function (error){
-    //             console.log(error);
-    //         })
-    // }
     const selectBrand = (brandName) => {
         setBrand(brandName);
     }
@@ -51,7 +43,7 @@ export default function ProductContent({categoryContent}) {
         if (categoryContent.length > 0) {
             let brandLists = [];
 
-            let category = categoryContent.filter((category) => category.checked)[0].name.engName.replaceAll("/", "-").toLowerCase();
+            setCategory(categoryContent.filter((category) => category.checked)[0].name.engName.replaceAll("/", "-").toLowerCase());
             let url = "http://localhost:8081/api/product/" + category + "/brands";
 
 
@@ -64,6 +56,16 @@ export default function ProductContent({categoryContent}) {
                 });
             setBrandList(brandLists);
         }
+    }
+
+    const fetchProductListByCategory = () => {
+        axios.get(`http://localhost:8081/api/product/category/${category}`)
+            .then(function (res){
+                setProductList(res.data);
+            })
+            .catch(function (e){
+                console.log(e)
+            })
     }
 
     return (
