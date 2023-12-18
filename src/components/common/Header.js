@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 import {AuthContext} from "../account/AuthContextProvider";
 import {useContext} from "react";
+import MiniCart from "../cart/mini-cart/MiniCart";
 
 
 export default function Header() {
@@ -100,32 +101,7 @@ export default function Header() {
                                 <span className="ah-close">✕ Close</span>
                                 <ul className="ah-list ah-list--design1 ah-list--link-color-secondary" id="side-header">
                                     <li className="has-dropdown">
-                                        <a className="mini-cart-shop-link"><i className="fas fa-shopping-bag"></i><span
-                                            className="total-item-round"></span></a>
-                                        <span className="js-menu-toggle"></span>
-                                        <div className="mini-cart">
-                                            <form action="/payment/checkout" method="get" name="checkout-form">
-                                                <div className="mini-product-container gl-scroll u-s-m-b-15"
-                                                     id="mini-cart-list">
-                                                </div>
-                                                <div className="mini-product-stat">
-                                                    <div className="mini-total">
-                                                        <span className="subtotal-text">결제 금액</span>
-                                                        <span className="subtotal-value" id="subtotal-value"></span>
-                                                    </div>
-                                                    <div className="mini-action">
-                                                        <Link to={"/payment/checkout"}
-                                                              className="mini-link btn--e-brand-b-2"
-                                                              style={{width: "100%", cursor: "pointer"}}>
-                                                            결제 하기
-                                                        </Link>
-                                                        <Link to="/carts"
-                                                              className="mini-link btn--e-transparent-secondary-b-2">장바구니
-                                                            보기</Link>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+                                        {isAuthenticated && <MiniCart/>}
                                     </li>
                                 </ul>
                             </div>
