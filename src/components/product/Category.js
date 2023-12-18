@@ -1,6 +1,5 @@
 
-export default function Category({ category, index, selectorRef, handleCategoryClick }) {
-    const isSelected = category.checked;
+export default function Category({ category, index, selectorRef, handleCategoryClick, isSelected }) {
 
     return (
         <span

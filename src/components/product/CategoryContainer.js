@@ -1,9 +1,12 @@
-import {useRef} from "react";
+import {useRef, useState} from "react";
 import Category from "./Category";
 
 export default function CategoryContainer({categoryContent, selectCategoryContent}) {
 
     const selectorRef = useRef([]);
+    // const isSelected = category.checked;
+    const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(null);
+
 
     function handleCategoryClick(event){
         const selectedIndex = Number(event.target.dataset.index);
@@ -12,6 +15,7 @@ export default function CategoryContainer({categoryContent, selectCategoryConten
             checked: index === selectedIndex
         }));
         selectCategoryContent(updatedCategoryList);
+        setSelectedCategoryIndex(selectedIndex);
     }
 
     return (
@@ -29,6 +33,7 @@ export default function CategoryContainer({categoryContent, selectCategoryConten
                                         index={index}
                                         selectorRef={selectorRef}
                                         handleCategoryClick={handleCategoryClick}
+                                        isSelected={index === selectedCategoryIndex}
                                     />
                                 )}
                             </div>
