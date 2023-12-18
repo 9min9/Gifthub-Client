@@ -1,7 +1,14 @@
 import {Link} from "react-router-dom";
+import {AuthContext} from "../account/AuthContextProvider";
+import {useContext} from "react";
+
 
 export default function Header() {
-    let loginMenu = (
+    const {isAuthenticated, handleLogin, handleLogout} = useContext(AuthContext);
+    let menu;
+
+    if (isAuthenticated) {
+        menu =
             <>
                 <li id="nav-attendance-li" className="u-s-m-r-6">
                     <a id="show-attendance-a">
@@ -22,16 +29,13 @@ export default function Header() {
                     </Link>
                 </li>
                 <li id="nav-logout-li" className="u-s-m-r-6">
-                    <a className="btn" onClick="kakaoLogout"><i className="fas fa-lock-open"></i>
+                    <a className="btn" onClick={handleLogout}><i className="fas fa-lock-open"></i>
                         <span>로그아웃</span>
                     </a>
                 </li>
-            </>
-        )
-    ;
-
-    const logoutMenu = (
-        <>
+            </>;
+    } else {
+        menu = <>
             <li id="nav-signup-li" className="u-s-m-r-6">
                 <Link to="/signup">
                     <i className="fas fa-user-plus"></i>
@@ -43,13 +47,6 @@ export default function Header() {
                 <a href="/login"><i className="fas fa-lock"></i>
                     <span>로그인</span></a></li>
         </>
-    );
-
-    let menu;
-    if (localStorage.getItem("token")) {
-        menu = loginMenu;
-    } else {
-        menu = logoutMenu;
     }
 
     return (
@@ -77,6 +74,7 @@ export default function Header() {
                     </div>
                 </div>
             </nav>
+
             <nav className="secondary-nav-wrapper">
                 <div className="container">
                     <div className="secondary-nav">

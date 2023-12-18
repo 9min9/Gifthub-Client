@@ -1,20 +1,22 @@
 import LoginInputWrapper from "./LoginInputWrapper";
 import SocialLoginWrapper from "./SocialLoginWrapper";
 import LoginBtnWrapper from "./LoginInBtnWrapper";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import {AuthContext} from "../AuthContextProvider";
 
 export default function LoginForm() {
+    const { handleLogin } = useContext(AuthContext);
+
     const urlParams = new URL(window.location.href).searchParams;
     const [inputs, setInputs] = useState({});
-    const {params} = useParams();
-    const navigate = useNavigate();
+    let navigate = useNavigate();
 
     useEffect(() => {
         if (urlParams.get("state") != null) {
             naverLoginHandler();
-        } else if (urlParams.get("code") != null){
+        } else if (urlParams.get("code") != null) {
             kakaoLoginHandler();
         }
 
@@ -65,8 +67,7 @@ export default function LoginForm() {
             .then(function (response) {
                 let authorizationHeader = response.headers.authorization;
                 let token = authorizationHeader.replace("Bearer ", "");
-                localStorage.setItem("token", token);
-                document.cookie = "Authorization=" + authorizationHeader;
+                handleLogin(token);
                 alert("네이버 로그인 성공")
                 navigate("/");
             })
