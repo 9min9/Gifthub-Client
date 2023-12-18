@@ -1,4 +1,4 @@
-export default function OrderSummaryTable({totalPrice}) {
+export default function OrderSummaryWrapper({totalPrice}) {
     return (<table class="o-summary__table">
         <tbody>
         <tr>
