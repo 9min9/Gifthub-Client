@@ -46,7 +46,7 @@ export default function Header() {
     );
 
     let menu;
-    if (sessionStorage.getItem("token")) {
+    if (localStorage.getItem("token")) {
         menu = loginMenu;
     } else {
         menu = logoutMenu;
