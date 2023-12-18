@@ -3,6 +3,7 @@ import KakaoPayButton from "../ui/button/KakaoPayButton";
 import PriceSelectorWrapper from "./PriceSelectorWrapper";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 export default function OrderSummaryContainer() {
     let [totalPrice, setTotalPrice] = useState(5000);
@@ -14,6 +15,7 @@ export default function OrderSummaryContainer() {
         {point: 40000, checked: false},
         {point: 50000, checked: false},
     ]);
+    let navigate = useNavigate();
 
     useEffect(() => {
         const selectedPoint = points.filter((point) => point.checked)[0].point;
@@ -24,8 +26,8 @@ export default function OrderSummaryContainer() {
     /**
      * 카카오 결제 창 이벤트
      */
-    const kakaoPayHandleClick = (event) => {
-        axios.post("http://localhost:8081/api/kakao/pay/ready", {
+    const kakaoPayHandleClick = async (event) => {
+        await axios.post("http://localhost:8081/api/kakao/pay/ready", {
             itemName: "Point",
             totalAmount: totalPrice,
         }, {headers: {Authorization: localStorage.getItem("token")}})
