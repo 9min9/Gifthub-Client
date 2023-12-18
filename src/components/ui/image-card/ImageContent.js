@@ -1,8 +1,8 @@
-function ImageContent({productName, brandName}) {
+function ImageContent({product}) {
     return (
         <div>
-            <span className="product-o__category">{brandName}브랜드네임</span>
-            <span className="product-o__name">{productName}상품명</span>
+            <span className="product-o__category">{product.brandName}</span>
+            <span className="product-o__name">{product.name}</span>
         </div>
     );
 }

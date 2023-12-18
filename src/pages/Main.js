@@ -1,8 +1,8 @@
 import "../css/custom/index.css";
-import ProductWrapper from "../components/product/ProductWrapper";
+import ProductSection from "../components/product/ProductSection";
 
 export default function Main() {
     return(
-        <ProductWrapper></ProductWrapper>
+        <ProductSection></ProductSection>
     )
 }
