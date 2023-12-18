@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import SignupInputWrapper from "./SignupInputWrapper";
 import OutlineButton from "../../ui/button/OutlineButton";
 import SelectorButton from "../../ui/form/SelectorButton";
@@ -8,15 +8,18 @@ export default function SignupForm() {
 
     const [inputs, setInputs] = useState({});
 
+
     const onChange = (e) => {
         const {name, value} = e.target;
         setInputs({
             ...inputs,
             [name]: value
         })
-
-        console.log(inputs)
     }
+
+    useEffect(() => {
+        console.log(inputs);
+    }, [inputs]);
 
 
     // const handleSelectChange = (e) => {
