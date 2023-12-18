@@ -53,14 +53,20 @@ export default function ProductSection() {
     }
 
     const selectBrandList = (brandList) => {
-        setBrandList(brandList)
+        setBrandList(brandList);
+    }
+
+    const selectCategoryContent = (category) => {
+        setCategoryContent(category);
     }
 
     return (
         <div className="app-content">
-            <CategoryContainer productContentRef={productContentRef} categoryContent={categoryContent}
-                               setCategoryContent={setCategoryContent}/>
-
+            <CategoryContainer
+                productContentRef={productContentRef}
+                categoryContent={categoryContent}
+                selectCategoryContent={selectCategoryContent}
+            />
             <ProductContent
                 categoryContent={categoryContent}
                 brand={brand}
