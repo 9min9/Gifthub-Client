@@ -2,10 +2,16 @@ import {useEffect, useRef, useState} from "react";
 import axios from "axios";
 import CategoryContainer from "./CategoryContainer";
 import ProductContent from "./ProductContent";
+import BrandContainer from "./BrandContainer";
+import Brand from "./Brand";
 
 
 export default function ProductSection() {
     const productContentRef = useRef();
+
+    const [brand, setBrand] = useState("");
+    const [brandList, setBrandList] = useState([]);
+
     const [categoryList, setCategoryList] = useState([]);
     const [categoryContent, setCategoryContent] = useState([]);
 
@@ -42,11 +48,26 @@ export default function ProductSection() {
         setCategoryContent(updatedCategoryContent);
     }
 
+    const selectBrand = (brandName) => {
+        setBrand(brandName);
+    }
+
+    const selectBrandList = (brandList) => {
+        setBrandList(brandList)
+    }
+
     return (
         <div className="app-content">
             <CategoryContainer productContentRef={productContentRef} categoryContent={categoryContent}
                                setCategoryContent={setCategoryContent}/>
-            <ProductContent categoryContent={categoryContent}/>
+
+            <ProductContent
+                categoryContent={categoryContent}
+                brand={brand}
+                brandList={brandList}
+                selectBrandList={selectBrandList}
+                selectBrand={selectBrand}
+            />
         </div>
     );
 }

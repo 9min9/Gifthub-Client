@@ -6,11 +6,9 @@ import BrandContainer from "./BrandContainer";
 
 
 
-export default function ProductContent({categoryContent}) {
+export default function ProductContent({brand, brandList, categoryContent, selectBrand, selectBrandList}) {
     let token = "eyJyZWdEYXRlIjoxNzAyNDU1NzIxNDA2LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50VHlwZSI6IktBS0FPIiwidXNlcklkIjoyLCJ1c2VybmFtZSI6ImppY211QG5hdmVyLmNvbSIsImV4cCI6MTcwMjQ1OTMyMX0.yQOiF2W2Qk8Mc0DbrTW1IJ4-x-TsTEuboGGrwvnL4oU";
-    const [brand, setBrand] = useState();
     const [category, setCategory] = useState("all");
-    const [brandList, setBrandList] = useState([]);
     const [productList, setProductList] = useState([]);
     useEffect(() => {
         fetchBrandName();
@@ -21,12 +19,12 @@ export default function ProductContent({categoryContent}) {
     }, [brand]);
 
     useEffect(() => {
-        fetchProductListByCategory();
+        fetchProductListByCategory(brand);
     }, [category]);
 
-    const fetchProductListByBrand = async () => {
-        console.log(brand);
-        await axios.get(`http://localhost:8081/api/product/brands/${brand}`)
+    const fetchProductListByBrand = async (selectedBrand) => {
+        // console.log(brand);
+        await axios.get(`http://localhost:8081/api/product/brands/${selectedBrand}`)
             .then(function (res){
                 setProductList(res.data)
             })
@@ -35,9 +33,7 @@ export default function ProductContent({categoryContent}) {
             })
     }
 
-    const selectBrand = (brandName) => {
-        setBrand(brandName);
-    }
+
 
     const fetchBrandName = async () => {
         if (categoryContent.length > 0) {
@@ -54,7 +50,7 @@ export default function ProductContent({categoryContent}) {
                         brandLists.push({brandName: r, checked: false});
                     }
                 });
-            setBrandList(brandLists);
+            selectBrandList(brandLists);
         }
     }
 
