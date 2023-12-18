@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import ProductCard from "../ui/image-card/ProductCard";
 import Brand from "./Brand";
-import * as PropTypes from "prop-types";
+import BrandContainer from "./BrandContainer";
 
 
 
@@ -71,13 +71,14 @@ export default function ProductContent({categoryContent}) {
     return (
         <div className="u-s-p-y-30" id="show-product-div">
 
-            <ProductHeader brand={brandList} callbackfn={b =>
+            <BrandContainer brand={brandList} callbackfn={b =>
                 <Brand
                     key={b.brandName}
                     brand={b.brandName}
                     checked={b.checked}
                     brandClick={selectBrand}
-                />}/>
+                />}
+            />
 
             <div className="section__content" id="product-area-div">
                 <div className="container">
@@ -111,28 +112,7 @@ export default function ProductContent({categoryContent}) {
     );
 }
 
-function ProductHeader(props) {
-    return <div className="section__content" id="sticky-header">
-        <div className="container">
-            <div className="row">
-                <div className="col-lg-12">
-                    <div className="filter-category-container" id="filter-category-container">
-                        <Brand
-                            brand={"전체"}
-                            checked={true}
-                            // brandClick={selectBrand}
-                        />
-                        {props.brand.map(props.callbackfn)}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>;
-}
-ProductHeader.propTypes = {
-    brand: PropTypes.arrayOf(PropTypes.any),
-    callbackfn: PropTypes.func
-};
+
 
 function InputWithLabel({id, placeholder}) {
     return <>

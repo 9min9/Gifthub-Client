@@ -1,10 +1,10 @@
 import {useEffect, useRef, useState} from "react";
 import axios from "axios";
-import CategoryBar from "./CategoryBar";
+import CategoryContainer from "./CategoryContainer";
 import ProductContent from "./ProductContent";
 
 
-export default function ProductWrapper() {
+export default function ProductSection() {
     const productContentRef = useRef();
     const [categoryList, setCategoryList] = useState([]);
     const [categoryContent, setCategoryContent] = useState([]);
@@ -44,8 +44,8 @@ export default function ProductWrapper() {
 
     return (
         <div className="app-content">
-            <CategoryBar productContentRef={productContentRef} categoryContent={categoryContent}
-                         setCategoryContent={setCategoryContent}/>
+            <CategoryContainer productContentRef={productContentRef} categoryContent={categoryContent}
+                               setCategoryContent={setCategoryContent}/>
             <ProductContent categoryContent={categoryContent}/>
         </div>
     );

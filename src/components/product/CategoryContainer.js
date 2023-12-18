@@ -1,6 +1,6 @@
 import {useRef} from "react";
 
-export default function CategoryBar({categoryContent, setCategoryContent}) {
+export default function CategoryContainer({categoryContent, setCategoryContent}) {
 
     const selectorRef = useRef([]);
 
