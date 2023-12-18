@@ -11,6 +11,7 @@ export default function ProductSection() {
 
     const [brand, setBrand] = useState("");
     const [brandList, setBrandList] = useState([]);
+    const [category, setCategory] = useState("all");
 
     const [categoryList, setCategoryList] = useState([]);
     const [categoryContent, setCategoryContent] = useState([]);
@@ -30,11 +31,13 @@ export default function ProductSection() {
     }, [categoryList])
 
     useEffect(() => {
-        fetchProductListByBrand();
-    }, [brand]);
+        fetchProductListByCategory();
+    }, [category]);
+
+
 
     const getCategory = () => {
-        axios.get("http://localhost:8081/api/product/categories", {headers: {Authorization: token}})
+        axios.get("http://localhost:8081/api/product/categories")
             .then(function (result) {
                 setCategoryList(result.data);
             })
@@ -53,19 +56,25 @@ export default function ProductSection() {
         setCategoryContent(updatedCategoryContent);
     }
 
-    const fetchProductListByBrand = async () => {
-        // console.log(brand);
-        await axios.get(`http://localhost:8081/api/product/brands/${brand}`)
+    const fetchProductListByCategory = () => {
+        console.log("category(productListContainer) : " +category)
+        axios.get(`http://localhost:8081/api/product/category/${category}`)
             .then(function (res) {
                 setProductList(res.data);
             })
             .catch(function (e) {
-                console.log(e);
+                console.log(e)
             })
     }
 
+
+
     const selectBrand = (brandName) => {
         setBrand(brandName);
+    }
+
+    const selectCategory = (category) => {
+        setCategory(category);
     }
 
     const selectBrandList = (brandList) => {
@@ -83,23 +92,19 @@ export default function ProductSection() {
         <div className="app-content">
             <CategoryContainer
                 categoryContent={categoryContent}
+                category={category}
                 selectCategoryContent={selectCategoryContent}
+                selectCategory={selectCategory}
+                selectBrandList={selectBrandList}
             />
             <div className="u-s-p-y-30" id="show-product-div">
-                <BrandContainer brand={brandList} callbackfn={b =>
-                    <Brand
-                        key={b.brandName}
-                        brand={b.brandName}
-                        checked={b.checked}
-                        brandClick={selectBrand}
-                    />}
+                <BrandContainer
+                    brandList = {brandList}
+                    selectBrand={selectBrand}
                 />
                 <ProductListContainer
-                    categoryContent={categoryContent}
                     brand={brand}
                     productList={productList} // 필요
-                    selectBrandList={selectBrandList}
-                    selectBrand={selectBrand}
                     selectProductList={selectProductList}
                 />
             </div>

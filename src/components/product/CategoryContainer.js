@@ -1,10 +1,39 @@
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import Category from "./Category";
+import axios from "axios";
 
-export default function CategoryContainer({categoryContent, selectCategoryContent}) {
+export default function CategoryContainer({category, categoryContent, selectCategoryContent, selectCategory, selectBrandList}) {
 
     const selectorRef = useRef([]);
     const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(null);
+    // useEffect(() => {
+    //     fetchBrandName();
+    // }, [categoryContent]);
+    useEffect(() => {
+        fetchBrandName();
+    },
+        // [categoryContent],
+        [selectedCategoryIndex]);
+
+    const fetchBrandName =  async () => {
+        if (categoryContent.length > 0) {
+            let brandLists = [];
+
+            selectCategory(categoryContent.filter((category) => category.checked)[0].name.engName.replaceAll("/", "-").toLowerCase());
+            let url = "http://localhost:8081/api/product/" + category + "/brands";
+
+            console.log("category(categoryContainer) : " +category)
+
+             await axios
+                .get(url)
+                .then((result) => {
+                    for (let r of result.data) {
+                        brandLists.push({brandName: r, checked: false});
+                    }
+                });
+            selectBrandList(brandLists);
+        }
+    }
 
 
     function handleCategoryClick(event){

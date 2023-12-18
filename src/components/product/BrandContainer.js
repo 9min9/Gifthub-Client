@@ -1,7 +1,6 @@
 import Brand from "./Brand";
-import * as PropTypes from "prop-types";
 
-export default function BrandContainer(props) {
+export default function BrandContainer({brandList, selectBrand}) {
     return <div className="section__content" id="sticky-header">
         <div className="container">
             <div className="row">
@@ -12,14 +11,17 @@ export default function BrandContainer(props) {
                             checked={true}
                             // brandClick={selectBrand}
                         />
-                        {props.brand.map(props.callbackfn)}
+                        {brandList.map(brand => (
+                            <Brand
+                                key={brand.brandName}
+                                brand={brand.brandName}
+                                checked={brand.checked}
+                                brandClick={selectBrand}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>
         </div>
     </div>;
 }
-BrandContainer.propTypes = {
-    brand: PropTypes.arrayOf(PropTypes.any),
-    callbackfn: PropTypes.func
-};
