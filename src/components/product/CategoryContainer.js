@@ -4,7 +4,6 @@ import Category from "./Category";
 export default function CategoryContainer({categoryContent, selectCategoryContent}) {
 
     const selectorRef = useRef([]);
-    // const isSelected = category.checked;
     const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(null);
 
 

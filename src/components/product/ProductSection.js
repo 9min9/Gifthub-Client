@@ -82,7 +82,6 @@ export default function ProductSection() {
     return (
         <div className="app-content">
             <CategoryContainer
-                productContentRef={productContentRef}
                 categoryContent={categoryContent}
                 selectCategoryContent={selectCategoryContent}
             />
