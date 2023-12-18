@@ -30,9 +30,7 @@ export default function Login() {
                                     <div className="l-f-o__pad-box">
                                         <h1 className="gl-h1">로그인</h1>
 
-                                        <form className="l-f-o__form">
-                                            <LoginForm></LoginForm>
-                                        </form>
+                                        <LoginForm></LoginForm>
                                     </div>
                                 </div>
                             </div>
