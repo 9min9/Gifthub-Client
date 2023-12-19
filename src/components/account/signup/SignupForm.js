@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import SignupInputWrapper from "./SignupInputWrapper";
 import OutlineButton from "../../ui/button/OutlineButton";
-import SelectorButton from "../../ui/form/SelectorButton";
 import axios from "axios";
 
 export default function SignupForm() {
@@ -17,22 +16,32 @@ export default function SignupForm() {
         })
     }
 
+    const signUp = (e) => {
+        e.preventDefault();
+
+        axios
+            .post('http://localhost:8081/api/local/signup/submit', inputs)
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    };
+
     useEffect(() => {
-        console.log(inputs);
+        console.log(inputs)
     }, [inputs]);
 
 
     // const handleSelectChange = (e) => {
     //     setSelectedGender(e.target.value);
     // };
-    const phoneCheck = () => {
-        console.log("인증번호입력하셈ㅋ");
+    // const phoneCheck = () => {
+    //     console.log("인증번호");
+    //
+    // }
 
-    }
-
-    const signUp = () => {
-        console.log("회원가입");
-    }
 
     return (
         <form className="l-f-o__form">
@@ -45,9 +54,9 @@ export default function SignupForm() {
                 </div>
                 <div className="gl-inline u-s-m-b-25">
 
-                    <SignupInputWrapper target="password" labelText="비밀번호" type="password"
+                    <SignupInputWrapper target="password" labelText="비밀번호" type="text"
                                         placeholder="비밀번호를 입력해주세요" _onChange={onChange}></SignupInputWrapper>
-                    <SignupInputWrapper target="confirm-password" labelText="비밀번호확인" type="password"
+                    <SignupInputWrapper target="confirmPassword" labelText="비밀번호확인" type="text"
                                         placeholder="비밀번호를 입력해주세요" _onChange={onChange}></SignupInputWrapper>
 
                 </div>
@@ -65,11 +74,11 @@ export default function SignupForm() {
                 <div className="gl-inline u-s-m-b-25">
 
                     <SignupInputWrapper target="tel" labelText="전화번호" type="text"
-                                        placeholder="'-'를포함해서 입력해주세요" _onChange={onChange}></SignupInputWrapper>
+                                        placeholder="01012345678" _onChange={onChange}></SignupInputWrapper>
                     <div className="u-s-m-b-25"
                          style={{display: 'flex', justifyContent: 'center', marginTop: '40px'}}>
-                        <OutlineButton target="phoneCheck" innerText="인증번호"
-                                       phoneCheck={phoneCheck()}> </OutlineButton>
+                        {/*<OutlineButton target="phoneCheck" innerText="인증번호"*/}
+                        {/*               phoneCheck={phoneCheck()}> </OutlineButton>*/}
                     </div>
 
                 </div>
@@ -86,7 +95,7 @@ export default function SignupForm() {
                 </div>
 
                 <div className="u-s-m-b-25" style={{display: 'flex', justifyContent: 'center'}}>
-                    <OutlineButton target="signUp" innerText="회원가입" signup={signUp}></OutlineButton>
+                    <OutlineButton target="signUp" innerText="회원가입" _onClick={signUp}></OutlineButton>
                 </div>
             </div>
         </form>
