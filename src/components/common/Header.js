@@ -88,7 +88,7 @@ export default function Header() {
                                 <span className="ah-close">✕ Close</span>
                                 <ul className="ah-list ah-list--design2 ah-list--link-color-secondary">
                                     <li><Link to="/gifticon/add">기프티콘 등록</Link></li>
-                                    <li><Link to="/user/my-gifticon">내 기프티콘</Link></li>
+                                    <li><Link to="/gifticon/my">내 기프티콘</Link></li>
                                 </ul>
                             </div>
                         </div>
