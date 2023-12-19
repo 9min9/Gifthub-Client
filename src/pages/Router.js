@@ -8,6 +8,9 @@ import {AuthContext} from "../components/account/AuthContextProvider";
 import Cart from "../components/cart/cart/Cart";
 import GifticonStorage from "./gifticon/GifticonStorage";
 import MyGifticon from "./gifticon/MyGifticon";
+import MyPage from "./account/MyPage";
+import PaymentHistory from "./history/PaymentHistory";
+import OrderHistory from "./history/OrderHistory";
 
 export default function Router() {
     const {isAuthenticated} = useContext(AuthContext);
@@ -21,11 +24,13 @@ export default function Router() {
             {isAuthenticated ? (
                     <>
                         <Route path="/payments" element={<Payment/>}/>
-                        <Route path="/mypage" element={<Main/>}/>
+                        <Route path="/mypage" element={<MyPage/>}/>
                         <Route path="/gifticon/add" element={<GifticonStorage/>}/>
                         <Route path="/gifticon/my" element={<MyGifticon/>}/>
                         <Route path="/carts" element={<Cart/>}/>
                         <Route path="/payment/checkout" element={<Main/>}/>
+                        <Route path="/payment/history" element={<PaymentHistory/>}/>
+                        <Route path="/order/history" element={<OrderHistory/>}/>
                     </>)
                 :
                 (<Route path="/*" element={<Navigate to="/login"/>}/>)}
