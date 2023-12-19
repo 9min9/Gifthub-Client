@@ -11,8 +11,9 @@ export default function MiniCart() {
     const fetchCart = async () => {
         await axios.get("http://localhost:8081/api/carts", {headers: {Authorization: localStorage.getItem("token")}})
             .then((result) => {
-                setCarts(result.data);
                 if (result.data.length !== 0) {
+                    setCarts(result.data);
+
                     let sum = 0;
 
                     result.data.forEach(r => sum += r.gifticonDto.price);
@@ -34,13 +35,15 @@ export default function MiniCart() {
             <div className="mini-cart">
                 <div className="mini-product-container gl-scroll u-s-m-b-15"
                      id="mini-cart-list">
-                    {carts.map((cart) => {
-                        return (<MiniCartContainer cart={cart} key={cart.id}/>);
-                    })}
+                    {carts !== 0 ?
+                        carts.map((cart) => {
+                            return (<MiniCartContainer cart={cart} key={cart.id}/>);
+                        }) : <></>
+                    }
                 </div>
                 <div className="mini-product-stat">
                     <MiniCartTotalPriceContainer totalPrice={totalPrice}/>
-                    <MiniCartButtonContainer/>
+                    <MiniCartButtonContainer carts={carts}/>
                 </div>
             </div>
         </>

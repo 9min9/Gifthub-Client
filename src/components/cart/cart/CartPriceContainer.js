@@ -1,4 +1,6 @@
-export default function CartPriceContainer({original, totalPrice}) {
+import PrimaryBtn from "../../ui/button/PrimaryBtn";
+
+export default function CartPriceContainer({original, totalPrice, checkoutHandleClick}) {
     return <div className="section__content">
         <div className="container">
             <div className="row">
@@ -25,10 +27,7 @@ export default function CartPriceContainer({original, totalPrice}) {
                                     </table>
                                 </div>
                                 <div>
-
-                                    <button className="btn btn--e-brand-b-2" type="submit"> PROCEED TO
-                                        CHECKOUT
-                                    </button>
+                                    <PrimaryBtn innerText={"CHECKOUT"} _onClick={checkoutHandleClick}/>
                                 </div>
                             </div>
                         </div>
