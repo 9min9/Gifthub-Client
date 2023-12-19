@@ -6,6 +6,8 @@ import Payment from "../components/payment/Payment";
 import {useContext} from "react";
 import {AuthContext} from "../components/account/AuthContextProvider";
 import Cart from "../components/cart/cart/Cart";
+import GifticonStorage from "./gifticon/GifticonStorage";
+import MyGifticon from "./gifticon/MyGifticon";
 
 export default function Router() {
     const {isAuthenticated} = useContext(AuthContext);
@@ -20,8 +22,8 @@ export default function Router() {
                     <>
                         <Route path="/payments" element={<Payment/>}/>
                         <Route path="/mypage" element={<Main/>}/>
-                        <Route path="/gifticon/add" element={<Main/>}/>
-                        <Route path="/user/my-gifticon" element={<Main/>}/>
+                        <Route path="/gifticon/add" element={<GifticonStorage/>}/>
+                        <Route path="/gifticon/my" element={<MyGifticon/>}/>
                         <Route path="/carts" element={<Cart/>}/>
                         <Route path="/payment/checkout" element={<Main/>}/>
                     </>)
