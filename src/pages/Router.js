@@ -1,10 +1,11 @@
-import {Route, Routes, Navigate} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import Main from "./Main";
 import Signup from "./account/Signup";
 import Login from "./account/Login";
 import Payment from "../components/payment/Payment";
 import {useContext} from "react";
 import {AuthContext} from "../components/account/AuthContextProvider";
+import Cart from "../components/cart/cart/Cart";
 
 export default function Router() {
     const {isAuthenticated} = useContext(AuthContext);
@@ -21,7 +22,7 @@ export default function Router() {
                         <Route path="/mypage" element={<Main/>}/>
                         <Route path="/gifticon/add" element={<Main/>}/>
                         <Route path="/user/my-gifticon" element={<Main/>}/>
-                        <Route path="/carts" element={<Main/>}/>
+                        <Route path="/carts" element={<Cart/>}/>
                         <Route path="/payment/checkout" element={<Main/>}/>
                     </>)
                 :
