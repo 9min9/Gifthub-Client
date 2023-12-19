@@ -13,7 +13,11 @@ export default function MiniCart() {
             .then((result) => {
                 setCarts(result.data);
                 if (result.data.length !== 0) {
-                    setTotalPrice(result.data.reduce((acc, current) => acc.gifticonDto.price + current.gifticonDto.price));
+                    let sum = 0;
+
+                    result.data.forEach(r => sum += r.gifticonDto.price);
+
+                    setTotalPrice(sum);
                 }
             })
     }
@@ -31,7 +35,7 @@ export default function MiniCart() {
                 <div className="mini-product-container gl-scroll u-s-m-b-15"
                      id="mini-cart-list">
                     {carts.map((cart) => {
-                        return (<MiniCartContainer cart={cart}/>);
+                        return (<MiniCartContainer cart={cart} key={cart.id}/>);
                     })}
                 </div>
                 <div className="mini-product-stat">
