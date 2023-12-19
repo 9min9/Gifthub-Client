@@ -4,7 +4,7 @@ import Label from "../../ui/form/Label";
 export default function SignupInputWrapper(prop) {
 
     const {target, labelText, type, placeholder, _onChange} = prop;
-    console.log(target);
+
 
     let id = "signup-" + target + "-div";
 
