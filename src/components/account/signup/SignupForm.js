@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
 import SignupInputWrapper from "./SignupInputWrapper";
 import OutlineButton from "../../ui/button/OutlineButton";
+import SelectorButton from "../../ui/button/SelectorButton";
 import axios from "axios";
 
 export default function SignupForm() {
 
     const [inputs, setInputs] = useState({});
-
 
     const onChange = (e) => {
         const {name, value} = e.target;
@@ -30,18 +30,7 @@ export default function SignupForm() {
     };
 
     useEffect(() => {
-        console.log(inputs)
     }, [inputs]);
-
-
-    // const handleSelectChange = (e) => {
-    //     setSelectedGender(e.target.value);
-    // };
-    // const phoneCheck = () => {
-    //     console.log("인증번호");
-    //
-    // }
-
 
     return (
         <form className="l-f-o__form">
@@ -49,12 +38,12 @@ export default function SignupForm() {
 
                 <div className="gl-inline u-s-m-b-25">
 
-                    <SignupInputWrapper target="email" labelText="이메일" type="text"
+                    <SignupInputWrapper target="email" labelText="이메일" type="password"
                                         placeholder="이메일을 입력해주세요" _onChange={onChange}></SignupInputWrapper>
                 </div>
                 <div className="gl-inline u-s-m-b-25">
 
-                    <SignupInputWrapper target="password" labelText="비밀번호" type="text"
+                    <SignupInputWrapper target="password" labelText="비밀번호" type="password"
                                         placeholder="비밀번호를 입력해주세요" _onChange={onChange}></SignupInputWrapper>
                     <SignupInputWrapper target="confirmPassword" labelText="비밀번호확인" type="text"
                                         placeholder="비밀번호를 입력해주세요" _onChange={onChange}></SignupInputWrapper>
@@ -75,11 +64,6 @@ export default function SignupForm() {
 
                     <SignupInputWrapper target="tel" labelText="전화번호" type="text"
                                         placeholder="01012345678" _onChange={onChange}></SignupInputWrapper>
-                    <div className="u-s-m-b-25"
-                         style={{display: 'flex', justifyContent: 'center', marginTop: '40px'}}>
-                        {/*<OutlineButton target="phoneCheck" innerText="인증번호"*/}
-                        {/*               phoneCheck={phoneCheck()}> </OutlineButton>*/}
-                    </div>
 
                 </div>
 
@@ -88,9 +72,9 @@ export default function SignupForm() {
                     <SignupInputWrapper target="birthDate" labelText="생년월일" type="text"
                                         placeholder="생년월일 8자리를 입력해주세요" _onChange={onChange}></SignupInputWrapper>
 
-                    {/*<SelectorButton target="gender" labelText={'성별'} title={'성별'} options={['남자', '여자']}*/}
-                    {/*                handleSelectChange={handleSelectChange}/>*/}
-
+                    <SelectorButton target="gender" labelText="성별" options={['m', 'f']} placeholder="성별"
+                                    innerText={['남성', '여성']}
+                                    _onChange={onChange}></SelectorButton>
 
                 </div>
 
