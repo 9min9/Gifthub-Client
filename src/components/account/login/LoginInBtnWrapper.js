@@ -1,5 +1,5 @@
 import OutlineButton from "../../ui/button/OutlineButton";
-import GlLink from "../../ui/GlLink";
+import GlLink from "../../ui/link/GlLink";
 
 export default function LoginBtnWrapper(props) {
 
