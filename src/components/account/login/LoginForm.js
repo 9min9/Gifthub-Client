@@ -8,7 +8,6 @@ import {AuthContext} from "../AuthContextProvider";
 
 export default function LoginForm() {
     const {loginHandler} = useContext(AuthContext);
-
     const urlParams = new URL(window.location.href).searchParams;
     const [inputs, setInputs] = useState({});
     const {email, password} = inputs;
@@ -20,7 +19,6 @@ export default function LoginForm() {
         } else if (urlParams.get("code") != null) {
             kakaoLoginHandler();
         }
-
     }, []);
 
     const onChange = (e) => {
@@ -29,29 +27,25 @@ export default function LoginForm() {
             ...inputs,
             [name]: value
         })
-
     }
     useEffect(() => {
     }, [inputs]);
 
-    const localLoginHandler = async (e) => {
+    const localLoginHandler = (e) => {
         e.preventDefault();
+        axios.post('http://localhost:8081/api/local/login', {email, password})
+            .then(function (response) {
+                let token = convertToken(response);
+                const userRole = response.data.userRole;
+                loginHandler(token, userRole);
 
-        try {
-            const response = await axios.post('http://localhost:8081/api/local/login', { email, password });
-
-            const authorizationHeader = response.headers.authorization;
-            const token = authorizationHeader.replace("Bearer ", "");
-            const userRole = response.data.userRole;
-            loginHandler(token, userRole);
-
-            alert("로그인 성공");
-            navigate("/");
-
-        } catch (error) {
-            console.log(error);
-            console.log("로그인 실패");
-        }
+                alert("로그인 성공");
+                navigate("/");
+            })
+            .catch(function (error) {
+                console.log(error);
+                console.log("로그인 실패");
+            });
     };
 
     const kakaoLoginHandler = async () => {
@@ -65,8 +59,7 @@ export default function LoginForm() {
         axios
             .post("http://localhost:8081/api/naver/login" + param)
             .then(function (response) {
-                let authorizationHeader = response.headers.authorization;
-                let token = authorizationHeader.replace("Bearer ", "");
+                let token = convertToken(response);
                 let userRole = response.data.userRole;
                 loginHandler(token, userRole);
                 alert("네이버 로그인 성공")
@@ -76,6 +69,13 @@ export default function LoginForm() {
                 alert("네이버 로그인 실패");
                 console.log(error);
             });
+    }
+
+    const convertToken = (response) => {
+        const authorizationHeader = response.headers.authorization;
+        const token = authorizationHeader.replace("Bearer ", "");
+
+        return token;
     }
 
     return (
