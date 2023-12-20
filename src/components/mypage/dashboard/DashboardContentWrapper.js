@@ -1,5 +1,5 @@
-import DashboardH2 from "../../ui/form/DashboardH2";
-import DashboardSpan from "../../ui/form/DashboardSpan";
+import DashboardH2 from "../../ui/dashboard/DashboardH2";
+import DashboardSpan from "../../ui/dashboard/DashboardSpan";
 
 
 export default function DashboardContentWrapper(props) {

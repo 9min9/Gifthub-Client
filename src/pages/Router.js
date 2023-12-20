@@ -12,6 +12,7 @@ import Checkout from "./checkout/Checkout";
 import MyPage from "./account/MyPage";
 import PaymentHistory from "./history/PaymentHistory";
 import OrderHistory from "./history/OrderHistory";
+import ProductManagement from "./admin/ProductManagement";
 import AdminIndex from "./admin/AdminIndex";
 
 export default function Router() {
@@ -41,6 +42,7 @@ export default function Router() {
             {isAuthenticated && (userRole === "ADMIN") ? (
                     <>
                         <Route path="/admin/index" element={<AdminIndex/>}/>
+                        <Route path="/admin/product/config" element={<ProductManagement/>}/>
                     </>)
                 :
                 (<></>)}
