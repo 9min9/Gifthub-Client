@@ -7,10 +7,11 @@ import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../AuthContextProvider";
 
 export default function LoginForm() {
-    const { handleLogin } = useContext(AuthContext);
+    const {handleLogin} = useContext(AuthContext);
 
     const urlParams = new URL(window.location.href).searchParams;
     const [inputs, setInputs] = useState({});
+    const {email, password} = inputs;
     let navigate = useNavigate();
 
     useEffect(() => {
@@ -29,22 +30,25 @@ export default function LoginForm() {
             [name]: value
         })
 
-        console.log(inputs)
     }
+    useEffect(() => {
+    }, [inputs]);
 
-    const localLoginHandler = async () => {
+    const localLoginHandler = async (e) => {
+        e.preventDefault();
+
         try {
             const response = await axios.post('http://localhost:8081/api/local/login', {
-                // email: email,
-                // password: password
+                email, password
+
             });
 
             alert("로그인 성공");
-            console.log(response.data);
 
             const authorizationHeader = response.headers.authorization;
             const token = authorizationHeader.replace("Bearer ", "");
             localStorage.setItem("token", token);
+            handleLogin(token);
             navigate("/");
 
 
@@ -79,11 +83,11 @@ export default function LoginForm() {
 
     return (
         <form className="l-f-o__form">
-            <LoginInputWrapper target="email" labelText="이메일" type="text" onChage={onChange}
-                               placeholder="이메일을 입력해주세요"></LoginInputWrapper>
+            <LoginInputWrapper target="email" labelText="이메일" type="text"
+                               placeholder="이메일을 입력해주세요" _onChange={onChange}></LoginInputWrapper>
             <LoginInputWrapper target="password" labelText="비밀번호" type="password"
-                               placeholder="비밀번호를 입력해주세요"></LoginInputWrapper>
-            <LoginBtnWrapper localHandler={localLoginHandler}></LoginBtnWrapper>
+                               placeholder="비밀번호를 입력해주세요" _onChange={onChange}></LoginInputWrapper>
+            <LoginBtnWrapper onClickHandler={localLoginHandler}></LoginBtnWrapper>
 
             <div id="social-login-div" className="gl-s-api">
                 <SocialLoginWrapper target="social" kakaoHandler={kakaoLoginHandler}
