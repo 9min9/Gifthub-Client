@@ -2,11 +2,19 @@ import React, {useEffect, useState} from "react";
 import SignupInputWrapper from "./SignupInputWrapper";
 import OutlineButton from "../../ui/button/OutlineButton";
 import SelectorButton from "../../ui/button/SelectorButton";
+import {useNavigate} from "react-router-dom";
+
 import axios from "axios";
 
 export default function SignupForm() {
+    let navigate = useNavigate();
 
     const [inputs, setInputs] = useState({});
+
+    const onBlur = (e) => {
+        e.preventDefault();
+        signUp(e);
+    };
 
     const onChange = (e) => {
         const {name, value} = e.target;
@@ -15,22 +23,44 @@ export default function SignupForm() {
             [name]: value
         })
     }
-
-    const signUp = (e) => {
+    useEffect(() => {
+        console.log(inputs)
+    }, [inputs]);
+    const errorCheck = (e) => {
         e.preventDefault();
 
+
         axios
-            .post('http://localhost:8081/api/local/signup/submit', inputs)
+            .post()
             .then(response => {
+                alert("회원가입을 축하드립니다")
                 console.log(response.data);
+                navigate("/login");
             })
             .catch(error => {
                 console.error(error);
             });
     };
 
-    useEffect(() => {
-    }, [inputs]);
+
+    const signUp = (e) => {
+        e.preventDefault();
+
+
+        axios
+            .post('http://localhost:8081/api/local/signup/submit',
+                inputs)
+            .then(response => {
+
+                alert("회원가입을 축하드립니다")
+                console.log(response.data);
+                navigate("/login");
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    };
+
 
     return (
         <form className="l-f-o__form">
@@ -38,14 +68,16 @@ export default function SignupForm() {
 
                 <div className="gl-inline u-s-m-b-25">
 
-                    <SignupInputWrapper target="email" labelText="이메일" type="password"
-                                        placeholder="이메일을 입력해주세요" _onChange={onChange}></SignupInputWrapper>
+                    <SignupInputWrapper target="email" labelText="이메일" type="text"
+                                        placeholder="이메일을 입력해주세요" _onChange={onBlur}></SignupInputWrapper>
+
+
                 </div>
                 <div className="gl-inline u-s-m-b-25">
 
                     <SignupInputWrapper target="password" labelText="비밀번호" type="password"
                                         placeholder="비밀번호를 입력해주세요" _onChange={onChange}></SignupInputWrapper>
-                    <SignupInputWrapper target="confirmPassword" labelText="비밀번호확인" type="text"
+                    <SignupInputWrapper target="confirmPassword" labelText="비밀번호확인" type="password"
                                         placeholder="비밀번호를 입력해주세요" _onChange={onChange}></SignupInputWrapper>
 
                 </div>

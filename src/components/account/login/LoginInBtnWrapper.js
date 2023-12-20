@@ -15,7 +15,7 @@ export default function LoginBtnWrapper(props) {
             </div>
 
             <div className="u-s-m-b-30">
-                <OutlineButton target="login" innerText="로그인" onClick={props.localHandler}></OutlineButton>
+                <OutlineButton target="login" innerText="로그인" _onClick={props.onClickHandler}></OutlineButton>
             </div>
         </div>
     );
