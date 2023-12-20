@@ -1,9 +1,9 @@
-export default function BrandComponent({brand, checked, brandClick}) {
+export default function BrandComponent({brand, checked, handleBrandClick}) {
     if (checked) {
         return <div className="filter__category-wrapper">
             <button className="btn filter__btn filter__btn--style-1 brand-filter total-filter js-checked" type="button"
                     data-filter="*"
-                    onClick={() => brandClick(brand)}
+                    onClick={handleBrandClick}
             >{brand}
             </button>
         </div>;
@@ -11,7 +11,7 @@ export default function BrandComponent({brand, checked, brandClick}) {
         return <div className="filter__category-wrapper">
             <button className="btn filter__btn filter__btn--style-1 brand-filter total-filter" type="button"
                     data-filter="*"
-                    onClick={() => brandClick(brand)}
+                    onClick={handleBrandClick}
             >{brand}
             </button>
         </div>;

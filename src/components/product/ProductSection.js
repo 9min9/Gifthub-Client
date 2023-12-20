@@ -6,11 +6,13 @@ import ProductListContainer from "./ProductListContainer";
 export default function ProductSection({
                                            categoryContent,
                                            brandList,
-                                           brand,
                                            productList,
                                            fetchBrandName,
                                            handleCategoryClick,
-                                           selectorRef
+                                           selectorRef,
+                                           handleBrandClick,
+                                           handleSearchChange,
+                                           searchInput
                                        }) {
     return (
         <div className="app-content">
@@ -23,10 +25,12 @@ export default function ProductSection({
             <div className="u-s-p-y-30" id="show-product-div">
                 <BrandContainer
                     brandList={brandList}
+                    handleBrandClick={handleBrandClick}
                 />
                 <ProductListContainer
-                    brand={brand}
                     productList={productList} // 필요
+                    handleSearchChange={handleSearchChange}
+                    searchInput={searchInput}
                 />
             </div>
         </div>

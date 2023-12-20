@@ -1,13 +1,14 @@
 import ProductCard from "../ui/image-card/ProductCard";
 
 
-export default function ProductListContainer({brand, productList, fetchProductListByBrand}) {
+export default function ProductListContainer({productList, handleSearchChange, searchInput}) {
     return (
         <div className="section__content" id="product-area-div">
             <div className="container">
                 <div className="u-s-p-y-20" style={{display: "flex", justifyContent: "end",}}>
                     <form className="main-form">
-                        <InputWithLabel id="main-search" placeholder="검색"/>
+                        <InputWithLabel id="main-search" placeholder="검색"
+                                        handleSearchChange={handleSearchChange} searchInput={searchInput}/>
                         <button className="btn btn--icon fas fa-search main-search-button" type="submit"></button>
                     </form>
                 </div>
@@ -33,10 +34,10 @@ export default function ProductListContainer({brand, productList, fetchProductLi
 }
 
 
-function InputWithLabel({id, placeholder}) {
+function InputWithLabel({id, placeholder, handleSearchChange, searchInput}) {
     return <>
         <label htmlFor={id}></label>
         <input className="input-text input-text--border-radius input-text--style-1" type="text"
-               id={id} placeholder={placeholder}/>
+               id={id} placeholder={placeholder} value={searchInput} onChange={handleSearchChange}/>
     </>;
 }
