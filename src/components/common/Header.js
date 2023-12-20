@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 import {AuthContext} from "../account/AuthContextProvider";
 import {useContext} from "react";
-import MiniCart from "../cart/mini-cart/MiniCart";
+import MiniCart from "../../pages/cart/MiniCart";
 
 
 export default function Header() {

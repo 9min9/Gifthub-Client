@@ -1,7 +1,7 @@
 import {useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import CheckoutSection from "./CheckoutSection";
+import CheckoutSection from "../../components/checkout/CheckoutSection";
 
 export default function Checkout() {
     const [searchParams, setSearchParams] = useSearchParams();
