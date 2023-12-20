@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import MiniCartContainer from "./MiniCartContainer";
-import MiniCartTotalPriceContainer from "./MiniCartTotalPriceContainer";
-import MiniCartButtonContainer from "./MiniCartButtonContainer";
+import MiniCartContainer from "../../components/cart/mini-cart/MiniCartContainer";
+import MiniCartTotalPriceContainer from "../../components/cart/mini-cart/MiniCartTotalPriceContainer";
+import MiniCartButtonContainer from "../../components/cart/mini-cart/MiniCartButtonContainer";
 
 export default function MiniCart() {
     const [carts, setCarts] = useState([]);

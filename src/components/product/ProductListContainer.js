@@ -1,26 +1,7 @@
-import {useEffect, useState} from "react";
-import axios from "axios";
 import ProductCard from "../ui/image-card/ProductCard";
 
 
-export default function ProductListContainer({brand, productList, selectProductList}) {
-    let token = "eyJyZWdEYXRlIjoxNzAyNDU1NzIxNDA2LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50VHlwZSI6IktBS0FPIiwidXNlcklkIjoyLCJ1c2VybmFtZSI6ImppY211QG5hdmVyLmNvbSIsImV4cCI6MTcwMjQ1OTMyMX0.yQOiF2W2Qk8Mc0DbrTW1IJ4-x-TsTEuboGGrwvnL4oU";
-
-    useEffect(() => {
-        fetchProductListByBrand();
-    }, [brand]);
-
-
-    const fetchProductListByBrand = async () => {
-        await axios.get(`http://localhost:8081/api/product/brands/${brand}`)
-            .then(function (res) {
-                selectProductList(res.data);
-            })
-            .catch(function (e) {
-                console.log(e);
-            })
-    }
-
+export default function ProductListContainer({brand, productList, fetchProductListByBrand}) {
     return (
         <div className="section__content" id="product-area-div">
             <div className="container">
@@ -39,7 +20,6 @@ export default function ProductListContainer({brand, productList, selectProductL
                                         <ProductCard
                                             key={product.id}
                                             product={product}
-                                            // onClick={handleProductClick()}
                                         />
                                     ))
                                 }

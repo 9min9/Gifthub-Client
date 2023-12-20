@@ -1,4 +1,4 @@
-import CartSection from "./CartSection";
+import CartSection from "../../components/cart/cart/CartSection";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
