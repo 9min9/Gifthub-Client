@@ -8,6 +8,7 @@ import {AuthContext} from "../components/account/AuthContextProvider";
 import Cart from "../components/cart/cart/Cart";
 import GifticonStorage from "./gifticon/GifticonStorage";
 import MyGifticon from "./gifticon/MyGifticon";
+import Checkout from "../components/checkout/Checkout";
 import MyPage from "./account/MyPage";
 import PaymentHistory from "./history/PaymentHistory";
 import OrderHistory from "./history/OrderHistory";
@@ -28,9 +29,10 @@ export default function Router() {
                         <Route path="/gifticon/add" element={<GifticonStorage/>}/>
                         <Route path="/gifticon/my" element={<MyGifticon/>}/>
                         <Route path="/carts" element={<Cart/>}/>
-                        <Route path="/payment/checkout" element={<Main/>}/>
+                        <Route path="/payment/checkout" element={<Checkout/>}/>
                         <Route path="/payment/history" element={<PaymentHistory/>}/>
                         <Route path="/order/history" element={<OrderHistory/>}/>
+                        <Route path="/payment/checkout" element={<Checkout/>}/>
                     </>)
                 :
                 (<Route path="/*" element={<Navigate to="/login"/>}/>)}

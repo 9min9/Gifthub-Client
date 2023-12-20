@@ -1,10 +1,16 @@
 import {Link} from "react-router-dom";
 
-export default function MiniCartButtonContainer() {
+export default function MiniCartButtonContainer({carts}) {
+    let cartStr = ``;
+
+    carts.forEach(cart => cartStr += `gifticonIds=${cart.gifticonDto.id}&`);
+
+    console.log(cartStr)
+
     return (
         <>
             <div className="mini-action">
-                <Link to={"/payment/checkout"}
+                <Link to={`/payment/checkout?${cartStr}`}
                       className="mini-link btn--e-brand-b-2"
                       style={{width: "100%", cursor: "pointer"}}>
                     결제 하기

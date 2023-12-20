@@ -9,7 +9,8 @@ export default function CartSection({
                                         fetchCart,
                                         originalPrice,
                                         totalPrice,
-                                        trashHandleClick
+                                        trashHandleClick,
+                                        checkoutHandleClick
                                     }) {
     let content;
 
@@ -40,7 +41,8 @@ export default function CartSection({
                 {content}
             </div>
             <div className="u-s-p-b-60">
-                <CartPriceContainer original={originalPrice} totalPrice={totalPrice}/>
+                <CartPriceContainer original={originalPrice} totalPrice={totalPrice}
+                                    checkoutHandleClick={checkoutHandleClick}/>
             </div>
         </form>
     </div>
