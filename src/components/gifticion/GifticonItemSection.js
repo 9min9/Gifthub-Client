@@ -3,7 +3,7 @@ import GifticonItemContainer from "./GifticonItemContainer";
 import RouteBox from "../ui/link/RouteBox";
 import GiftiBotContainer from "./GiftiBotContainer";
 
-export default function GifticonItemSection({test, itemList}) {
+export default function GifticonItemSection({itemList}) {
 
     const giftiBot = {imageUrl: "/images/giftibot.jpeg", intro: "기프티콘을 추가해주세요"};
 

@@ -4,8 +4,8 @@ import axios from "axios";
 import {AuthContext} from "../../components/account/AuthContextProvider";
 
 export default function GifticonStorage() {
-
     const [storageList,setStorageList] = useState([]);
+
     const auth = useContext(AuthContext);
 
     useEffect(() => {
@@ -26,10 +26,8 @@ export default function GifticonStorage() {
             })
     }
 
-
     return (
         <div className="app-content">
-            <GifticonItemSection test={getStorage} itemList={storageList}></GifticonItemSection>
-
+            <GifticonItemSection itemList={storageList}></GifticonItemSection>
         </div>)
 }
