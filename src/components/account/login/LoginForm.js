@@ -38,19 +38,16 @@ export default function LoginForm() {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:8081/api/local/login', {
-                email, password
-
-            });
-
-            alert("로그인 성공");
+            const response = await axios.post('http://localhost:8081/api/local/login', { email, password });
 
             const authorizationHeader = response.headers.authorization;
             const token = authorizationHeader.replace("Bearer ", "");
+            const userRole = response.data.userRole;
             localStorage.setItem("token", token);
-            handleLogin(token);
-            navigate("/");
+            handleLogin(token, userRole);
 
+            alert("로그인 성공");
+            navigate("/");
 
         } catch (error) {
             console.log(error);
@@ -71,7 +68,8 @@ export default function LoginForm() {
             .then(function (response) {
                 let authorizationHeader = response.headers.authorization;
                 let token = authorizationHeader.replace("Bearer ", "");
-                handleLogin(token);
+                let userRole = response.data.userRole;
+                handleLogin(token, userRole);
                 alert("네이버 로그인 성공")
                 navigate("/");
             })

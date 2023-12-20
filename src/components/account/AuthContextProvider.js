@@ -8,6 +8,7 @@ const AuthContext = createContext();
 const AuthProvider = ({children}) => {
     const [token, setToken] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [userRole, setUserRole] =useState({});
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -18,25 +19,23 @@ const AuthProvider = ({children}) => {
         }
     }, []);
 
-    const handleLogin = (token) => {
-        console.log("AuthProvider")
-        console.log(token)
-        // 로그인 로직 처리
+    const handleLogin = (token, role) => {
         setIsAuthenticated(true);
+        setUserRole(role);
         setToken(token);
         localStorage.setItem('token', token);
     };
 
     const handleLogout = () => {
-        // 로그아웃 로직 처리
         setIsAuthenticated(false);
         setToken('');
+        setUserRole('');
         localStorage.removeItem('token');
         navigate("/");
     };
 
     return (
-        <AuthContext.Provider value={{isAuthenticated, token, handleLogin, handleLogout}}>
+        <AuthContext.Provider value={{isAuthenticated, userRole, token, handleLogin, handleLogout}}>
             {children}
         </AuthContext.Provider>
     );
