@@ -3,6 +3,7 @@ import SignupInputWrapper from "./SignupInputWrapper";
 import OutlineButton from "../../ui/button/OutlineButton";
 import SelectorButton from "../../ui/button/SelectorButton";
 import {useNavigate} from "react-router-dom";
+import MessageWrapper from "./MesseageWrapper";
 
 import axios from "axios";
 
@@ -10,48 +11,58 @@ export default function SignupForm() {
     let navigate = useNavigate();
 
     const [inputs, setInputs] = useState({});
+    const {email} = inputs;
+    const [validateMessage, setValidateMessage] = useState('');
+    const [field, setField] = useState('');
+    const [style, setStyle] = useState('');
 
     const onBlur = (e) => {
-        e.preventDefault();
-        signUp(e);
+        const {name, value} = e.target;
+        setInputs({
+            ...inputs,
+
+            [name]: value
+        })
+
+        errorCheck(e);
+    }
+
+    const errorCheck = (e) => {
+        axios
+            .post('http://localhost:8081/api/local/signup/validate/email',
+                {email})
+            .then(response => {
+                let result = response.data
+                setValidateMessage(result.message)
+                setField(result.field);
+                setStyle("green");
+
+
+            })
+            .catch(error => {
+                let result = error.response.data
+                setValidateMessage(result.message);
+                setField(result.field);
+                setStyle("red");
+            });
     };
 
     const onChange = (e) => {
+        e.preventDefault();
         const {name, value} = e.target;
         setInputs({
             ...inputs,
             [name]: value
         })
+
     }
-    useEffect(() => {
-        console.log(inputs)
-    }, [inputs]);
-    const errorCheck = (e) => {
-        e.preventDefault();
-
-
-        axios
-            .post()
-            .then(response => {
-                alert("회원가입을 축하드립니다")
-                console.log(response.data);
-                navigate("/login");
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    };
-
 
     const signUp = (e) => {
         e.preventDefault();
-
-
         axios
             .post('http://localhost:8081/api/local/signup/submit',
                 inputs)
             .then(response => {
-
                 alert("회원가입을 축하드립니다")
                 console.log(response.data);
                 navigate("/login");
@@ -67,12 +78,16 @@ export default function SignupForm() {
             <div>
 
                 <div className="gl-inline u-s-m-b-25">
-
                     <SignupInputWrapper target="email" labelText="이메일" type="text"
-                                        placeholder="이메일을 입력해주세요" _onChange={onBlur}></SignupInputWrapper>
-
+                                        placeholder="이메일을 입력해주세요" _onChange={onChange}
+                                        _onBlur={onBlur}></SignupInputWrapper>
 
                 </div>
+                <div>
+                    <MessageWrapper color={style} innerText={validateMessage} target={field}></MessageWrapper>
+                </div>
+
+
                 <div className="gl-inline u-s-m-b-25">
 
                     <SignupInputWrapper target="password" labelText="비밀번호" type="password"
