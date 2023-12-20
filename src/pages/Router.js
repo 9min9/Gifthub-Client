@@ -12,9 +12,10 @@ import Checkout from "./checkout/Checkout";
 import MyPage from "./account/MyPage";
 import PaymentHistory from "./history/PaymentHistory";
 import OrderHistory from "./history/OrderHistory";
+import AdminIndex from "./admin/AdminIndex";
 
 export default function Router() {
-    const {isAuthenticated} = useContext(AuthContext);
+    const {isAuthenticated, userRole} = useContext(AuthContext);
 
     return (
         <Routes>
@@ -36,7 +37,14 @@ export default function Router() {
                     </>)
                 :
                 (<Route path="/*" element={<Navigate to="/login"/>}/>)}
+
+            {isAuthenticated && (userRole === "ADMIN") ? (
+                    <>
+                        <Route path="/admin/index" element={<AdminIndex/>}/>
+                    </>)
+                :
+                (<></>)}
+                {/*(<Route path="/admin/index" element={<Product/>}/>)}*/}
         </Routes>
-    )
-        ;
+    );
 }

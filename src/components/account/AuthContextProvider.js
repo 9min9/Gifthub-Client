@@ -1,10 +1,8 @@
 import React, {createContext, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 
-// AuthContext 생성
 const AuthContext = createContext();
 
-// AuthProvider 컴포넌트 생성
 const AuthProvider = ({children}) => {
     const [token, setToken] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -13,29 +11,34 @@ const AuthProvider = ({children}) => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
+        const role = localStorage.getItem('role');
+
         if (token) {
             setIsAuthenticated(true);
+            setUserRole(role);
             setToken(token);
         }
     }, []);
 
-    const handleLogin = (token, role) => {
+    const loginHandler = (token, role) => {
         setIsAuthenticated(true);
         setUserRole(role);
         setToken(token);
         localStorage.setItem('token', token);
+        localStorage.setItem('role', role);
     };
 
-    const handleLogout = () => {
+    const logoutHandler = () => {
         setIsAuthenticated(false);
         setToken('');
         setUserRole('');
         localStorage.removeItem('token');
+        localStorage.removeItem('role');
         navigate("/");
     };
 
     return (
-        <AuthContext.Provider value={{isAuthenticated, userRole, token, handleLogin, handleLogout}}>
+        <AuthContext.Provider value={{isAuthenticated, userRole, token, loginHandler, logoutHandler}}>
             {children}
         </AuthContext.Provider>
     );
