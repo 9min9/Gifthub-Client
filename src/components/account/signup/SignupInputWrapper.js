@@ -11,7 +11,7 @@ export default function SignupInputWrapper(prop) {
     return (
         <div id={id}>
             <Label htmlFor={target} labelText={labelText}></Label>
-            <Input name={target} type={type} placeholder={placeholder} _onChange={_onChange} _onBlur={_onBlur}> </Input>
+            <Input className={"input-text input-text--primary-style"} name={target} type={type} placeholder={placeholder} _onChange={_onChange} _onBlur={_onBlur}> </Input>
         </div>
     );
 

@@ -10,7 +10,7 @@ export default function LoginInputWrapper(prop) {
     return(
         <div id={id} className="u-s-m-b-30">
             <Label htmlFor={target} labelText={labelText}></Label>
-            <Input name={target} type={type} _onChange={_onChange} placeholder={placeholder}></Input>
+            <Input className={"input-text input-text--primary-style"} name={target} type={type} _onChange={_onChange} placeholder={placeholder}></Input>
         </div>
     );
 
