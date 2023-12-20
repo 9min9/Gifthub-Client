@@ -12,7 +12,8 @@ export default function ProductSection({
                                            selectorRef,
                                            handleBrandClick,
                                            handleSearchChange,
-                                           searchInput
+                                           searchInput,
+                                           handleSearchKeyUp
                                        }) {
     return (
         <div className="app-content">
@@ -31,6 +32,7 @@ export default function ProductSection({
                     productList={productList} // 필요
                     handleSearchChange={handleSearchChange}
                     searchInput={searchInput}
+                    handleSearchKeyUp={handleSearchKeyUp}
                 />
             </div>
         </div>
