@@ -3,38 +3,58 @@ import {AuthContext} from "../account/AuthContextProvider";
 import {useContext} from "react";
 import MiniCart from "../../pages/cart/MiniCart";
 
-
 export default function Header() {
-    const {isAuthenticated, handleLogin, handleLogout} = useContext(AuthContext);
+    const {isAuthenticated, userRole, logoutHandler} = useContext(AuthContext);
     let menu;
 
     if (isAuthenticated) {
-        menu =
-            <>
-                <li id="nav-attendance-li" className="u-s-m-r-6">
-                    <a id="show-attendance-a">
-                        <i className="fa-regular fa-square-check"></i>
-                        <span>출석체크</span>
-                    </a>
-                </li>
-                <li id="nav-point-li" className="u-s-m-r-6">
-                    <Link to="/payments">
-                        <i className="fa-solid fa-wallet"></i>
-                        <span>포인트 충전</span>
-                    </Link>
-                </li>
+        if(userRole === "USER") {
+            menu =
+                <>
+                    <li id="nav-attendance-li" className="u-s-m-r-6">
+                        <a id="show-attendance-a">
+                            <i className="fa-regular fa-square-check"></i>
+                            <span>출석체크</span>
+                        </a>
+                    </li>
+                    <li id="nav-point-li" className="u-s-m-r-6">
+                        <Link to="/payments">
+                            <i className="fa-solid fa-wallet"></i>
+                            <span>포인트 충전</span>
+                        </Link>
+                    </li>
+                    <li id="nav-mypage-li" className="u-s-m-r-6">
+                        <Link to="/mypage">
+                            <i className="fas fa-user-circle"></i>
+                            <span>내정보</span>
+                        </Link>
+                    </li>
+
+                    <li id="nav-logout-li" className="u-s-m-r-6">
+                        <a className="btn" onClick={logoutHandler}><i className="fas fa-lock-open"></i>
+                            <span>로그아웃</span>
+                        </a>
+                    </li>
+                </>;
+        }
+
+        if (userRole === "ADMIN") {
+            menu = <>
                 <li id="nav-mypage-li" className="u-s-m-r-6">
-                    <Link to="/mypage">
+                    <Link to="/admin/index">
                         <i className="fas fa-user-circle"></i>
-                        <span>내정보</span>
+                        <span>관리자 페이지</span>
                     </Link>
                 </li>
+
                 <li id="nav-logout-li" className="u-s-m-r-6">
-                    <a className="btn" onClick={handleLogout}><i className="fas fa-lock-open"></i>
+                    <a className="btn" onClick={logoutHandler}><i className="fas fa-lock-open"></i>
                         <span>로그아웃</span>
                     </a>
                 </li>
-            </>;
+            </>
+        }
+
     } else {
         menu = <>
             <li id="nav-signup-li" className="u-s-m-r-6">

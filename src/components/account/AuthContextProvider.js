@@ -1,42 +1,44 @@
 import React, {createContext, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 
-// AuthContext 생성
 const AuthContext = createContext();
 
-// AuthProvider 컴포넌트 생성
 const AuthProvider = ({children}) => {
     const [token, setToken] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [userRole, setUserRole] =useState({});
     const navigate = useNavigate();
 
     useEffect(() => {
         const token = localStorage.getItem('token');
+        const role = localStorage.getItem('role');
+
         if (token) {
             setIsAuthenticated(true);
+            setUserRole(role);
             setToken(token);
         }
     }, []);
 
-    const handleLogin = (token) => {
-        console.log("AuthProvider")
-        console.log(token)
-        // 로그인 로직 처리
+    const loginHandler = (token, role) => {
         setIsAuthenticated(true);
+        setUserRole(role);
         setToken(token);
         localStorage.setItem('token', token);
+        localStorage.setItem('role', role);
     };
 
-    const handleLogout = () => {
-        // 로그아웃 로직 처리
+    const logoutHandler = () => {
         setIsAuthenticated(false);
         setToken('');
+        setUserRole('');
         localStorage.removeItem('token');
+        localStorage.removeItem('role');
         navigate("/");
     };
 
     return (
-        <AuthContext.Provider value={{isAuthenticated, token, handleLogin, handleLogout}}>
+        <AuthContext.Provider value={{isAuthenticated, userRole, token, loginHandler, logoutHandler}}>
             {children}
         </AuthContext.Provider>
     );

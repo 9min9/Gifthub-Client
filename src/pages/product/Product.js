@@ -10,7 +10,12 @@ export default function Product() {
     const [categoryContent, setCategoryContent] = useState([]);
     const [productList, setProductList] = useState([]);
 
+    const [searchInput, setSearchInput] = useState("")
+
     const selectorRef = useRef([]);
+    const searchRef = useRef();
+
+    let page = 0;
 
 //DOM이 road 되었을 때 getCategory 호출
     useEffect(() => {
@@ -29,13 +34,37 @@ export default function Product() {
         fetchBrandName();
     }, [categoryContent]);
 
+    useEffect(() => {
+        fetchProductByName();
+    }, [categoryContent, brandList]);
+
+
+    // TODO 검색 방법 변경으로 인한 주석
+    // useEffect(() => {
+    //     let categoryName = "";
+    //     let brandName = "";
+    //
+    //     for (let category of categoryContent) {
+    //         if (category.checked) {
+    //             categoryName = category.name.korName.replaceAll("/", "-");
+    //         }
+    //     }
+    //
+    //     for (let brand of brandList) {
+    //         if (brand.checked) {
+    //             brandName = brand.brandName;
+    //         }
+    //     }
+    //
+    //     fetchProduct(categoryName, brandName, searchInput);
+    // }, [searchInput]);
+
 
     const getCategory = async () => {
         let data;
 
         await axios.get("http://localhost:8081/api/product/categories", {headers: {Authorization: localStorage.getItem("token")}})
             .then(function (result) {
-                // setCategoryList(result.data);
                 data = result.data;
             })
             .catch(function (error) {
@@ -68,6 +97,7 @@ export default function Product() {
             await axios
                 .get(url, {headers: {Authorization: localStorage.getItem("token")}})
                 .then((result) => {
+                    brandLists.push({brandName: "전체", checked: true})
                     for (let r of result.data) {
                         brandLists.push({brandName: r, checked: false})
                     }
@@ -85,9 +115,76 @@ export default function Product() {
         setCategoryContent(updatedCategoryList);
     }
 
+    const fetchProduct = async (category, brand, name) => {
+        if (!category || !brand) {
+            return;
+        }
+
+        let url = ``;
+
+        if (name) {
+            url = `http://localhost:8081/api/product/page/search/${category}/${brand}/${name}?page=${page}&size=12`;
+        } else {
+            url = `http://localhost:8081/api/product/page/${category}/${brand}?page=${page}&size=12`;
+        }
+
+        await axios.get(url, {headers: {Authorization: localStorage.getItem("token")}})
+            .then((result) => {
+                setProductList(result.data.content);
+            })
+    }
+
+    const handleBrandClick = (event) => {
+        const updatedBrandList = [...brandList];
+
+        updatedBrandList.forEach(brand => {
+            if (brand.brandName === event.target.innerText) {
+                brand.checked = true;
+            } else {
+                brand.checked = false;
+            }
+        })
+
+        setBrandList(updatedBrandList);
+    }
+
+    const handleSearchChange = (event) => {
+        let inputs = event.target.value;
+
+        setSearchInput(inputs);
+    }
+
+    const handleSearchKeyUp = (event) => {
+        if (event.key === "Enter") {
+            fetchProductByName()
+        }
+    }
+
+    const fetchProductByName = () => {
+        let categoryName = "";
+        let brandName = "";
+
+        for (let category of categoryContent) {
+            if (category.checked) {
+                categoryName = category.name.korName.replaceAll("/", "-");
+            }
+        }
+
+        for (let brand of brandList) {
+            if (brand.checked) {
+                brandName = brand.brandName;
+            }
+        }
+
+        fetchProduct(categoryName, brandName, searchInput);
+    }
+
     return (
         <ProductSection productList={productList} categoryContent={categoryContent}
                         brandList={brandList} fetchBrandName={fetchBrandName}
-                        handleCategoryClick={handleCategoryClick} selectorRef={selectorRef}></ProductSection>
-    )
+                        handleCategoryClick={handleCategoryClick} selectorRef={selectorRef}
+                        handleBrandClick={handleBrandClick}
+                        handleSearchChange={handleSearchChange}
+                        searchInput={searchInput} handleSearchKeyUp={handleSearchKeyUp}></ProductSection>
+    );
 };
