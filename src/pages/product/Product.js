@@ -35,42 +35,29 @@ export default function Product() {
     }, [categoryContent]);
 
     useEffect(() => {
-        let categoryName = "";
-        let brandName = "";
-
-        for (let category of categoryContent) {
-            if (category.checked) {
-                categoryName = category.name.korName.replaceAll("/", "-");
-            }
-        }
-
-        for (let brand of brandList) {
-            if (brand.checked) {
-                brandName = brand.brandName;
-            }
-        }
-
-        fetchProduct(categoryName, brandName, searchInput);
+        fetchProductByName();
     }, [categoryContent, brandList]);
 
-    useEffect(() => {
-        let categoryName = "";
-        let brandName = "";
 
-        for (let category of categoryContent) {
-            if (category.checked) {
-                categoryName = category.name.korName.replaceAll("/", "-");
-            }
-        }
-
-        for (let brand of brandList) {
-            if (brand.checked) {
-                brandName = brand.brandName;
-            }
-        }
-
-        fetchProduct(categoryName, brandName, searchInput);
-    }, [searchInput]);
+    // TODO 검색 방법 변경으로 인한 주석
+    // useEffect(() => {
+    //     let categoryName = "";
+    //     let brandName = "";
+    //
+    //     for (let category of categoryContent) {
+    //         if (category.checked) {
+    //             categoryName = category.name.korName.replaceAll("/", "-");
+    //         }
+    //     }
+    //
+    //     for (let brand of brandList) {
+    //         if (brand.checked) {
+    //             brandName = brand.brandName;
+    //         }
+    //     }
+    //
+    //     fetchProduct(categoryName, brandName, searchInput);
+    // }, [searchInput]);
 
 
     const getCategory = async () => {
@@ -167,12 +154,37 @@ export default function Product() {
         setSearchInput(inputs);
     }
 
+    const handleSearchKeyUp = (event) => {
+        if (event.key === "Enter") {
+            fetchProductByName()
+        }
+    }
+
+    const fetchProductByName = () => {
+        let categoryName = "";
+        let brandName = "";
+
+        for (let category of categoryContent) {
+            if (category.checked) {
+                categoryName = category.name.korName.replaceAll("/", "-");
+            }
+        }
+
+        for (let brand of brandList) {
+            if (brand.checked) {
+                brandName = brand.brandName;
+            }
+        }
+
+        fetchProduct(categoryName, brandName, searchInput);
+    }
+
     return (
         <ProductSection productList={productList} categoryContent={categoryContent}
                         brandList={brandList} fetchBrandName={fetchBrandName}
                         handleCategoryClick={handleCategoryClick} selectorRef={selectorRef}
                         handleBrandClick={handleBrandClick}
                         handleSearchChange={handleSearchChange}
-                        searchInput={searchInput}></ProductSection>
+                        searchInput={searchInput} handleSearchKeyUp={handleSearchKeyUp}></ProductSection>
     );
 };
