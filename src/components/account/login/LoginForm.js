@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../AuthContextProvider";
 
 export default function LoginForm() {
-    const {handleLogin} = useContext(AuthContext);
+    const {loginHandler} = useContext(AuthContext);
 
     const urlParams = new URL(window.location.href).searchParams;
     const [inputs, setInputs] = useState({});
@@ -43,8 +43,7 @@ export default function LoginForm() {
             const authorizationHeader = response.headers.authorization;
             const token = authorizationHeader.replace("Bearer ", "");
             const userRole = response.data.userRole;
-            localStorage.setItem("token", token);
-            handleLogin(token, userRole);
+            loginHandler(token, userRole);
 
             alert("로그인 성공");
             navigate("/");
@@ -69,7 +68,7 @@ export default function LoginForm() {
                 let authorizationHeader = response.headers.authorization;
                 let token = authorizationHeader.replace("Bearer ", "");
                 let userRole = response.data.userRole;
-                handleLogin(token, userRole);
+                loginHandler(token, userRole);
                 alert("네이버 로그인 성공")
                 navigate("/");
             })
