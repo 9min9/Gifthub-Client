@@ -31,7 +31,10 @@ export default function GiftiBotContainer({item}) {
                     >
                     </PrimaryButton>
                 </div>
-                <GifticonAddModal isOpen={isOpen}/>
+                <GifticonAddModal
+                    isOpen={isOpen}
+                    setIsOpen={setIsOpen}
+                />
                 {/*{isOpen ?}*/}
             </div>
 
