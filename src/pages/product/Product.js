@@ -176,6 +176,7 @@ export default function Product() {
     const handleSearchKeyUp = (event) => {
         if (event.key === "Enter") {
             fetchProductByName(true)
+            setPage(0);
         }
     }
 
