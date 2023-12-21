@@ -1,10 +1,14 @@
 import ReactModal from 'react-modal';
 import {useEffect} from "react";
 import styled from "styled-components";
+import axios from "axios";
+import React from "react";
 
 export default function GifticonAddModal({isOpen, setIsOpen}) {
     console.log("GifticonAddModal is rendered");
-    console.log("jsKey : "+process.env.REACT_APP_KAKAO_JS_KEY);
+
+    const fileAdd = React.useRef(null);
+
     useEffect(() => {
         const script = document.createElement('script');
         script.src = 'https://developers.kakao.com/sdk/js/kakao.js'
@@ -34,9 +38,37 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
         }
     };
 
-    const openFile = (e) => {
+    const handleFileAddButtonClick = async () => {
+        try {
+            fileAdd.current.click();
+            const imageFile = fileAdd.current.files[0];
+
+            if(!imageFile){
+                console.error("no file selected");
+                // return;
+            }
+
+            const formData = new FormData();
+            formData.append('imageFile', imageFile);
+
+            const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/storage/file/add`,
+                formData,
+        {headers:{
+                        'Content-Type': 'multipart/form-data',
+                        Authorization : localStorage.getItem('token')
+                    },
+                }
+                );
+            console.log("fileupload success:", res.data);
+        }catch (error){
+            console.log("error: "+ error);
+        }
 
     };
+
+    const handleFileChange = e => {
+        console.log(e.target.files[0]);
+    }
 
 
     const StyledModal = styled(ReactModal)`
@@ -89,10 +121,19 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
                                     <div className="s-option__link-box">
                                         <a id="open-chat-button" className="s-option__link btn--e-white-brand-shadow"
                                            onClick={openChat} data-dismiss="modal">카카오톡으로 추가하기</a>
-                                        <label className="s-option__link btn--e-white-brand-shadow" htmlFor="fileInput">파일로
-                                            추가하기</label>
-                                        <input type="file" id="fileInput" style={{display: `none`}}
-                                               onChange="openFile(this)"/>
+                                        <React.Fragment>
+                                        <label
+                                            className="s-option__link btn--e-white-brand-shadow"
+                                            htmlFor="fileInput"
+                                            onClick={handleFileAddButtonClick}
+                                        >파일로 추가하기</label>
+                                        <input type="file"
+                                               id="fileInput"
+                                               style={{display: `none`} }
+                                               ref={fileAdd}
+                                               onChange={handleFileChange}
+                                       />
+                                        </React.Fragment>
                                     </div>
                                 </div>
                             </div>
