@@ -1,5 +1,7 @@
 import ProductCard from "../ui/image-card/ProductCard";
 import InputWithLabel from "../ui/form/InputWithLabel";
+import ImageModal from "../ui/modal/image-modal/ImageModal";
+import {useState} from "react";
 
 
 export default function ProductListContainer({
@@ -9,6 +11,22 @@ export default function ProductListContainer({
                                                  handleSearchKeyUp,
                                                  increasePage,
                                              }) {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const [imageSrc, setImageSrc] = useState("");
+    const [clickedProductName, setClickedProductName] = useState("")
+
+    const handleOpenModalClick = (event) => {
+        setIsOpen(true);
+
+        setImageSrc(event.target.src);
+        setClickedProductName(event.target.dataset.productName)
+    }
+
+    const handleCloseModalClick = (event) => {
+        setIsOpen(false);
+    }
+
     return (
         <div className="section__content" id="product-area-div">
             <div className="container">
@@ -32,6 +50,7 @@ export default function ProductListContainer({
                                             index={index}
                                             products={products}
                                             increasePage={increasePage}
+                                            handleOpenModalClick={handleOpenModalClick}
                                         />
                                     ))
                                 }
@@ -40,6 +59,10 @@ export default function ProductListContainer({
                     </div>
                 </div>
             </div>
+            <ImageModal isOpen={isOpen}
+                        handleCloseModalClick={handleCloseModalClick}
+                        imageSrc={imageSrc}
+                        clickedProductName={clickedProductName}/>
         </div>
     );
 }
