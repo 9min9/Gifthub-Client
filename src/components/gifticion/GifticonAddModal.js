@@ -27,9 +27,10 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
                 // <!--    <script>function chatChannel(){Kakao.Channel.chat({ channelPublicId: '_ATxoKG',});}</script>-->
             }
 
-            kakao.Channel.addChannel({
-                channelPublicId: '_ATxoKG',
-            })
+            kakao.Channel.chat({
+                // channelPublicId: '_yEhsG'
+                channelPublicId: '_ATxoKG'
+            });
         }
     };
 
