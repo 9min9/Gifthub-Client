@@ -1,7 +1,13 @@
 import ProductCard from "../ui/image-card/ProductCard";
 
 
-export default function ProductListContainer({productList, handleSearchChange, searchInput, handleSearchKeyUp}) {
+export default function ProductListContainer({
+                                                 productList,
+                                                 handleSearchChange,
+                                                 searchInput,
+                                                 handleSearchKeyUp,
+                                                 increasePage,
+                                             }) {
     return (
         <div className="section__content" id="product-area-div">
             <div className="container">
@@ -18,10 +24,13 @@ export default function ProductListContainer({productList, handleSearchChange, s
                         <div className="u-s-m-t-30">
                             <div id="row-product-div" className="row">
                                 {
-                                    productList.map(product => (
+                                    productList.map((product, index, products) => (
                                         <ProductCard
                                             key={product.id}
                                             product={product}
+                                            index={index}
+                                            products={products}
+                                            increasePage={increasePage}
                                         />
                                     ))
                                 }

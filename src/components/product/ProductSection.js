@@ -13,7 +13,8 @@ export default function ProductSection({
                                            handleBrandClick,
                                            handleSearchChange,
                                            searchInput,
-                                           handleSearchKeyUp
+                                           handleSearchKeyUp,
+                                           increasePage,
                                        }) {
     return (
         <div className="app-content">
@@ -33,6 +34,7 @@ export default function ProductSection({
                     handleSearchChange={handleSearchChange}
                     searchInput={searchInput}
                     handleSearchKeyUp={handleSearchKeyUp}
+                    increasePage={increasePage}
                 />
             </div>
         </div>

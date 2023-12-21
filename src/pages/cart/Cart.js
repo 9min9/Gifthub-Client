@@ -13,7 +13,7 @@ export default function Cart() {
     const navigate = useNavigate();
 
     const fetchCart = async () => {
-        await axios.get("http://localhost:8081/api/carts", {headers: {Authorization: localStorage.getItem("token")}})
+        await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/carts`, {headers: {Authorization: localStorage.getItem("token")}})
             .then((result) => {
                 setCarts(result.data);
 
@@ -33,7 +33,7 @@ export default function Cart() {
     const clearCartHandleClick = (event) => {
         event.preventDefault();
 
-        axios.post("http://localhost:8081/api/carts/delete", {},
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/api/carts/delete`, {},
             {headers: {Authorization: localStorage.getItem("token")}})
             .then(() => setCarts([]));
     }
@@ -43,7 +43,7 @@ export default function Cart() {
 
         const id = event.target.id.replace("delete-", "");
 
-        axios.post(`http://localhost:8081/api/carts/delete/${id}`, {}, {headers: {Authorization: localStorage.getItem("token")}})
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/api/carts/delete/${id}`, {}, {headers: {Authorization: localStorage.getItem("token")}})
             .then(() => fetchCart());
     }
 

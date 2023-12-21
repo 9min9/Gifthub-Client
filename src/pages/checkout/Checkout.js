@@ -27,7 +27,7 @@ export default function Checkout() {
             sendData += `gifticonIds=${gifticonId}&`
         }
 
-        axios.get(`http://localhost:8081/api/checkout?${sendData}`, {headers: {Authorization: localStorage.getItem("token")}})
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/api/checkout?${sendData}`, {headers: {Authorization: localStorage.getItem("token")}})
             .then((res) => {
                 setGifticons(res.data.list);
                 setOriginalPrice(res.data.originalPrice);
@@ -66,7 +66,7 @@ export default function Checkout() {
             sendData.gifticonIds.push(gifticonId);
         })
 
-        axios.post("http://localhost:8081/api/points/buy", sendData, {headers: {Authorization: localStorage.getItem("token")}})
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/api/points/buy`, sendData, {headers: {Authorization: localStorage.getItem("token")}})
             .then(navigate("/"));
     };
 

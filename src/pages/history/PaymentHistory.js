@@ -12,7 +12,7 @@ export default function PaymentHistory() {
     const size = 12;
 
     const fetchOrders = () => {
-        axios.get(`http://localhost:8081/api/payments?page=${page}&size=${size}`,
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/api/payments?page=${page}&size=${size}`,
             {headers: {Authorization: localStorage.getItem("token")}})
             .then((result) => {
                 setPayments(result.data.content);
