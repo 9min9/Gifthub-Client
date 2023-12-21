@@ -4,10 +4,26 @@ import styled from "styled-components";
 import axios from "axios";
 import React from "react";
 
+function disableScroll() {
+    document.body.style.overflow = 'hidden';
+}
+
+function enableScroll() {
+    document.body.style.overflow = 'visible';
+}
+
 export default function GifticonAddModal({isOpen, setIsOpen}) {
     console.log("GifticonAddModal is rendered");
 
     const fileAdd = React.useRef(null);
+
+    useEffect(() => {
+        if(isOpen) {
+            disableScroll();
+        } else {
+            enableScroll();
+        }
+    }, [isOpen]);
 
     useEffect(() => {
         const script = document.createElement('script');
