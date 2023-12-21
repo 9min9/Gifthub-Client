@@ -16,6 +16,17 @@ export default function GifticonItemContainer({item, _onClick}) {
     }
 
     //todo : 값이 없으면 error로 보내기
+
+    const renderErrorInfo = (content, error) => {
+        return (
+            <GifticonItemInfo
+                content={content}
+                error={error ? <span className="u-s-m-x-10" style={{color : 'red'}}>{error}</span> : null}
+            />
+        )
+    }
+
+
     return (
 
         <div className="w-r u-s-m-b-30">
@@ -24,40 +35,10 @@ export default function GifticonItemContainer({item, _onClick}) {
                     <GifticonItemImage url={item.imageUrl}></GifticonItemImage>
 
                     <div id="gifticon-info" className="w-r__info">
-                        <GifticonItemInfo
-                            id={item.id}
-                            content={
-                                item.brand
-                                    ? item.brand
-                                    : <span style={{color: 'red'}}>브랜드 이름이 존재하지 않습니다</span>
-                            }
-                        />
-                        <GifticonItemInfo
-                            id={item.id}
-                            content={
-                                item.productName
-                                    ? item.productName
-                                    : <span style={{color: 'red'}}>상품 이름이 존재하지 않습니다</span>
-                            }
-
-                        />
-                        <GifticonItemInfo
-                            id={item.id}
-                            content={
-                                item.barcode
-                                    ? item.barcode
-                                    : <span style={{color: 'red'}}>바코드 번호가 존재하지 않습니다</span>
-                            }
-                        />
-                        <GifticonItemInfo
-                            id={item.id}
-                            content={
-                                item.due
-                                    ? item.due
-                                    : <span style={{color: 'red'}}>유효기간이 존재하지 않습니다</span>
-                            }
-
-                        />
+                        {renderErrorInfo(item.brand, "브랜드 이름이 존재하지 않습니다")}
+                        {renderErrorInfo(item.productName, "상품명이 존재하지 않습니다")}
+                        {renderErrorInfo(item.barcode, "바코드 번호가 존재하지 않습니다")}
+                        {renderErrorInfo(item.due, "유효기간이 존재하지 않습니다")}
                     </div>
                 </div>
 
