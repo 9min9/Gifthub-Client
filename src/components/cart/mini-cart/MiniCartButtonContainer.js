@@ -5,8 +5,6 @@ export default function MiniCartButtonContainer({carts}) {
 
     carts.forEach(cart => cartStr += `gifticonIds=${cart.gifticonDto.id}&`);
 
-    console.log(cartStr)
-
     return (
         <>
             <div className="mini-action">

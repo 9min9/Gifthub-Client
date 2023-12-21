@@ -1,4 +1,6 @@
-export default function CheckoutPayContainer({originalPrice, totalPrice}) {
+import PrimaryBtn from "../ui/button/PrimaryBtn";
+
+export default function CheckoutPayContainer({originalPrice, totalPrice, handlePointClick, pointSelectRef}) {
     return <div class="col-lg-6">
         <h1 class="checkout-f__h1">결제 금액</h1>
         <div class="o-summary">
@@ -16,7 +18,7 @@ export default function CheckoutPayContainer({originalPrice, totalPrice}) {
                         </tr>
                         <tr>
                             <td>판매가</td>
-                            <td id="total-price">{totalPrice}</td>
+                            <td id="total-price" ref={pointSelectRef}>{totalPrice}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -27,11 +29,11 @@ export default function CheckoutPayContainer({originalPrice, totalPrice}) {
                 <div class="o-summary__box">
                     <form class="checkout-f__payment">
                         <div>
-                            <button class="btn btn--e-brand-b-2" type="button" id="pay-with-point">포인트 결제</button>
+                            <PrimaryBtn id={"pay-with-point"} innerText={"포인트 결제"} _onClick={handlePointClick}/>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
+    </div>;
 };
