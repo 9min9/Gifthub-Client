@@ -68,6 +68,7 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
 
     const handleFileChange = e => {
         console.log(e.target.files[0]);
+        handleFileAddButtonClick();
     }
 
 
@@ -125,7 +126,7 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
                                         <label
                                             className="s-option__link btn--e-white-brand-shadow"
                                             htmlFor="fileInput"
-                                            onClick={handleFileAddButtonClick}
+                                            // onClick={handleFileAddButtonClick}
                                         >파일로 추가하기</label>
                                         <input type="file"
                                                id="fileInput"
