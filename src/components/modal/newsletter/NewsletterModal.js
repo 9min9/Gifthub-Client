@@ -13,7 +13,8 @@ function enableScroll() {
     document.body.style.overflow = 'visible';
 }
 
-export default function NewsletterModal({isOpen, setIsOpen}) {
+export default function NewsletterModal({item, isOpen, closeModal}) {
+    // const {isOpen, openModal, closeModal} = useNewsletterModal();
 
     useEffect(() => {
         if(isOpen) {
@@ -21,6 +22,7 @@ export default function NewsletterModal({isOpen, setIsOpen}) {
         } else {
             enableScroll();
         }
+        // isOpen(true);
     }, [isOpen]);
 
     const StyledModal = styled(ReactModal)`
@@ -49,16 +51,18 @@ export default function NewsletterModal({isOpen, setIsOpen}) {
     }
 
     return (
-        <StyledModal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} style={modalStyle}>
+        <StyledModal isOpen={isOpen}
+                     onRequestClose={closeModal}
+                     style={modalStyle}>
 
             {/*<div id="newsletter-modal" className="modal fade new-l">*/}
             {/*<div id="newsletter-modal" className="modal-dialog modal-dialog-centered">*/}
             <div className="modal-content modal--shadow">
-                <button className="btn dismiss-button fas fa-times" type="button" onClick={() => setIsOpen(false)}></button>
+                <button className="btn dismiss-button fas fa-times" type="button" onClick={closeModal}/>
                 <div className="modal-body">
                     <div className="row u-s-m-x-0">
                         {/*image section*/}
-                        <NewsletterModalImageSection/>
+                        <NewsletterModalImageSection item={item}/>
 
                         {/*info section*/}
                         <NewsletterInfoSection/>

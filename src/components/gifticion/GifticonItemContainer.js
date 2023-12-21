@@ -2,20 +2,13 @@ import GifticonItemImage from "./GifticonItemImage";
 import GifticonItemInfo from "./GifticonItemInfo";
 import PrimaryButton from "../ui/button/PrimaryButton";
 import WhiteButton from "../ui/button/WhiteButton";
-import {useState} from "react";
 import NewsletterModal from "../modal/newsletter/NewsletterModal";
+import useNewsletterModal from "../../hooks/useNewsletterModal";
 
 
-export default function GifticonItemContainer({item, _onClick}) {
+export default function GifticonItemContainer({item}) {
 
-    const [isOpen, setIsOpen] = useState(false);
-
-    const handleOpenModalClick = () => {
-        console.log("handleOpenModalClick is triggered")
-        setIsOpen(!isOpen);
-    }
-
-    //todo : 값이 없으면 error로 보내기
+    const { isOpen, openModal, closeModal} = useNewsletterModal();
 
     const renderErrorInfo = (content, error) => {
         return (
@@ -44,11 +37,16 @@ export default function GifticonItemContainer({item, _onClick}) {
 
                 <div id="gifticon-btn-wrap" className="w-r__wrap-2">
                     <WhiteButton innerText="삭제"></WhiteButton>
-                    <PrimaryButton innerText="등록 하기" _onClick={handleOpenModalClick}></PrimaryButton>
+                    <PrimaryButton innerText="등록 하기"
+                                   _onClick={() => openModal()}
+                    />
                 </div>
+                <NewsletterModal
+                    item={item}
+                    isOpen={isOpen}
+                    closeModal={closeModal}
+                />
             </div>
-
-            <NewsletterModal isOpen={isOpen} setIsOpen={setIsOpen}></NewsletterModal>
         </div>
 
     )
