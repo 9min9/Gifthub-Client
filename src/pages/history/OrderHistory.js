@@ -1,5 +1,5 @@
 import Sidebar from "../../components/common/Sidebar";
-import OrderHistorySection from "../../components/History/order/OrderHistorySection";
+import OrderHistorySection from "../../components/history/order/OrderHistorySection";
 import MyPageTitleContainer from "../../components/mypage/MyPageTitleContainer";
 
 export default function OrderHistory() {
@@ -16,9 +16,11 @@ export default function OrderHistory() {
                                 </div>
 
                                 <div className="col-lg-9 col-md-12">
-                                    <div className="dash__box dash__box--shadow dash__box--radius dash__box--bg-white u-s-m-b-30">
+                                    <div
+                                        className="dash__box dash__box--shadow dash__box--radius dash__box--bg-white u-s-m-b-30">
                                         <div className="dash__pad-2">
-                                            <MyPageTitleContainer title="내 구매 내역" subTitle="기프티콘 구매 내역 입니다"></MyPageTitleContainer>
+                                            <MyPageTitleContainer title="내 구매 내역"
+                                                                  subTitle="기프티콘 구매 내역 입니다"></MyPageTitleContainer>
                                             <OrderHistorySection></OrderHistorySection>
                                         </div>
                                     </div>
