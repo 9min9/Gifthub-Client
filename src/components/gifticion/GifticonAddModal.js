@@ -28,7 +28,6 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
 
             if (!kakao.isInitialized()) {
                 kakao.init(process.env.REACT_APP_KAKAO_JS_KEY)
-                // <!--    <script>function chatChannel(){Kakao.Channel.chat({ channelPublicId: '_ATxoKG',});}</script>-->
             }
 
             kakao.Channel.chat({
@@ -60,8 +59,11 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
                 }
                 );
             console.log("fileupload success:", res.data);
+            alert("등록 성공");
+
         }catch (error){
             console.log("error: "+ error);
+            alert(`등록 실패\n\n${error.response.data.message}`);
         }
 
     };
