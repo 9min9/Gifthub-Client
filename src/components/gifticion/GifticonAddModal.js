@@ -99,7 +99,7 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
         <StyledModal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} style={modalStyle}>
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content modal-radius modal-shadow">
-                    <button className="btn dismiss-button fas fa-times" type="button" data-dismiss="modal"></button>
+                    <button className="btn dismiss-button fas fa-times" type="button" onClick={() => setIsOpen(false)}></button>
                     <div className="modal-body">
                         <div className="row">
                             <div className="col-lg-6 col-md-12">
