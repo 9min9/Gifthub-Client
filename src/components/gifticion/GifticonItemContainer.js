@@ -24,10 +24,40 @@ export default function GifticonItemContainer({item, _onClick}) {
                     <GifticonItemImage url={item.imageUrl}></GifticonItemImage>
 
                     <div id="gifticon-info" className="w-r__info">
-                        <GifticonItemInfo id={item.id} content={item.brand}></GifticonItemInfo>
-                        <GifticonItemInfo id={item.id} content={item.productName}></GifticonItemInfo>
-                        <GifticonItemInfo id={item.id} content={item.barcode}></GifticonItemInfo>
-                        <GifticonItemInfo id={item.id} content={item.due}></GifticonItemInfo>
+                        <GifticonItemInfo
+                            id={item.id}
+                            content={
+                                item.brand
+                                    ? item.brand
+                                    : <span style={{color: 'red'}}>브랜드 이름이 존재하지 않습니다</span>
+                            }
+                        />
+                        <GifticonItemInfo
+                            id={item.id}
+                            content={
+                                item.productName
+                                    ? item.productName
+                                    : <span style={{color: 'red'}}>상품 이름이 존재하지 않습니다</span>
+                            }
+
+                        />
+                        <GifticonItemInfo
+                            id={item.id}
+                            content={
+                                item.barcode
+                                    ? item.barcode
+                                    : <span style={{color: 'red'}}>바코드 번호가 존재하지 않습니다</span>
+                            }
+                        />
+                        <GifticonItemInfo
+                            id={item.id}
+                            content={
+                                item.due
+                                    ? item.due
+                                    : <span style={{color: 'red'}}>유효기간이 존재하지 않습니다</span>
+                            }
+
+                        />
                     </div>
                 </div>
 
