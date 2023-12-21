@@ -6,7 +6,7 @@ import axios from "axios";
 
 
 export default function PaymentHistory() {
-    const [orders, setOrders] = useState([]);
+    const [payments, setPayments] = useState([]);
     const [page, setPage] = useState(0);
 
     const size = 12;
@@ -15,7 +15,7 @@ export default function PaymentHistory() {
         axios.get(`http://localhost:8081/api/payments?page=${page}&size=${size}`,
             {headers: {Authorization: localStorage.getItem("token")}})
             .then((result) => {
-                setOrders(result.data.content);
+                setPayments(result.data.content);
             });
     }
 
@@ -42,7 +42,7 @@ export default function PaymentHistory() {
                                             <MyPageTitleContainer title="내 결제 내역"
                                                                   subTitle="결제 내역 입니다"></MyPageTitleContainer>
 
-                                            <PaymentHistorySection orders={orders}></PaymentHistorySection>
+                                            <PaymentHistorySection payments={payments}></PaymentHistorySection>
                                         </div>
                                     </div>
                                 </div>

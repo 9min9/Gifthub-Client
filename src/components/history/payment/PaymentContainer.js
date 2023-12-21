@@ -1,10 +1,10 @@
-export default function PaymentContainer({order}) {
+export default function PaymentContainer({payment}) {
     return <div className="m-order__get">
         <div className="manage-o__header u-s-m-b-30">
             <div className="dash-l-r">
                 <div>
                     <div className="manage-o__text-2 u-c-secondary">Order
-                        #{order.id}
+                        #{payment.id}
                     </div>
                 </div>
             </div>
@@ -16,11 +16,11 @@ export default function PaymentContainer({order}) {
                     <img className="u-img-fluid"
                          src="images/product/electronic/product3.jpg" alt=""/>
                 </div>
-                <div className="description-title">{order.price} Point</div>
+                <div className="description-title">{payment.price} Point</div>
             </div>
             <div className="description__info-wrap">
                 <div>
-                    <span className="manage-o__badge badge--processing">{order.payStatus}</span>
+                    <span className="manage-o__badge badge--processing">{payment.payStatus}</span>
                 </div>
                 <div>
                     <span className="manage-o__text-2 u-c-silver">Quantity:
@@ -31,7 +31,7 @@ export default function PaymentContainer({order}) {
                 <div>
 
                     <span className="manage-o__text-2 u-c-silver">Total:
-                        <span className="manage-o__text-2 u-c-secondary">{order.price}</span>
+                        <span className="manage-o__text-2 u-c-secondary">{payment.price}</span>
                     </span>
                 </div>
             </div>
