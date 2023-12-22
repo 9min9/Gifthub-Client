@@ -17,7 +17,7 @@ export default function NewsletterModal({item, isOpen, closeModal}) {
     // const {isOpen, openModal, closeModal} = useNewsletterModal();
 
     useEffect(() => {
-        if(isOpen) {
+        if (isOpen) {
             disableScroll();
         } else {
             enableScroll();
@@ -32,8 +32,8 @@ export default function NewsletterModal({item, isOpen, closeModal}) {
         height: 100%;
         max-height: 800px;
         margin: auto;
-        display: flex;
-        flex-direction: column;
+        //display: flex;
+        //flex-direction: column;
         justify-content: center;
       }
 
@@ -51,25 +51,23 @@ export default function NewsletterModal({item, isOpen, closeModal}) {
     }
 
     return (
-        <StyledModal isOpen={isOpen}
-                     onRequestClose={closeModal}
-                     style={modalStyle}>
+        <StyledModal isOpen={isOpen} onRequestClose={closeModal} style={modalStyle}>
 
             {/*<div id="newsletter-modal" className="modal fade new-l">*/}
             {/*<div id="newsletter-modal" className="modal-dialog modal-dialog-centered">*/}
-            <div className="modal-content modal--shadow">
-                <button className="btn dismiss-button fas fa-times" type="button" onClick={closeModal}/>
-                <div className="modal-body">
-                    <div className="row u-s-m-x-0">
-                        {/*image section*/}
-                        <NewsletterModalImageSection item={item}/>
+                <div className="modal-content modal--shadow">
+                    <button className="btn dismiss-button fas fa-times" type="button" onClick={closeModal}/>
+                    <div className="modal-body">
+                        <div className="row u-s-m-x-0">
+                            {/*image section*/}
+                            <NewsletterModalImageSection item={item}/>
 
-                        {/*info section*/}
-                        <NewsletterInfoSection item={item}/>
+                            {/*info section*/}
+                            <NewsletterInfoSection item={item}/>
 
+                        </div>
                     </div>
                 </div>
-            </div>
             {/*</div>*/}
             {/*</div>*/}
         </StyledModal>
