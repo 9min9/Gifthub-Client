@@ -3,7 +3,7 @@ import NewsletterModalTitleWrapper from "./NewsletterModalTitleWrapper";
 import NewsletterModalSubSubTitleWrapper from "./NewsletterModalSubSubTitleWrapper";
 import GifticonAddForm from "../../gifticion/GifticonAddForm";
 
-export default function NewsletterInfoSection({selectedItem}) {
+export default function NewsletterInfoSection({item}) {
     return(
         <div className="col-lg-6 new-l__col-2">
             <div className="new-l__section u-s-m-t-30">
@@ -12,7 +12,7 @@ export default function NewsletterInfoSection({selectedItem}) {
                     <NewsletterModalSubSubTitleWrapper innerText={"기프티콘 정보를 확인해주세요"}/>
                 </NewsletterModalHead>
 
-                <GifticonAddForm/>
+                <GifticonAddForm item={item}/>
             </div>
         </div>
     );

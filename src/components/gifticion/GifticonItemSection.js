@@ -10,7 +10,7 @@ export default function GifticonItemSection({itemList}) {
     return (
         <div className="u-s-p-y-60">
             <div className="section__intro u-s-m-b-60">
-                <GifticonIntroContainer title="기프티콘 등록" content="등록 할 기프티콘을 올려주세요"></GifticonIntroContainer>
+                <GifticonIntroContainer title="기프티콘 등록" content="등록 할 기프티콘을 올려주세요"/>
             </div>
 
             <div className="section__content">
