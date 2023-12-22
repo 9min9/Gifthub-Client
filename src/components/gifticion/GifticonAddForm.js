@@ -21,7 +21,7 @@ export default function GifticonAddForm(props) {
         try {
             const formData = new FormData();
 
-            for (const [key, value] of Object.entries(input.values)){
+            for (const [key, value] of Object.entries(input.values)) {
                 formData.append(key, value);
             }
             formData.append('storageId', item.gifticonStorageId);
@@ -30,76 +30,74 @@ export default function GifticonAddForm(props) {
                 formData,
                 {
                     headers: {
-                        'Content-Type' : 'application/json',
-                        Authorization : localStorage.getItem('token')
+                        'Content-Type': 'application/json',
+                        Authorization: localStorage.getItem('token')
                     },
-                }).then( function (response){
-                    console.log("response : " + response);
-                    console.log("response.data : "+ response.data);
+                }).then(function (response) {
+                console.log("response : " + response);
+                console.log("response.data : " + response.data);
             })
-        } catch (error){
+        } catch (error) {
             console.log(error);
         }
     }
 
-    return(
+    return (
         <form id="gifticon-add-form" className="new-l__form">
-
-            <NewsletterInputWrapper
-                labelText={"상품 이름"}
-                inputClassName={"news-l__input"}
-                name={"productName"} type={"text"}
-                                    // placeholder={"상품 이름을 입력해주세요"}
-                placeholder={item.productName}
-                _onChange={(e) => input.onChange('productName', e.target.value)}
-            />
+            <NewsletterInputWrapper labelText={"상품 이름"}
+                                    inputClassName={"news-l__input"}
+                                    name={"productName"}
+                                    value={item.productName}
+                                    type={"text"}
+                                    placeholder={"상품 이름을 입력해주세요"}
+                                    _onChange={(e) => input.onChange('productName', e.target.value)}/>
 
             <div id="error-product-div" className="u-s-m-b-10">
                 <Label labelText={""}></Label>
                 <label id="error-product-modal-label" className="gl-label"></label>
             </div>
-            <NewsletterInputWrapper
-                labelText={"브랜드 이름"}
-                inputClassName={"news-l__input"}
-                name={"brandName"}
-                type={"text"}
-                placeholder={item.brand}
-                _onChange={(e) => input.onChange('brand', e.target.value)}
-            />
+
+            <NewsletterInputWrapper labelText={"브랜드 이름"}
+                                    inputClassName={"news-l__input"}
+                                    name={"brandName"}
+                                    value={item.brand}
+                                    type={"text"}
+                                    placeholder={"브랜드 이름을 입력해주세요"}
+                                    _onChange={(e) => input.onChange('brand', e.target.value)}/>
 
             <div id="error-brand-div" className="u-s-m-b-10">
                 <label id="error-brand-modal-label" className="gl-label"></label>
             </div>
 
-            <NewsletterInputWrapper labelText={"유효 기간"} inputClassName={"news-l__input"} name={"due"} type={"date"}
-                                    placeholder={item.due ? item.due : ""}
-            />
+            <NewsletterInputWrapper labelText={"유효 기간"}
+                                    inputClassName={"news-l__input"}
+                                    name={"due"}
+                                    value={item.due}
+                                    type={"date"}/>
 
             <div id="error-due-div" className="u-s-m-b-10">
                 <label id="error-due-modal-label" className="gl-label"></label>
             </div>
 
-            <NewsletterInputWrapper
-                labelText={"바코드 번호"}
-                inputClassName={"news-l__input"}
-                name={"barcode"}
-                type={"number"}
-                placeholder={item.barcode}
-                _onChange={(e) => input.onChange(`barcode`, e.target.value)}
-            />
+            <NewsletterInputWrapper labelText={"바코드 번호"}
+                                    inputClassName={"news-l__input"}
+                                    name={"barcode"}
+                                    value={item.barcode}
+                                    type={"number"}
+                                    placeholder={"바코드 값을 입력해주세요"}
+                                    _onChange={(e) => input.onChange(`barcode`, e.target.value)}/>
 
             <div id="error-barcode-div" className="u-s-m-b-10">
                 <label id="error-barcode-modal-label" className="gl-label"></label>
             </div>
 
-            <NewsletterInputWrapper
-                labelText={"구매 가격"}
-                inputClassName={"news-l__input"}
-                name={"price"}
-                type={"number"}
-                placeholder={item.price}
-                _onChange={(e) => input.onChange(`price`, e.target.value)}
-            />
+            <NewsletterInputWrapper labelText={"구매 가격"}
+                                    inputClassName={"news-l__input"}
+                                    name={"price"}
+                                    value={item.price}
+                                    type={"number"}
+                                    placeholder={item.price}
+                                    _onChange={(e) => input.onChange(`price`, e.target.value)}/>
 
             <div id="error-price-div" className="u-s-m-b-10">
                 <label id="error-price-modal-label" className="gl-label"></label>
