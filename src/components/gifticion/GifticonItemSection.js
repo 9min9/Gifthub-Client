@@ -17,7 +17,7 @@ export default function GifticonItemSection({itemList}) {
                 <div className="container">
                     <div className="row">
                         <div id="gifticon-list-div" className="col-lg-12 col-md-12 col-sm-12">
-                            <GiftiBotContainer item={giftiBot}></GiftiBotContainer>
+                            <GiftiBotContainer item={giftiBot}/>
 
                             {/*FIXME : item.gifticonStorageId가 아닌 그냥 id를 받아야함 또한 전체적으로 동일한 name이 세팅되어야 함*/}
                             {itemList.map((item) => (
@@ -28,7 +28,7 @@ export default function GifticonItemSection({itemList}) {
                         </div>
 
                         <div className="col-lg-12">
-                            <RouteBox></RouteBox>
+                            <RouteBox/>
                         </div>
                     </div>
                 </div>

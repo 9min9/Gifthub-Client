@@ -25,7 +25,7 @@ export default function GifticonItemContainer({item}) {
         <div className="w-r u-s-m-b-30">
             <div className="w-r__container">
                 <div id="gifticon-info-wrap" className="w-r__wrap-1">
-                    <GifticonItemImage url={item.imageUrl}></GifticonItemImage>
+                    <GifticonItemImage url={item.imageUrl}/>
 
                     <div id="gifticon-info" className="w-r__info">
                         {renderErrorInfo(item.brand, "브랜드 이름이 존재하지 않습니다")}
@@ -36,7 +36,7 @@ export default function GifticonItemContainer({item}) {
                 </div>
 
                 <div id="gifticon-btn-wrap" className="w-r__wrap-2">
-                    <WhiteButton innerText="삭제"></WhiteButton>
+                    <WhiteButton innerText="삭제"/>
                     <PrimaryButton innerText="등록 하기"
                                    _onClick={() => openModal()}
                     />
