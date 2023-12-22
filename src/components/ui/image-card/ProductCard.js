@@ -22,7 +22,8 @@ function ProductCard({product, index, products, increasePage, handleOpenModalCli
                 <div className="product-o product-o--radius product-o--hover-off u-h-100">
                     <a className="aspect aspect--bg-grey aspect--square u-d-block">
                         <img className="aspect__img" src="/images/noproductimage/no-image-departmentstore.png"
-                             onClick={handleOpenModalClick} data-product-name={product.name}/>
+                             onClick={handleOpenModalClick} data-product-name={product.name}
+                             data-product-id={product.id}/>
                     </a>
                     <ImageContent
                         product={product}
@@ -37,7 +38,7 @@ function ProductCard({product, index, products, increasePage, handleOpenModalCli
                 <div className="product-o product-o--radius product-o--hover-off u-h-100">
                     <a className="aspect aspect--bg-grey aspect--square u-d-block" onClick={handleOpenModalClick}>
                         <img className="aspect__img" src="/images/noproductimage/no-image-departmentstore.png"
-                             data-product-name={product.name}/>
+                             data-product-name={product.name} data-product-id={product.id}/>
                     </a>
                     <ImageContent
                         product={product}

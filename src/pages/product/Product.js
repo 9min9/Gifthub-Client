@@ -14,7 +14,9 @@ export default function Product() {
     const [categoryContent, setCategoryContent] = useState([]);
     const [productList, setProductList] = useState([]);
 
-    const [searchInput, setSearchInput] = useState("")
+    const [searchInput, setSearchInput] = useState("");
+
+    const [priceList, setPriceList] = useState([]);
 
     const selectorRef = useRef([]);
 
@@ -67,6 +69,14 @@ export default function Product() {
     //     fetchProduct(categoryName, brandName, searchInput);
     // }, [searchInput]);
 
+
+    const fetchPriceList = (productId) => {
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/api/gifticon/products/${productId}`,
+            {headers: {Authorization: localStorage.getItem("token")}})
+            .then((result) => {
+                setPriceList(result.data.content);
+            })
+    }
 
     const getCategory = async () => {
         let data;
@@ -210,6 +220,8 @@ export default function Product() {
                         handleBrandClick={handleBrandClick}
                         handleSearchChange={handleSearchChange}
                         searchInput={searchInput} handleSearchKeyUp={handleSearchKeyUp}
-                        increasePage={increasePage}></ProductSection>
+                        increasePage={increasePage}
+                        priceList={priceList}
+                        fetchPriceList={fetchPriceList}></ProductSection>
     );
 };
