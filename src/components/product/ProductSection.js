@@ -15,6 +15,8 @@ export default function ProductSection({
                                            searchInput,
                                            handleSearchKeyUp,
                                            increasePage,
+                                           priceList,
+                                           fetchPriceList,
                                        }) {
     return (
         <div className="app-content">
@@ -35,6 +37,8 @@ export default function ProductSection({
                     searchInput={searchInput}
                     handleSearchKeyUp={handleSearchKeyUp}
                     increasePage={increasePage}
+                    priceList={priceList}
+                    fetchPriceList={fetchPriceList}
                 />
             </div>
         </div>
