@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import DayComponent from "./DayComponent";
 
-export default function Attendance({isOpen, handleCloseModalClick}) {
+export default function Attendance({isOpen, handleCloseModalClick, isAuthenticated}) {
     const today = new Date();
 
     const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -60,6 +60,10 @@ export default function Attendance({isOpen, handleCloseModalClick}) {
     useEffect(() => {
         setDaysByCalendar();
     }, []);
+
+    useEffect(() => {
+        setDaysByCalendar();
+    }, [isAuthenticated]);
 
     return <Modal isOpen={isOpen} handleCloseModalClick={handleCloseModalClick}>
         <div className={"row"}>

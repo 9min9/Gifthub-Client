@@ -84,7 +84,8 @@ export default function Header() {
     return (
         <>
             <Attendance isOpen={isAttendanceOpen}
-                        handleCloseModalClick={handleCloseAttendanceModalClick}/>
+                        handleCloseModalClick={handleCloseAttendanceModalClick}
+                        isAuthenticated={isAuthenticated}/>
             <nav className="primary-nav primary-nav-wrapper--border">
                 <div className="container">
                     <div id="primary-nav" className="primary-nav">
