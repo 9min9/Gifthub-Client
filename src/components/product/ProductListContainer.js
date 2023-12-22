@@ -14,6 +14,7 @@ export default function ProductListContainer({
                                                  increasePage,
                                                  priceList,
                                                  fetchPriceList,
+                                                 handleAddToCartClick,
                                              }) {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -72,7 +73,8 @@ export default function ProductListContainer({
 
                 <div className="row u-s-m-x-0">
                     <ImageSection imageSrc={imageSrc}></ImageSection>
-                    <ModalInfoSection title={clickedProductName} contentList={priceList}></ModalInfoSection>
+                    <ModalInfoSection title={clickedProductName} contentList={priceList}
+                                      handleAddToCartClick={handleAddToCartClick}></ModalInfoSection>
                 </div>
             </Modal>
         </div>
