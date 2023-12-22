@@ -37,7 +37,13 @@ export default function Modal({
 
     return (
         <StyledModal isOpen={isOpen} onRequestClose={handleCloseModalClick} style={modalStyle}>
-            {children}
+            <div className="modal-content modal--shadow">
+                <button className="btn dismiss-button fas fa-times" type="button" data-dismiss="modal"
+                        onClick={handleCloseModalClick}></button>
+                <div className="modal-body">
+                    {children}
+                </div>
+            </div>
         </StyledModal>
     );
 };

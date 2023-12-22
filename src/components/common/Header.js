@@ -1,18 +1,29 @@
 import {Link} from "react-router-dom";
 import {AuthContext} from "../account/AuthContextProvider";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import MiniCart from "../../pages/cart/MiniCart";
+import Attendance from "../attendance/Attendance";
 
 export default function Header() {
     const {isAuthenticated, userRole, logoutHandler} = useContext(AuthContext);
     let menu;
 
+    const [isAttendanceOpen, setIsAttendanceOpen] = useState(false);
+
+    const handleOpenAttendanceModalClick = (event) => {
+        setIsAttendanceOpen(true);
+    }
+
+    const handleCloseAttendanceModalClick = (event) => {
+        setIsAttendanceOpen(false);
+    }
+
     if (isAuthenticated) {
-        if(userRole === "USER") {
+        if (userRole === "USER") {
             menu =
                 <>
                     <li id="nav-attendance-li" className="u-s-m-r-6">
-                        <a id="show-attendance-a">
+                        <a id="show-attendance-a" onClick={handleOpenAttendanceModalClick}>
                             <i className="fa-regular fa-square-check"></i>
                             <span>출석체크</span>
                         </a>
@@ -72,6 +83,8 @@ export default function Header() {
 
     return (
         <>
+            <Attendance isOpen={isAttendanceOpen}
+                        handleCloseModalClick={handleCloseAttendanceModalClick}/>
             <nav className="primary-nav primary-nav-wrapper--border">
                 <div className="container">
                     <div id="primary-nav" className="primary-nav">
@@ -130,6 +143,6 @@ export default function Header() {
                 </div>
             </nav>
         </>
-    )
+    );
 
 }
