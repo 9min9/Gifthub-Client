@@ -1,6 +1,6 @@
-export default function DayComponent({day, today, dayCounter, handleTodayClick}) {
+export default function DayComponent({day, today, dayCounter, handleTodayClick, attendance}) {
     if (dayCounter === 6) {
-        if (day.checked) {
+        if (day.checked || (attendance && today.getDate() === day.day)) {
             return <>
                 <div className={"unit-box attendance"}>
                     {day.day}
@@ -32,7 +32,7 @@ export default function DayComponent({day, today, dayCounter, handleTodayClick})
             }
         }
     } else {
-        if (day.checked) {
+        if (day.checked || (attendance && today.getDate() === day.day)) {
             return <>
                 <div className={"unit-box attendance"}>
                     {day.day}
