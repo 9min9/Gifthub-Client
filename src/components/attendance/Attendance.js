@@ -11,12 +11,16 @@ export default function Attendance({isOpen, handleCloseModalClick}) {
 
     const [days, setDays] = useState([]);
 
+    const [attendance, setAttendance] = useState(false);
+
     const handleTodayClick = (event) => {
         axios.post(`${process.env.REACT_APP_SERVER_URL}/api/attendances`,
             {}, {headers: {Authorization: localStorage.getItem("token")}})
             .then((result) => {
                 event.target.classList.remove(`today`);
                 event.target.classList.add(`attendance`);
+
+                setAttendance(true);
             })
     }
 
@@ -26,7 +30,7 @@ export default function Attendance({isOpen, handleCloseModalClick}) {
         if (!localStorage.getItem("token")) {
             return;
         }
-        
+
         axios.get(`${process.env.REACT_APP_SERVER_URL}/api/attendances`,
             {headers: {Authorization: localStorage.getItem("token")}})
             .then((result) => {
@@ -49,7 +53,8 @@ export default function Attendance({isOpen, handleCloseModalClick}) {
 
     let dayCounter = 0;
     const calendar = days.map((day) => {
-        return <DayComponent day={day} today={today} dayCounter={dayCounter} handleTodayClick={handleTodayClick}/>
+        return <DayComponent day={day} today={today} dayCounter={dayCounter} handleTodayClick={handleTodayClick}
+                             attendance={attendance}/>
     })
 
     useEffect(() => {
