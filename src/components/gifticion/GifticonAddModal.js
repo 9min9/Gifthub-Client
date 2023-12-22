@@ -78,8 +78,8 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
                 );
             console.log("fileupload success:", res.data);
             alert("등록 성공");
-            navigate("/gifticon/add");
-
+            setIsOpen(false);
+            navigate("/redirect");
 
         }catch (error){
             console.log("error: "+ error);
