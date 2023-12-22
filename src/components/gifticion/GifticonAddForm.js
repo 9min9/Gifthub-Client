@@ -1,45 +1,76 @@
-import Label from "../ui/form/Label";
 import NewsletterInputWrapper from "../modal/newsletter/NewsletterInputWrapper";
 import axios from "axios";
 import useGifticonAddFormInput from "../../hooks/useGifticonAddFormInput";
+import NewsletterFormErrorWrapper from "../modal/newsletter/NewsletterFormErrorWrapper";
+import NewsletterFormButton from "../modal/newsletter/NewsletterFormButton";
+import {useNavigate} from "react-router-dom";
 
-export default function GifticonAddForm(props) {
-    const {item} = props;
+export default function GifticonAddForm({item, buttonText}) {
+    console.log("GifticonAddForm")
+    console.log(item);
+    let navigate = useNavigate();
 
     const input = useGifticonAddFormInput({
-        productName : item.productName || '',
-        brandName : item.brand || '',
-        due : item.due || '',
-        barcode : item.barcode || '',
-        price : '',
+        productName: item.productName || '',
+        brandName: item.brand || '',
+        due: item.due || '',
+        barcode: item.barcode || '',
+        price: '',
     });
 
-    console.log("item:"+item);
-    console.log("item.storageId: " +item.gifticonStorageId);
+    const handleGifticonAddModalClick = () => {
+        const formData = new FormData();
 
-    const handleGifticonAddModalClick = async () => {
-        try {
-            const formData = new FormData();
+        for (const [key, value] of Object.entries(input.values)) {
+            formData.append(key, value);
+        }
 
-            for (const [key, value] of Object.entries(input.values)) {
-                formData.append(key, value);
-            }
-            formData.append('storageId', item.gifticonStorageId);
+        formData.append('storageId', item.gifticonStorageId);
 
-            const response = await axios.post(`${process.env.REACT_APP_API_ROOT}/api/gifticon/register`,
+        if (item.flagInDb === true) {
+            gifticonAdd(formData);
+        }
+
+        if (item.flagInDb === false) {
+            sendToAdmin(formData);
+        }
+
+        if(item.flagInDb === false && item.status === "NEED_APPROVAL") {
+            sendToAdmin(formData);
+        }
+
+        if (item.status === "FAIL_REGISTRATION") {
+            sendToAdmin(formData);
+        }
+    }
+
+    const gifticonAdd = (formData) => {
+        axios
+            .post(
+                `${process.env.REACT_APP_API_ROOT}/api/gifticon/register`,
                 formData,
                 {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: localStorage.getItem('token')
-                    },
-                }).then(function (response) {
-                console.log("response : " + response);
-                console.log("response.data : " + response.data);
+                    headers: {'Content-Type': 'application/json', Authorization: localStorage.getItem('token')},
+                })
+            .then(function (response) {
+                console.log(response);
             })
-        } catch (error) {
-            console.log(error);
-        }
+    }
+
+    const sendToAdmin = (formData) => {
+        axios
+            .post(
+                `${process.env.REACT_APP_API_ROOT}/api/gifticon/register/check`,
+                formData,
+                {
+                    headers: {'Content-Type': 'application/json', Authorization: localStorage.getItem('token')},
+                })
+            .then(function (response) {
+                alert("등록 검수가 신청되었습니다");
+                navigate("/gifitcon/add");
+            })
+
+
     }
 
     return (
@@ -50,12 +81,10 @@ export default function GifticonAddForm(props) {
                                     value={item.productName}
                                     type={"text"}
                                     placeholder={"상품 이름을 입력해주세요"}
-                                    _onChange={(e) => input.onChange('productName', e.target.value)}/>
+                                    _onChange={(e) => input.onChange('productName', e.target.value)}
+            />
 
-            <div id="error-product-div" className="u-s-m-b-10">
-                <Label labelText={""}></Label>
-                <label id="error-product-modal-label" className="gl-label"></label>
-            </div>
+            <NewsletterFormErrorWrapper field={"productName"} innerText={""}></NewsletterFormErrorWrapper>
 
             <NewsletterInputWrapper labelText={"브랜드 이름"}
                                     inputClassName={"news-l__input"}
@@ -63,21 +92,19 @@ export default function GifticonAddForm(props) {
                                     value={item.brand}
                                     type={"text"}
                                     placeholder={"브랜드 이름을 입력해주세요"}
-                                    _onChange={(e) => input.onChange('brand', e.target.value)}/>
+                                    _onChange={(e) => input.onChange('brand', e.target.value)}
+            />
 
-            <div id="error-brand-div" className="u-s-m-b-10">
-                <label id="error-brand-modal-label" className="gl-label"></label>
-            </div>
+            <NewsletterFormErrorWrapper field={"brandName"} innerText={""}></NewsletterFormErrorWrapper>
 
             <NewsletterInputWrapper labelText={"유효 기간"}
                                     inputClassName={"news-l__input"}
                                     name={"due"}
                                     value={item.due}
-                                    type={"date"}/>
+                                    type={"date"}
+            />
 
-            <div id="error-due-div" className="u-s-m-b-10">
-                <label id="error-due-modal-label" className="gl-label"></label>
-            </div>
+            <NewsletterFormErrorWrapper field={"due"} innerText={""}></NewsletterFormErrorWrapper>
 
             <NewsletterInputWrapper labelText={"바코드 번호"}
                                     inputClassName={"news-l__input"}
@@ -85,11 +112,10 @@ export default function GifticonAddForm(props) {
                                     value={item.barcode}
                                     type={"number"}
                                     placeholder={"바코드 값을 입력해주세요"}
-                                    _onChange={(e) => input.onChange(`barcode`, e.target.value)}/>
+                                    _onChange={(e) => input.onChange(`barcode`, e.target.value)}
+            />
 
-            <div id="error-barcode-div" className="u-s-m-b-10">
-                <label id="error-barcode-modal-label" className="gl-label"></label>
-            </div>
+            <NewsletterFormErrorWrapper field={"barcode"} innerText={""}></NewsletterFormErrorWrapper>
 
             <NewsletterInputWrapper labelText={"구매 가격"}
                                     inputClassName={"news-l__input"}
@@ -97,15 +123,12 @@ export default function GifticonAddForm(props) {
                                     value={item.price}
                                     type={"number"}
                                     placeholder={item.price}
-                                    _onChange={(e) => input.onChange(`price`, e.target.value)}/>
+                                    _onChange={(e) => input.onChange(`price`, e.target.value)}
+            />
 
-            <div id="error-price-div" className="u-s-m-b-10">
-                <label id="error-price-modal-label" className="gl-label"></label>
-            </div>
+            <NewsletterFormErrorWrapper field={"price"} innerText={""}></NewsletterFormErrorWrapper>
 
-            <div className="u-s-m-y-15">
-                <a id="gifticon-add-modal-btn" className="btn btn--e-brand-b-2" onClick={handleGifticonAddModalClick}>등록</a>
-            </div>
+            <NewsletterFormButton innerText={buttonText} _onClick={handleGifticonAddModalClick}></NewsletterFormButton>
         </form>
     );
 

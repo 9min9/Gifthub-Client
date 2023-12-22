@@ -3,6 +3,7 @@ import {useEffect} from "react";
 import styled from "styled-components";
 import axios from "axios";
 import React from "react";
+import {useNavigate} from "react-router-dom";
 
 function disableScroll() {
     document.body.style.overflow = 'hidden';
@@ -16,6 +17,7 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
     console.log("GifticonAddModal is rendered");
 
     const fileAdd = React.useRef(null);
+    let navigate = useNavigate();
 
     useEffect(() => {
         if(isOpen) {
@@ -76,6 +78,8 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
                 );
             console.log("fileupload success:", res.data);
             alert("등록 성공");
+            navigate("/gifticon/add");
+
 
         }catch (error){
             console.log("error: "+ error);
