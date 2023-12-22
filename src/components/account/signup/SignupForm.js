@@ -29,7 +29,7 @@ export default function SignupForm() {
 
     const errorCheck = (e) => {
         axios
-            .post('http://localhost:8081/api/local/signup/validate/email',
+            .post(`${process.env.REACT_APP_SERVER_URL}/api/local/signup/validate/email`,
                 {email})
             .then(response => {
                 let result = response.data
@@ -60,7 +60,7 @@ export default function SignupForm() {
     const signUp = (e) => {
         e.preventDefault();
         axios
-            .post('http://localhost:8081/api/local/signup/submit',
+            .post(`${process.env.REACT_APP_SERVER_URL}/api/local/signup/submit`,
                 inputs)
             .then(response => {
                 alert("회원가입을 축하드립니다")

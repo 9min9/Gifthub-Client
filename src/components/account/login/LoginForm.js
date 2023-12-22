@@ -33,7 +33,7 @@ export default function LoginForm() {
 
     const localLoginHandler = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8081/api/local/login', {email, password})
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/api/local/login`, {email, password})
             .then(function (response) {
                 let token = convertToken(response);
                 const userRole = response.data.userRole;
@@ -57,7 +57,7 @@ export default function LoginForm() {
         let param = '?code=' + code;
 
         axios
-            .post("http://localhost:8081/api/naver/login" + param)
+            .post(`${process.env.REACT_APP_SERVER_URL}/api/naver/login` + param)
             .then(function (response) {
                 let token = convertToken(response);
                 let userRole = response.data.userRole;

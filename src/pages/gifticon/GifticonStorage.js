@@ -18,7 +18,7 @@ export default function GifticonStorage() {
 
     const getStorage = async () => {
         await axios
-            .post("http://localhost:8081/api/storage/list", null, {headers: {Authorization: localStorage.getItem("token")}})
+            .post(`${process.env.REACT_APP_SERVER_URL}/api/storage/list`, null, {headers: {Authorization: localStorage.getItem("token")}})
 
             .then(function (response) {
                 console.log(response.data.content)

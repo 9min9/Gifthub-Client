@@ -8,7 +8,7 @@ export default function MyPage() {
 
     useEffect(() => {
         axios
-            .post("http://localhost:8081/api/users/myinfo", {}, {headers: {Authorization: localStorage.getItem("token")}})
+            .post(`${process.env.REACT_APP_SERVER_URL}/api/users/myinfo`, {}, {headers: {Authorization: localStorage.getItem("token")}})
             .then(function (response) {
                 response.data.gender = convertGender(response.data);
                 setUserInfo(response.data);
