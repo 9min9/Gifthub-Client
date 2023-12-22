@@ -23,6 +23,10 @@ export default function Attendance({isOpen, handleCloseModalClick}) {
     const setDaysByCalendar = () => {
         let updateDays = [];
 
+        if (!localStorage.getItem("token")) {
+            return;
+        }
+        
         axios.get(`${process.env.REACT_APP_SERVER_URL}/api/attendances`,
             {headers: {Authorization: localStorage.getItem("token")}})
             .then((result) => {
