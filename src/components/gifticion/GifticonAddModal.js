@@ -4,10 +4,26 @@ import styled from "styled-components";
 import axios from "axios";
 import React from "react";
 
+function disableScroll() {
+    document.body.style.overflow = 'hidden';
+}
+
+function enableScroll() {
+    document.body.style.overflow = 'visible';
+}
+
 export default function GifticonAddModal({isOpen, setIsOpen}) {
     console.log("GifticonAddModal is rendered");
 
     const fileAdd = React.useRef(null);
+
+    useEffect(() => {
+        if(isOpen) {
+            disableScroll();
+        } else {
+            enableScroll();
+        }
+    }, [isOpen]);
 
     useEffect(() => {
         const script = document.createElement('script');
@@ -28,7 +44,6 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
 
             if (!kakao.isInitialized()) {
                 kakao.init(process.env.REACT_APP_KAKAO_JS_KEY)
-                // <!--    <script>function chatChannel(){Kakao.Channel.chat({ channelPublicId: '_ATxoKG',});}</script>-->
             }
 
             kakao.Channel.chat({
@@ -60,8 +75,11 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
                 }
                 );
             console.log("fileupload success:", res.data);
+            alert("등록 성공");
+
         }catch (error){
             console.log("error: "+ error);
+            alert(`등록 실패\n\n${error.response.data.message}`);
         }
 
     };
@@ -99,7 +117,7 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
         <StyledModal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} style={modalStyle}>
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content modal-radius modal-shadow">
-                    <button className="btn dismiss-button fas fa-times" type="button" data-dismiss="modal"></button>
+                    <button className="btn dismiss-button fas fa-times" type="button" onClick={() => setIsOpen(false)}></button>
                     <div className="modal-body">
                         <div className="row">
                             <div className="col-lg-6 col-md-12">

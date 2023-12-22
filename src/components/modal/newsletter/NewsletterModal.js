@@ -2,8 +2,29 @@ import ReactModal from "react-modal";
 import styled from "styled-components";
 import NewsletterInfoSection from "./NewsletterInfoSection";
 import NewsletterModalImageSection from "./NewsletterModalImageSection";
+import {useEffect} from "react";
 
-export default function NewsletterModal({isOpen, setIsOpen}) {
+
+function disableScroll() {
+    document.body.style.overflow = 'hidden';
+}
+
+function enableScroll() {
+    document.body.style.overflow = 'visible';
+}
+
+export default function NewsletterModal({item, isOpen, closeModal}) {
+    // const {isOpen, openModal, closeModal} = useNewsletterModal();
+
+    useEffect(() => {
+        if(isOpen) {
+            disableScroll();
+        } else {
+            enableScroll();
+        }
+        // isOpen(true);
+    }, [isOpen]);
+
     const StyledModal = styled(ReactModal)`
       &.ReactModal__Content {
         width: 100%;
@@ -30,19 +51,21 @@ export default function NewsletterModal({isOpen, setIsOpen}) {
     }
 
     return (
-        <StyledModal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} style={modalStyle}>
+        <StyledModal isOpen={isOpen}
+                     onRequestClose={closeModal}
+                     style={modalStyle}>
 
             {/*<div id="newsletter-modal" className="modal fade new-l">*/}
             {/*<div id="newsletter-modal" className="modal-dialog modal-dialog-centered">*/}
             <div className="modal-content modal--shadow">
-                <button className="btn dismiss-button fas fa-times" type="button" data-dismiss="modal"></button>
+                <button className="btn dismiss-button fas fa-times" type="button" onClick={closeModal}/>
                 <div className="modal-body">
                     <div className="row u-s-m-x-0">
                         {/*image section*/}
-                        <NewsletterModalImageSection></NewsletterModalImageSection>
+                        <NewsletterModalImageSection item={item}/>
 
                         {/*info section*/}
-                        <NewsletterInfoSection></NewsletterInfoSection>
+                        <NewsletterInfoSection/>
 
                     </div>
                 </div>

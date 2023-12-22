@@ -21,7 +21,9 @@ export default function GifticonItemSection({itemList}) {
 
                             {/*FIXME : item.gifticonStorageId가 아닌 그냥 id를 받아야함 또한 전체적으로 동일한 name이 세팅되어야 함*/}
                             {itemList.map((item) => (
-                                <GifticonItemContainer key={item.gifticonStorageId} item={item}/>
+                                <div key={item.gifticonStorageId}>
+                                    <GifticonItemContainer item={item}/>
+                                </div>
                             ))}
                         </div>
 
