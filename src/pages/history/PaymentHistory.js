@@ -11,17 +11,38 @@ export default function PaymentHistory() {
 
     const size = 12;
 
-    const fetchOrders = () => {
-        axios.get(`http://localhost:8081/api/payments?page=${page}&size=${size}`,
+    const fetchPayments = (replace) => {
+        if (replace) {
+            setPayments([]);
+        }
+
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/api/payments?page=${page}&size=${size}`,
             {headers: {Authorization: localStorage.getItem("token")}})
             .then((result) => {
-                setPayments(result.data.content);
+                if (replace) {
+                    setPayments(result.data.content);
+                } else {
+                    let updatePayments = [...payments];
+
+                    setPayments(updatePayments.concat(result.data.content));
+                }
             });
+    };
+
+    const increasePage = () => {
+        setPage((page) => page + 1);
     }
 
     useEffect(() => {
-        fetchOrders();
+        fetchPayments(true);
     }, []);
+
+    useEffect(() => {
+        console.log(page);
+        if (page !== 0) {
+            fetchPayments(false);
+        }
+    }, [page]);
 
 
     return (
@@ -42,7 +63,8 @@ export default function PaymentHistory() {
                                             <MyPageTitleContainer title="내 결제 내역"
                                                                   subTitle="결제 내역 입니다"></MyPageTitleContainer>
 
-                                            <PaymentHistorySection payments={payments}></PaymentHistorySection>
+                                            <PaymentHistorySection payments={payments}
+                                                                   increasePage={increasePage}></PaymentHistorySection>
                                         </div>
                                     </div>
                                 </div>

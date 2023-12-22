@@ -1,7 +1,7 @@
 import OrderContainer from "./OrderContainer";
 
-export default function OrderHistorySection({orders}) {
-    return orders.map((order) => {
-        return <OrderContainer order={order}/>
+export default function OrderHistorySection({orders, increasePage}) {
+    return orders.map((order, index, orders) => {
+        return <OrderContainer order={order} increasePage={increasePage} index={index} orders={orders}/>;
     })
 }

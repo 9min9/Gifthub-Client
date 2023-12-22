@@ -2,8 +2,12 @@ import "../../css/custom/index.css";
 import ProductSection from "../../components/product/ProductSection";
 import {useEffect, useRef, useState} from "react";
 import axios from "axios";
+import useIntersectionObserver from "../../components/ui/useIntersectionObserver";
 
 export default function Product() {
+    // let page = 0;
+    const [page, setPage] = useState(0);
+
     const [brandList, setBrandList] = useState([]);
 
     const [categoryList, setCategoryList] = useState([]);
@@ -13,14 +17,14 @@ export default function Product() {
     const [searchInput, setSearchInput] = useState("")
 
     const selectorRef = useRef([]);
-    const searchRef = useRef();
 
-    let page = 0;
+    const [observe, unobserve] = useIntersectionObserver(() => {
+        setPage(page + 1);
+    });
 
 //DOM이 road 되었을 때 getCategory 호출
     useEffect(() => {
         getCategory().then(r => {
-            console.log(r);
             setCategoryList(r);
         });
     }, []);
@@ -35,9 +39,13 @@ export default function Product() {
     }, [categoryContent]);
 
     useEffect(() => {
-        fetchProductByName();
+        fetchProductByName(true);
+        setPage(0);
     }, [categoryContent, brandList]);
 
+    useEffect(() => {
+        fetchProductByName(false);
+    }, [page]);
 
     // TODO 검색 방법 변경으로 인한 주석
     // useEffect(() => {
@@ -63,7 +71,8 @@ export default function Product() {
     const getCategory = async () => {
         let data;
 
-        await axios.get("http://localhost:8081/api/product/categories", {headers: {Authorization: localStorage.getItem("token")}})
+        await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/product/categories`,
+            {headers: {Authorization: localStorage.getItem("token")}})
             .then(function (result) {
                 data = result.data;
             })
@@ -90,7 +99,7 @@ export default function Product() {
             let brandLists = [];
 
             let category = (categoryContent.filter((category) => category.checked)[0].name.engName.replaceAll("/", "-").toLowerCase());
-            let url = "http://localhost:8081/api/product/" + category + "/brands";
+            let url = `${process.env.REACT_APP_SERVER_URL}/api/product/${category}/brands`;
 
             console.log("category(categoryContainer) : " + category)
 
@@ -115,22 +124,32 @@ export default function Product() {
         setCategoryContent(updatedCategoryList);
     }
 
-    const fetchProduct = async (category, brand, name) => {
+    const fetchProduct = async (category, brand, name, replace) => {
         if (!category || !brand) {
             return;
+        }
+
+        if (replace) {
+            setProductList([]);
         }
 
         let url = ``;
 
         if (name) {
-            url = `http://localhost:8081/api/product/page/search/${category}/${brand}/${name}?page=${page}&size=12`;
+            url = `${process.env.REACT_APP_SERVER_URL}/api/product/page/search/${category}/${brand}/${name}?page=${page}&size=12`;
         } else {
-            url = `http://localhost:8081/api/product/page/${category}/${brand}?page=${page}&size=12`;
+            url = `${process.env.REACT_APP_SERVER_URL}/api/product/page/${category}/${brand}?page=${page}&size=12`;
         }
 
         await axios.get(url, {headers: {Authorization: localStorage.getItem("token")}})
             .then((result) => {
-                setProductList(result.data.content);
+                if (replace) {
+                    setProductList(result.data.content);
+                } else {
+                    let updateProductList = [...productList];
+
+                    setProductList(updateProductList.concat(result.data.content));
+                }
             })
     }
 
@@ -156,11 +175,12 @@ export default function Product() {
 
     const handleSearchKeyUp = (event) => {
         if (event.key === "Enter") {
-            fetchProductByName()
+            fetchProductByName(true)
+            setPage(0);
         }
     }
 
-    const fetchProductByName = () => {
+    const fetchProductByName = (replace) => {
         let categoryName = "";
         let brandName = "";
 
@@ -176,7 +196,11 @@ export default function Product() {
             }
         }
 
-        fetchProduct(categoryName, brandName, searchInput);
+        fetchProduct(categoryName, brandName, searchInput, replace);
+    }
+
+    const increasePage = () => {
+        setPage((page) => page + 1);
     }
 
     return (
@@ -185,6 +209,7 @@ export default function Product() {
                         handleCategoryClick={handleCategoryClick} selectorRef={selectorRef}
                         handleBrandClick={handleBrandClick}
                         handleSearchChange={handleSearchChange}
-                        searchInput={searchInput} handleSearchKeyUp={handleSearchKeyUp}></ProductSection>
+                        searchInput={searchInput} handleSearchKeyUp={handleSearchKeyUp}
+                        increasePage={increasePage}></ProductSection>
     );
 };

@@ -9,7 +9,7 @@ export default function MiniCart() {
     const [totalPrice, setTotalPrice] = useState(0);
 
     const fetchCart = async () => {
-        await axios.get("http://localhost:8081/api/carts", {headers: {Authorization: localStorage.getItem("token")}})
+        await axios.get(process.env.REACT_APP_SERVER_URL + "/api/carts", {headers: {Authorization: localStorage.getItem("token")}})
             .then((result) => {
                 if (result.data.length !== 0) {
                     setCarts(result.data);
@@ -20,7 +20,7 @@ export default function MiniCart() {
 
                     setTotalPrice(sum);
                 }
-            })
+            });
     }
 
     useEffect(() => {

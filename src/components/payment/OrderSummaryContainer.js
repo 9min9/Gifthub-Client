@@ -27,7 +27,7 @@ export default function OrderSummaryContainer() {
      * 카카오 결제 창 이벤트
      */
     const kakaoPayHandleClick = async (event) => {
-        await axios.post("http://localhost:8081/api/kakao/pay/ready", {
+        await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/kakao/pay/ready`, {
             itemName: "Point",
             totalAmount: totalPrice,
         }, {headers: {Authorization: localStorage.getItem("token")}})

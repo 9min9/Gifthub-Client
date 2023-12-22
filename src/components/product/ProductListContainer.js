@@ -1,7 +1,32 @@
 import ProductCard from "../ui/image-card/ProductCard";
+import InputWithLabel from "../ui/form/InputWithLabel";
+import ImageModal from "../ui/modal/image-modal/ImageModal";
+import {useState} from "react";
 
 
-export default function ProductListContainer({productList, handleSearchChange, searchInput, handleSearchKeyUp}) {
+export default function ProductListContainer({
+                                                 productList,
+                                                 handleSearchChange,
+                                                 searchInput,
+                                                 handleSearchKeyUp,
+                                                 increasePage,
+                                             }) {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const [imageSrc, setImageSrc] = useState("");
+    const [clickedProductName, setClickedProductName] = useState("")
+
+    const handleOpenModalClick = (event) => {
+        setIsOpen(true);
+
+        setImageSrc(event.target.src);
+        setClickedProductName(event.target.dataset.productName)
+    }
+
+    const handleCloseModalClick = (event) => {
+        setIsOpen(false);
+    }
+
     return (
         <div className="section__content" id="product-area-div">
             <div className="container">
@@ -18,10 +43,14 @@ export default function ProductListContainer({productList, handleSearchChange, s
                         <div className="u-s-m-t-30">
                             <div id="row-product-div" className="row">
                                 {
-                                    productList.map(product => (
+                                    productList.map((product, index, products) => (
                                         <ProductCard
                                             key={product.id}
                                             product={product}
+                                            index={index}
+                                            products={products}
+                                            increasePage={increasePage}
+                                            handleOpenModalClick={handleOpenModalClick}
                                         />
                                     ))
                                 }
@@ -30,16 +59,12 @@ export default function ProductListContainer({productList, handleSearchChange, s
                     </div>
                 </div>
             </div>
+            <ImageModal isOpen={isOpen}
+                        handleCloseModalClick={handleCloseModalClick}
+                        imageSrc={imageSrc}
+                        clickedProductName={clickedProductName}/>
         </div>
     );
 }
 
 
-function InputWithLabel({id, placeholder, handleSearchChange, searchInput, handleSearchKeyUp}) {
-    return <>
-        <label htmlFor={id}></label>
-        <input className="input-text input-text--border-radius input-text--style-1" type="text"
-               id={id} placeholder={placeholder} value={searchInput} onChange={handleSearchChange}
-               onKeyUp={handleSearchKeyUp}/>
-    </>;
-}

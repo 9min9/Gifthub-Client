@@ -11,17 +11,38 @@ export default function OrderHistory() {
 
     const size = 12;
 
-    const fetchOrders = () => {
-        axios.get(`http://localhost:8081/api/movements?page=${page}&size=${size}`,
+    const fetchOrders = (replace) => {
+        if (replace) {
+            setOrders([]);
+        }
+
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/api/movements?page=${page}&size=${size}`,
             {headers: {Authorization: localStorage.getItem("token")}})
             .then((result) => {
-                setOrders(result.data.content);
+                if (replace) {
+                    setOrders(result.data.content);
+                } else {
+                    let updateOrders = [...orders];
+
+                    setOrders(updateOrders.concat(result.data.content));
+                }
             });
     }
 
+    const increasePage = () => {
+        setPage((page) => page + 1);
+    }
+
     useEffect(() => {
-        fetchOrders();
+        fetchOrders(true);
     }, []);
+
+    useEffect(() => {
+        console.log(page);
+        if (page !== 0) {
+            fetchOrders(false);
+        }
+    }, [page]);
 
     return (
         <div className="app-content">
@@ -40,7 +61,8 @@ export default function OrderHistory() {
                                         <div className="dash__pad-2">
                                             <MyPageTitleContainer title="내 구매 내역"
                                                                   subTitle="기프티콘 구매 내역 입니다"></MyPageTitleContainer>
-                                            <OrderHistorySection orders={orders}></OrderHistorySection>
+                                            <OrderHistorySection orders={orders}
+                                                                 increasePage={increasePage}></OrderHistorySection>
                                         </div>
                                     </div>
                                 </div>
