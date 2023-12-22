@@ -1,7 +1,6 @@
 import DashboardTitleContainer from "../../mypage/dashboard/DashboardTitleContainer";
 import DashboardH1 from "../../ui/dashboard/DashboardH1";
 import DashboardSpan from "../../ui/dashboard/DashboardSpan";
-import GifticonItemContainer from "../../gifticion/GifticonItemContainer";
 import GifticonTableBody from "./GifticonTableBody";
 
 export default function ProductManagementSection({itemList}) {
@@ -30,7 +29,6 @@ export default function ProductManagementSection({itemList}) {
                     </tbody>
                 </table>
             </div>
-
 
         </div>
 
