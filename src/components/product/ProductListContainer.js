@@ -1,4 +1,4 @@
-import ProductCard from "../ui/image-card/ProductCard";
+import ProductCard from "./ProductCard";
 import InputWithLabel from "../ui/form/InputWithLabel";
 import Modal from "../ui/modal/image-modal/Modal";
 import {useState} from "react";
