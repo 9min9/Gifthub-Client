@@ -213,6 +213,14 @@ export default function Product() {
         setPage((page) => page + 1);
     }
 
+    const handleAddToCartClick = (event) => {
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/api/carts`, {},
+            {headers: {Authorization: localStorage.getItem("token")}, params: {gifticonId: parseInt(event.target.id)}})
+            .then((result) => {
+                console.log(result.data);
+            });
+    }
+
     return (
         <ProductSection productList={productList} categoryContent={categoryContent}
                         brandList={brandList} fetchBrandName={fetchBrandName}
@@ -222,6 +230,6 @@ export default function Product() {
                         searchInput={searchInput} handleSearchKeyUp={handleSearchKeyUp}
                         increasePage={increasePage}
                         priceList={priceList}
-                        fetchPriceList={fetchPriceList}></ProductSection>
+                        fetchPriceList={fetchPriceList} handleAddToCartClick={handleAddToCartClick}></ProductSection>
     );
 };

@@ -1,4 +1,4 @@
-import ProductCard from "../ui/image-card/ProductCard";
+import ProductCard from "./ProductCard";
 import InputWithLabel from "../ui/form/InputWithLabel";
 import Modal from "../ui/modal/image-modal/Modal";
 import {useState} from "react";
@@ -14,6 +14,7 @@ export default function ProductListContainer({
                                                  increasePage,
                                                  priceList,
                                                  fetchPriceList,
+                                                 handleAddToCartClick,
                                              }) {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -69,17 +70,11 @@ export default function ProductListContainer({
                    imageSrc={imageSrc}
                    title={clickedProductName}
                    contentList={priceList}>
-                <div className="modal-content modal--shadow">
-                    <button className="btn dismiss-button fas fa-times" type="button" data-dismiss="modal"
-                            onClick={handleCloseModalClick}></button>
-                    <div className="modal-body">
-                        <div className="row u-s-m-x-0">
-                            <ImageSection imageSrc={imageSrc}></ImageSection>
 
-                            <ModalInfoSection title={clickedProductName} contentList={priceList}></ModalInfoSection>
-
-                        </div>
-                    </div>
+                <div className="row u-s-m-x-0">
+                    <ImageSection imageSrc={imageSrc}></ImageSection>
+                    <ModalInfoSection title={clickedProductName} contentList={priceList}
+                                      handleAddToCartClick={handleAddToCartClick}></ModalInfoSection>
                 </div>
             </Modal>
         </div>

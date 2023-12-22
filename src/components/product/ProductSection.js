@@ -17,6 +17,7 @@ export default function ProductSection({
                                            increasePage,
                                            priceList,
                                            fetchPriceList,
+                                           handleAddToCartClick,
                                        }) {
     return (
         <div className="app-content">
@@ -39,6 +40,7 @@ export default function ProductSection({
                     increasePage={increasePage}
                     priceList={priceList}
                     fetchPriceList={fetchPriceList}
+                    handleAddToCartClick={handleAddToCartClick}
                 />
             </div>
         </div>
