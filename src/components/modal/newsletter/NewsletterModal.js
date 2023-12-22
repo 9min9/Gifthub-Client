@@ -65,7 +65,7 @@ export default function NewsletterModal({item, isOpen, closeModal}) {
                         <NewsletterModalImageSection item={item}/>
 
                         {/*info section*/}
-                        <NewsletterInfoSection/>
+                        <NewsletterInfoSection item={item}/>
 
                     </div>
                 </div>
