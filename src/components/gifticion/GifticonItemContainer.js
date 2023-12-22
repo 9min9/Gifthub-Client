@@ -5,16 +5,30 @@ import WhiteButton from "../ui/button/WhiteButton";
 import NewsletterModal from "../modal/newsletter/NewsletterModal";
 import useNewsletterModal from "../../hooks/useNewsletterModal";
 import GifticonHiddenInfo from "./GifticonHiddenInfo";
-
+import axios from "axios";
+import {Navigate, useNavigate} from "react-router-dom";
 
 export default function GifticonItemContainer({item}) {
 
     const { isOpen, openModal, closeModal} = useNewsletterModal();
+    let navigate = useNavigate();
 
     const renderErrorInfo = (content, error) => {
         return (
             <GifticonItemInfo content={content} error={error ? <span className="u-s-m-x-10" style={{color : 'red'}}>{error}</span> : null}/>
         )
+    }
+
+    const deleteStorage = () => {
+        axios
+            .post(
+                `${process.env.REACT_APP_SERVER_URL}/api/storage/delete/` +item.gifticonStorageId,
+                null,
+                {headers: {Authorization: localStorage.getItem("token")}})
+            .then(function (response){
+                alert("삭제가 완료되었습니다");
+                navigate("/redirect");
+            });
     }
 
     return (
@@ -34,7 +48,7 @@ export default function GifticonItemContainer({item}) {
                 </div>
 
                 <div id="gifticon-btn-wrap" className="w-r__wrap-2">
-                    <WhiteButton innerText="삭제"/>
+                    <WhiteButton innerText="삭제" _onClick={deleteStorage}/>
                     <PrimaryButton innerText="등록 하기" _onClick={() => openModal()}/>
                 </div>
 
