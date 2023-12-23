@@ -5,12 +5,18 @@ import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../AuthContextProvider";
+import MessageWrapper from "../signup/MesseageWrapper";
+
 
 export default function LoginForm() {
     const {loginHandler} = useContext(AuthContext);
     const urlParams = new URL(window.location.href).searchParams;
     const [inputs, setInputs] = useState({});
     const {email, password} = inputs;
+    const [validateMessage, setValidateMessage] = useState('');
+    const [field, setField] = useState('');
+    const [style, setStyle] = useState('');
+
     let navigate = useNavigate();
 
     useEffect(() => {
@@ -44,6 +50,11 @@ export default function LoginForm() {
             })
             .catch(function (error) {
                 console.log(error);
+                let result = error.response.data
+                setValidateMessage(result.message);
+                setField(result.field);
+                setStyle("red");
+                console.log(result);
                 console.log("로그인 실패");
             });
     };
@@ -85,6 +96,9 @@ export default function LoginForm() {
             <LoginInputWrapper target="password" labelText="비밀번호" type="password"
                                placeholder="비밀번호를 입력해주세요" _onChange={onChange}></LoginInputWrapper>
             <LoginBtnWrapper onClickHandler={localLoginHandler}></LoginBtnWrapper>
+            <div>
+                <MessageWrapper color={style} innerText={validateMessage} target={field}></MessageWrapper>
+            </div>
 
             <div id="social-login-div" className="gl-s-api">
                 <SocialLoginWrapper target="social" kakaoHandler={kakaoLoginHandler}
