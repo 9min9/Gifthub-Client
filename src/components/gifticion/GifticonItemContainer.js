@@ -9,27 +9,89 @@ import axios from "axios";
 import {Navigate, useNavigate} from "react-router-dom";
 
 export default function GifticonItemContainer({item}) {
-    const { isOpen, openModal, closeModal} = useNewsletterModal();
+    const {isOpen, openModal, closeModal} = useNewsletterModal();
     let navigate = useNavigate();
     let screen;
 
     const renderErrorInfo = (content, error) => {
         return (
-            <GifticonItemInfo content={content} error={error ? <span className="u-s-m-x-10" style={{color : 'red'}}>{error}</span> : null}/>
+            <GifticonItemInfo content={content} error={error ?
+                <span className="u-s-m-x-10" style={{color: 'red'}}>{error}</span> : null}/>
         )
     }
 
     const deleteStorage = () => {
         axios
             .post(
-                `${process.env.REACT_APP_SERVER_URL}/api/storage/delete/` +item.gifticonStorageId,
+                `${process.env.REACT_APP_SERVER_URL}/api/storage/delete/` + item.gifticonStorageId,
                 null,
                 {headers: {Authorization: localStorage.getItem("token")}})
-            .then(function (response){
+            .then(function (response) {
                 alert("삭제가 완료되었습니다");
                 navigate("/redirect");
             });
     }
+
+    const deleteGifticon = () => {
+        console.log("삭제 클릭")
+        axios.post(
+            `${process.env.REACT_APP_SERVER_URL}/api/gifticon/delete/` + item.id,
+            null,
+            {headers: {Authorization: localStorage.getItem("token")}})
+            .then(function (res) {
+                console.log("기프티콘 삭제")
+                alert("기프티콘 삭제 완료")
+                navigate("/redirect");
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
+
+    const handleUseClick = () => {
+        console.log("사용 클릭");
+    }
+
+    const handleReUseClick = () => {
+        console.log("재 사용 클릭");
+    }
+
+    const handleSellClick = () => {
+        console.log("판매하기 클릭");
+        axios.post(
+            `${process.env.REACT_APP_SERVER_URL}/api/gifticon/forSale/` + item.id,
+            null,
+            {headers: {Authorization: localStorage.getItem("token")}})
+            .then(function (res) {
+                console.log("판매중")
+                alert("판매중으로 처리 완료");
+                navigate("/redirect");
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
+
+    const handleChangePriceClick = () => {
+        console.log("가격 변경 클릭");
+    }
+
+    const handleCancelSaleClick = () => {
+        console.log("판매취소 클릭");
+        axios.post(
+            `${process.env.REACT_APP_SERVER_URL}/api/gifticon/notForSale/` + item.id,
+            null,
+            {headers: {Authorization: localStorage.getItem("token")}})
+            .then(function (res) {
+                console.log("판매취소")
+                alert("판매취소 완료");
+                navigate("/redirect");
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
+
 
     const renderWaitRegistrationState = () => {
         return (
@@ -88,7 +150,7 @@ export default function GifticonItemContainer({item}) {
     }
 
     const renderAdminApprovalState = () => {
-        return(
+        return (
             <div className="w-r u-s-m-b-30">
                 <div className="w-r__container">
                     <div id="gifticon-info-wrap" className="w-r__wrap-1">
@@ -142,15 +204,133 @@ export default function GifticonItemContainer({item}) {
         );
     }
 
+    const renderMyGifticonDefault = () => {
+        return (
+            <div className="w-r u-s-m-b-30">
+                <div className="w-r__container">
+                    <div id="gifticon-info-wrap" className="w-r__wrap-1">
+                        <GifticonItemImage url={item.imageUrl}/>
+
+                        <div id="gifticon-info" className="w-r__info">
+                            {renderErrorInfo(item.brandName, "")}
+                            {renderErrorInfo(item.productName, "")}
+                            {renderErrorInfo(item.barcode, "")}
+                            {renderErrorInfo(item.due, "")}
+                            <GifticonHiddenInfo content={item.gifticonStatus}/>
+                        </div>
+                    </div>
+
+                    <div id="gifticon-btn-wrap" className="w-r__wrap-2">
+                        <WhiteButton innerText="사용" _onClick={handleUseClick}/>
+                        <PrimaryButton innerText="판매 하기" _onClick={handleSellClick}/>
+                    </div>
+                </div>
+            </div>
+        );
+
+    }
+
+
+    const renderMyGifticonOnSale = () => {
+        return (
+            <div className="w-r u-s-m-b-30">
+                <div className="w-r__container">
+                    <div id="gifticon-info-wrap" className="w-r__wrap-1">
+                        <GifticonItemImage url={item.imageUrl}/>
+
+                        <div id="gifticon-info" className="w-r__info">
+                            {renderErrorInfo(item.brandName, "")}
+                            {renderErrorInfo(item.productName, "")}
+                            {renderErrorInfo(item.barcode, "")}
+                            {renderErrorInfo(item.due, "")}
+                            <GifticonHiddenInfo content={item.gifticonStatus}/>
+                        </div>
+                    </div>
+
+                    <div id="gifticon-btn-wrap" className="w-r__wrap-2">
+                        <WhiteButton innerText="가격변경" _onClick={handleChangePriceClick}/>
+                        <PrimaryButton innerText="판매 취소" _onClick={handleCancelSaleClick}/>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    const renderMyGifticonUsed = () => {
+        return (
+            <div className="w-r u-s-m-b-30">
+                <div className="w-r__container">
+                    <div id="gifticon-info-wrap" className="w-r__wrap-1">
+                        <GifticonItemImage url={item.imageUrl}/>
+
+                        <div id="gifticon-info" className="w-r__info">
+                            {renderErrorInfo(item.brandName, "")}
+                            {renderErrorInfo(item.productName, "")}
+                            {renderErrorInfo(item.barcode, "")}
+                            {renderErrorInfo(item.due, "")}
+                            <GifticonHiddenInfo content={item.gifticonStatus}/>
+                        </div>
+                    </div>
+
+                    <div id="gifticon-btn-wrap" className="w-r__wrap-2">
+                        <WhiteButton innerText="재사용" _onClick={handleReUseClick}/>
+                        <PrimaryButton innerText="삭제하기" _onClick={deleteGifticon}/>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    function renderMyGifticonExpired() {
+        return (
+            <div className="w-r u-s-m-b-30">
+                <div className="w-r__container">
+                    <div id="gifticon-info-wrap" className="w-r__wrap-1">
+                        <GifticonItemImage url={item.imageUrl}/>
+
+                        <div id="gifticon-info" className="w-r__info">
+                            {renderErrorInfo(item.brandName, "")}
+                            {renderErrorInfo(item.productName, "")}
+                            {renderErrorInfo(item.barcode, "")}
+                            {renderErrorInfo(item.due, "")}
+                            <GifticonHiddenInfo content={item.gifticonStatus}/>
+                        </div>
+                    </div>
+
+                    <div id="gifticon-btn-wrap" className="w-r__wrap-2">
+                        <PrimaryButton innerText="삭제하기" _onClick={deleteGifticon}/>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+
+    // 기프티콘 등록
     if (item.status === "WAIT_REGISTRATION") {
         screen = renderWaitRegistrationState();
     } else if (item.status === "NEED_APPROVAL") {
         screen = renderNeedApprovalState();
-    } else if(item.status === "ADMIN_APPROVAL") {
+    } else if (item.status === "ADMIN_APPROVAL") {
         screen = renderAdminApprovalState();
-    } else if(item.status === "FAIL_REGISTARTION"){
+    } else if (item.status === "FAIL_REGISTARTION") {
         screen = renderFailRegistrationState();
     }
+
+    // 내 기프티콘 리스트
+    if (item.gifticonStatus === "NONE") {
+        screen = renderMyGifticonDefault(); // 사용완료시 -> FINISHED
+    }
+    if (item.gifticonStatus === "ONSALE") {
+        screen = renderMyGifticonOnSale();
+    }
+    if (item.gifticonStatus === "FINISHED") {
+        screen = renderMyGifticonUsed();
+    }
+    if (item.gifticonStatus === "EXPIRED") {
+        screen = renderMyGifticonExpired();
+    }
+
 
     return (
         screen
