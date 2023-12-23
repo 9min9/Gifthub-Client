@@ -125,8 +125,10 @@ export default function GifticonAddForm({item, buttonText}) {
                 <NewsletterInputWrapper labelText={"유효 기간"}
                                         inputClassName={"news-l__input"}
                                         name={"due"}
-                                        value={item.due}
+                                        value={input.values.due}
                                         type={"date"}
+                                        _onChange={(e) => input.onChange('due', e.target.value)}
+
                 />
 
                 <NewsletterFormErrorWrapper field={"due"} innerText={""}></NewsletterFormErrorWrapper>
@@ -134,7 +136,7 @@ export default function GifticonAddForm({item, buttonText}) {
                 <NewsletterInputWrapper labelText={"바코드 번호"}
                                         inputClassName={"news-l__input"}
                                         name={"barcode"}
-                                        value={item.barcode}
+                                        value={input.values.barcode}
                                         type={"number"}
                                         placeholder={"바코드 값을 입력해주세요"}
                                         _onChange={(e) => input.onChange(`barcode`, e.target.value)}
@@ -145,7 +147,7 @@ export default function GifticonAddForm({item, buttonText}) {
                 <NewsletterInputWrapper labelText={"구매 가격"}
                                         inputClassName={"news-l__input"}
                                         name={"price"}
-                                        value={item.price}
+                                        value={input.values.price}
                                         type={"number"}
                                         placeholder={item.price}
                                         _onChange={(e) => input.onChange(`price`, e.target.value)}
@@ -179,7 +181,7 @@ export default function GifticonAddForm({item, buttonText}) {
             <NewsletterInputWrapper labelText={"상품 이름"}
                                     inputClassName={"news-l__input"}
                                     name={"productName"}
-                                    value={item.productName}
+                                    value={input.values.productName}
                                     type={"text"}
                                     placeholder={"상품 이름을 입력해주세요"}
                                     _onChange={(e) => input.onChange('productName', e.target.value)}
@@ -190,7 +192,7 @@ export default function GifticonAddForm({item, buttonText}) {
             <NewsletterInputWrapper labelText={"브랜드 이름"}
                                     inputClassName={"news-l__input"}
                                     name={"brandName"}
-                                    value={item.brand}
+                                    value={input.values.brandName}
                                     type={"text"}
                                     placeholder={"브랜드 이름을 입력해주세요"}
                                     _onChange={(e) => input.onChange('brand', e.target.value)}
@@ -201,8 +203,9 @@ export default function GifticonAddForm({item, buttonText}) {
             <NewsletterInputWrapper labelText={"유효 기간"}
                                     inputClassName={"news-l__input"}
                                     name={"due"}
-                                    value={item.due}
+                                    value={input.values.due}
                                     type={"date"}
+                                    _onChange={(e) => input.onChange('due', e.target.value)}
             />
 
             <NewsletterFormErrorWrapper field={"due"} innerText={""}></NewsletterFormErrorWrapper>
@@ -210,7 +213,7 @@ export default function GifticonAddForm({item, buttonText}) {
             <NewsletterInputWrapper labelText={"바코드 번호"}
                                     inputClassName={"news-l__input"}
                                     name={"barcode"}
-                                    value={item.barcode}
+                                    value={input.values.barcode}
                                     type={"number"}
                                     placeholder={"바코드 값을 입력해주세요"}
                                     _onChange={(e) => input.onChange(`barcode`, e.target.value)}
@@ -221,7 +224,7 @@ export default function GifticonAddForm({item, buttonText}) {
             <NewsletterInputWrapper labelText={"구매 가격"}
                                     inputClassName={"news-l__input"}
                                     name={"price"}
-                                    value={item.price}
+                                    value={input.values.price}
                                     type={"number"}
                                     placeholder={item.price}
                                     _onChange={(e) => input.onChange(`price`, e.target.value)}
