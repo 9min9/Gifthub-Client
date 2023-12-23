@@ -40,6 +40,7 @@ export default function GifticonItemContainer({item}) {
             {headers: {Authorization: localStorage.getItem("token")}})
             .then(function (res) {
                 console.log("기프티콘 삭제")
+                console.log(res.data);
                 alert("기프티콘 삭제 완료")
                 navigate("/redirect");
             })
@@ -50,6 +51,21 @@ export default function GifticonItemContainer({item}) {
 
     const handleUseClick = () => {
         console.log("사용 클릭");
+        axios.post(
+            `${process.env.REACT_APP_API_ROOT}/api/gifticon/use/` + item.id,
+            null,
+            {headers: {Authorization: localStorage.getItem("token")}})
+            .then(function (res) {
+                console.log("사용하기")
+                // alert("사용하기");
+                console.log(res.data);
+                console.log(res);
+                navigate("/redirect");
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+
     }
 
     const handleReUseClick = () => {
