@@ -127,6 +127,8 @@ export default function GifticonAddForm({item, buttonText}) {
                                         name={"due"}
                                         value={input.values.due}
                                         type={"date"}
+                                        _onChange={(e) => input.onChange('due', e.target.value)}
+
                 />
 
                 <NewsletterFormErrorWrapper field={"due"} innerText={""}></NewsletterFormErrorWrapper>
@@ -203,6 +205,7 @@ export default function GifticonAddForm({item, buttonText}) {
                                     name={"due"}
                                     value={input.values.due}
                                     type={"date"}
+                                    _onChange={(e) => input.onChange('due', e.target.value)}
             />
 
             <NewsletterFormErrorWrapper field={"due"} innerText={""}></NewsletterFormErrorWrapper>
