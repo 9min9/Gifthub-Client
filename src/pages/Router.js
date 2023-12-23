@@ -14,19 +14,37 @@ import PaymentHistory from "./history/PaymentHistory";
 import OrderHistory from "./history/OrderHistory";
 import ProductManagement from "./admin/ProductManagement";
 import AdminIndex from "./admin/AdminIndex";
-import PageRedirect from "./PageRedirect";
+import NotFound from "../components/common/NotFound";
+import NotForbidden from "../components/common/NotForbidden";
 
 export default function Router() {
     const {isAuthenticated, userRole} = useContext(AuthContext);
 
     return (
         <Routes>
-            <Route path="/" element={<Product/>} />
-            <Route path="/signup" element={isAuthenticated ? <Navigate to="/"/> : <Signup/>}/>
-            <Route path="/login" element={isAuthenticated ? <Navigate to="/"/> : <Login/>}/>
-            <Route path="/redirect" element={<PageRedirect></PageRedirect> }></Route>
+            <Route exact path="/" element={<Product/>}></Route>
+            <Route path="/signup" element={<Signup/>}></Route>
+            <Route path="/login" element={<Login/>}></Route>
+            <Route path="/notForbidden" element={<NotForbidden/>}></Route>
 
-            {isAuthenticated && (
+            {!isAuthenticated ? (
+                <>
+                    <Route path="/payments" element={<Navigate to="/login"/>}/>,
+                    <Route path="/mypage" element={<Navigate to="/login"/>}/>,
+                    <Route path="/payment" element={<Navigate to="/login"/>}/>,
+                    <Route path="/gifticon/my" element={<Navigate to="/login"/>}/>,
+                    <Route path="/gifticon/add" element={<Navigate to="/login"/>}/>,
+                    <Route path="/carts" element={<Navigate to="/login"/>}/>,
+                    <Route path="/order" element={<Navigate to="/login"/>}/>
+
+                </>
+            ) : (
+
+                (<></>)
+
+            )}
+
+            {isAuthenticated ? (
                 <>
                     <Route path="/payments" element={<Payment/>}/>
                     <Route path="/mypage" element={<MyPage/>}/>
@@ -36,21 +54,27 @@ export default function Router() {
                     <Route path="/payment/checkout" element={<Checkout/>}/>
                     <Route path="/payment/history" element={<PaymentHistory/>}/>
                     <Route path="/order/history" element={<OrderHistory/>}/>
-                    <Route path="/payment/checkout" element={<Checkout/>}/>
+
                 </>
+            ) : (
+
+                (<></>)
+
             )}
 
-            {/*FIXME 이것을 없애면 새로고침 시 리다이렉트가 되지만 로그인 상태가 아닐 시 로그인 창으로 이동하지 않음*/}
-            {!isAuthenticated && (
-                <Route path="/*" element={<Navigate to="/login"/>}/>
-            )}
-
-            {isAuthenticated && userRole === "ADMIN" && (
+            {userRole === "ADMIN" ? (
                 <>
                     <Route path="/admin/index" element={<AdminIndex/>}/>
                     <Route path="/admin/product/config" element={<ProductManagement/>}/>
+
                 </>
+            ) : (
+                <Route path="/admin/*" element={<Navigate to="/notForbidden"/>}/>
+
             )}
+
+            <Route path="/*" element={<NotFound/>}/>
         </Routes>
+
     );
 }
