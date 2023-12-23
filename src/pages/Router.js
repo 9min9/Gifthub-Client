@@ -18,15 +18,15 @@ import NotFound from "../components/common/NotFound";
 import NotForbidden from "../components/common/NotForbidden";
 import PageRedirect from "./PageRedirect";
 
-export default function Router() {
+export default function Router({carts, setCarts, originalPrice, totalPrice, fetchCart, trashHandleClick}) {
     const {isAuthenticated, userRole} = useContext(AuthContext);
 
     return (
         <Routes>
-            <Route exact path="/" element={<Product/>}></Route>
+            <Route exact path="/" element={<Product fetchCart={fetchCart}/>}></Route>
             <Route path="/signup" element={<Signup/>}></Route>
             <Route path="/login" element={<Login/>}></Route>
-            <Route path="/redirect" element={<PageRedirect />}></Route>
+            <Route path="/redirect" element={<PageRedirect/>}></Route>
             <Route path="/notForbidden" element={<NotForbidden/>}></Route>
 
             {!isAuthenticated ? (
@@ -52,7 +52,9 @@ export default function Router() {
                     <Route path="/mypage" element={<MyPage/>}/>
                     <Route path="/gifticon/add" element={<GifticonStorage/>}/>
                     <Route path="/gifticon/my" element={<MyGifticon/>}/>
-                    <Route path="/carts" element={<Cart/>}/>
+                    <Route path="/carts" element={<Cart carts={carts} setCarts={setCarts} totalPrice={totalPrice}
+                                                        originalPrice={originalPrice} fetchCart={fetchCart}
+                                                        trashHandleClick={trashHandleClick}/>}/>
                     <Route path="/payment/checkout" element={<Checkout/>}/>
                     <Route path="/payment/history" element={<PaymentHistory/>}/>
                     <Route path="/order/history" element={<OrderHistory/>}/>

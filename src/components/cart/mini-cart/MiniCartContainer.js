@@ -2,7 +2,7 @@ import MiniCartDeleteIcon from "./MiniCartDeleteIcon";
 import MiniCartImageWrapper from "./MiniCartImageWrapper";
 import MiniCartInfoWrapper from "./MiniCartInfoWrapper";
 
-export default function MiniCartContainer({cart}) {
+export default function MiniCartContainer({cart, trashHandleClick}) {
     const src = "images/product/electronic/product3.jpg";
 
     return <div className={"card-mini-product"} id={`div-mini-cart-${cart.gifticonDto.id}`}>
@@ -11,6 +11,6 @@ export default function MiniCartContainer({cart}) {
             <MiniCartInfoWrapper productName={cart.gifticonDto.productName} gifticonId={cart.gifticonDto.id}
                                  gifticonPrice={cart.gifticonDto.price}/>
         </div>
-        <MiniCartDeleteIcon cartId={cart.id}/>
+        <MiniCartDeleteIcon cartId={cart.id} _onClick={trashHandleClick}/>
     </div>;
 }

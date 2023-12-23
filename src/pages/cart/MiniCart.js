@@ -1,31 +1,8 @@
-import {useEffect, useState} from "react";
-import axios from "axios";
 import MiniCartContainer from "../../components/cart/mini-cart/MiniCartContainer";
 import MiniCartTotalPriceContainer from "../../components/cart/mini-cart/MiniCartTotalPriceContainer";
 import MiniCartButtonContainer from "../../components/cart/mini-cart/MiniCartButtonContainer";
 
-export default function MiniCart() {
-    const [carts, setCarts] = useState([]);
-    const [totalPrice, setTotalPrice] = useState(0);
-
-    const fetchCart = async () => {
-        await axios.get(process.env.REACT_APP_SERVER_URL + "/api/carts", {headers: {Authorization: localStorage.getItem("token")}})
-            .then((result) => {
-                if (result.data.length !== 0) {
-                    setCarts(result.data);
-
-                    let sum = 0;
-
-                    result.data.forEach(r => sum += r.gifticonDto.price);
-
-                    setTotalPrice(sum);
-                }
-            });
-    }
-
-    useEffect(() => {
-        fetchCart().then();
-    }, []);
+export default function MiniCart({carts, totalPrice, trashHandleClick}) {
 
     return (
         <>
@@ -37,7 +14,7 @@ export default function MiniCart() {
                      id="mini-cart-list">
                     {carts !== 0 ?
                         carts.map((cart) => {
-                            return (<MiniCartContainer cart={cart} key={cart.id}/>);
+                            return (<MiniCartContainer cart={cart} key={cart.id} trashHandleClick={trashHandleClick}/>);
                         }) : <></>
                     }
                 </div>
