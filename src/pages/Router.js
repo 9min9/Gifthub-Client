@@ -16,6 +16,7 @@ import ProductManagement from "./admin/ProductManagement";
 import AdminIndex from "./admin/AdminIndex";
 import NotFound from "../components/common/NotFound";
 import NotForbidden from "../components/common/NotForbidden";
+import PageRedirect from "./PageRedirect";
 
 export default function Router() {
     const {isAuthenticated, userRole} = useContext(AuthContext);
@@ -25,6 +26,7 @@ export default function Router() {
             <Route exact path="/" element={<Product/>}></Route>
             <Route path="/signup" element={<Signup/>}></Route>
             <Route path="/login" element={<Login/>}></Route>
+            <Route path="/redirect" element={<PageRedirect />}></Route>
             <Route path="/notForbidden" element={<NotForbidden/>}></Route>
 
             {!isAuthenticated ? (
