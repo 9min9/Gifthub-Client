@@ -14,7 +14,7 @@ export default function CartSection({
                                     }) {
     let content;
 
-    if (carts.length) {
+    if (carts && carts.length) {
         content = <CartContainer carts={carts} clearCartHandleClick={clearCartHandleClick} fetchCart={fetchCart}
                                  trashHandleClick={trashHandleClick}/>
     } else {

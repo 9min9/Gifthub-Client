@@ -4,7 +4,7 @@ import {useContext, useState} from "react";
 import MiniCart from "../../pages/cart/MiniCart";
 import Attendance from "../attendance/Attendance";
 
-export default function Header() {
+export default function Header({trashHandleClick, carts, totalPrice}) {
     const {isAuthenticated, userRole, logoutHandler} = useContext(AuthContext);
     let menu;
 
@@ -135,7 +135,8 @@ export default function Header() {
                                 <span className="ah-close">✕ Close</span>
                                 <ul className="ah-list ah-list--design1 ah-list--link-color-secondary" id="side-header">
                                     <li className="has-dropdown">
-                                        {isAuthenticated && <MiniCart/>}
+                                        {isAuthenticated && <MiniCart totalPrice={totalPrice} carts={carts}
+                                                                      trashHandleClick={trashHandleClick}/>}
                                     </li>
                                 </ul>
                             </div>

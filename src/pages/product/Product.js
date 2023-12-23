@@ -4,7 +4,7 @@ import {useEffect, useRef, useState} from "react";
 import axios from "axios";
 import useIntersectionObserver from "../../components/ui/useIntersectionObserver";
 
-export default function Product() {
+export default function Product({fetchCart}) {
     // let page = 0;
     const [page, setPage] = useState(0);
 
@@ -217,7 +217,7 @@ export default function Product() {
         axios.post(`${process.env.REACT_APP_SERVER_URL}/api/carts`, {},
             {headers: {Authorization: localStorage.getItem("token")}, params: {gifticonId: parseInt(event.target.id)}})
             .then((result) => {
-                console.log(result.data);
+                fetchCart();
             });
     }
 
@@ -230,6 +230,7 @@ export default function Product() {
                         searchInput={searchInput} handleSearchKeyUp={handleSearchKeyUp}
                         increasePage={increasePage}
                         priceList={priceList}
-                        fetchPriceList={fetchPriceList} handleAddToCartClick={handleAddToCartClick}></ProductSection>
+                        fetchPriceList={fetchPriceList} handleAddToCartClick={handleAddToCartClick}
+                        fetchCart={fetchCart}></ProductSection>
     );
 };
