@@ -211,7 +211,7 @@ export default function SignupForm() {
 
                 </div>
 
-                <div className="u-s-m-b-25" style={{display: 'flex', justifyContent: 'center'}}>
+                <div className="u-s-m-b-25" style={{display: 'flex', justifyContent: 'end'}}>
                     <OutlineButton target="signUp" innerText="회원가입" _onClick={signUp}></OutlineButton>
                 </div>
 
