@@ -76,6 +76,8 @@ export default function GifticonAddForm({item, buttonText}) {
                 })
             .then(function (response) {
                 console.log(response);
+                alert(`등록 실패\n\n${response.data.message}`);
+
             })
     }
 

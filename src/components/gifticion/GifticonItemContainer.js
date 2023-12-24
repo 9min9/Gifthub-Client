@@ -28,12 +28,12 @@ export default function GifticonItemContainer({item}) {
                 {headers: {Authorization: localStorage.getItem("token")}})
             .then(function (response) {
                 alert("삭제가 완료되었습니다");
-                navigate("/redirect");
+                console.log(response.data.message);
+
             });
     }
 
     const deleteGifticon = () => {
-        console.log("삭제 클릭")
         axios.post(
             `${process.env.REACT_APP_SERVER_URL}/api/gifticon/delete/` + item.id,
             null,
@@ -41,8 +41,7 @@ export default function GifticonItemContainer({item}) {
             .then(function (res) {
                 console.log("기프티콘 삭제")
                 console.log(res.data);
-                alert("기프티콘 삭제 완료")
-                navigate("/redirect");
+                alert("기프티콘 삭제 완료");
             })
             .catch(function (error) {
                 console.log(error);
@@ -50,26 +49,39 @@ export default function GifticonItemContainer({item}) {
     }
 
     const handleUseClick = () => {
-        console.log("사용 클릭");
         axios.post(
             `${process.env.REACT_APP_API_ROOT}/api/gifticon/use/` + item.id,
             null,
             {headers: {Authorization: localStorage.getItem("token")}})
             .then(function (res) {
                 console.log("사용하기")
-                // alert("사용하기");
                 console.log(res.data);
                 console.log(res);
-                navigate("/redirect");
             })
             .catch(function (error) {
                 console.log(error);
+                alert(`사용 실패\n\n${error.response.data.message}`);
+
             })
 
     }
 
     const handleReUseClick = () => {
-        console.log("재 사용 클릭");
+        axios.post(
+            `${process.env.REACT_APP_API_ROOT}/api/gifticon/reUse/` + item.id,
+            null,
+            {headers: {Authorization: localStorage.getItem("token")}})
+            .then(function (res) {
+                console.log("재사용하기")
+                console.log(res.data);
+                console.log(res);
+                alert("메세지 발송 성공")
+            })
+            .catch(function (error) {
+                console.log(error);
+                alert(`재사용 실패\n\n${error.response.data.message}`);
+
+            })
     }
 
     const handleSellClick = () => {
@@ -81,7 +93,6 @@ export default function GifticonItemContainer({item}) {
             .then(function (res) {
                 console.log("판매중")
                 alert("판매중으로 처리 완료");
-                navigate("/redirect");
             })
             .catch(function (error) {
                 console.log(error);
@@ -101,7 +112,6 @@ export default function GifticonItemContainer({item}) {
             .then(function (res) {
                 console.log("판매취소")
                 alert("판매취소 완료");
-                navigate("/redirect");
             })
             .catch(function (error) {
                 console.log(error);
