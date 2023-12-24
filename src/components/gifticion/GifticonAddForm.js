@@ -10,8 +10,6 @@ import ConfirmResultSelector from "../admin/product/ConfirmResultSelector";
 import {useEffect, useState} from "react";
 
 export default function GifticonAddForm({item, buttonText}) {
-    console.log("GifticonAddForm")
-    console.log(item);
     let navigate = useNavigate();
     const [isConfirm, setIsConfirm] = useState(true);
 
