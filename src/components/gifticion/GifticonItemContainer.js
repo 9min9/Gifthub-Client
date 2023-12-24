@@ -75,6 +75,7 @@ export default function GifticonItemContainer({item}) {
                 console.log("재사용하기")
                 console.log(res.data);
                 console.log(res);
+                alert("메세지 발송 성공")
             })
             .catch(function (error) {
                 console.log(error);
