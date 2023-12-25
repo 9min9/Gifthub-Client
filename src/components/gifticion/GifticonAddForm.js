@@ -45,7 +45,6 @@ export default function GifticonAddForm({item, buttonText}) {
     }
 
     //todo getCancelReason
-
     const handleCategoryChange = (selectedCategory) => {
         setSelectCategory(selectedCategory);
     };
@@ -93,7 +92,7 @@ export default function GifticonAddForm({item, buttonText}) {
                 })
             .then(function (response) {
                 alert("기프티콘 등록 완료")
-                console.log(response);
+                navigate("/gifticon/add/refresh");
             })
             .catch(function (error) {
                 let errorList = error.response.data;
@@ -114,34 +113,26 @@ export default function GifticonAddForm({item, buttonText}) {
                 })
             .then(function (response) {
                 alert("등록 검수가 신청되었습니다");
-                navigate("/gifitcon/add");
+                navigate("/gifticon/add/refresh");
             })
-
-
     }
 
     // 관리자 검수 후 기프티콘 등록
     const gifticonAddByAdmin = (formData) => {
-
         axios
             .post(
                 `${process.env.REACT_APP_SERVER_URL}/api/admin/gifticon/confirm/register`,
                 formData,
                 {headers: {'Content-Type': 'application/json', Authorization: localStorage.getItem('token')}})
             .then(function (response) {
-                console.log(response);
                 alert("검수가 완료되었습니다.")
+                navigate("/admin/product/config/refresh");
             })
             .catch(function (error) {
                 alert("검수에 실패했습니다")
                 console.log(error);
             })
     }
-
-    //관리자 검수 거절 시 Storage로 이동
-    // const adminToStorage = (formData) => {
-    //     axios.post(`${process.env.REACT_APP_SERVER_URL}/api/admin/`)
-    // }
 
     if (item.isAdmin === true) {
         return (

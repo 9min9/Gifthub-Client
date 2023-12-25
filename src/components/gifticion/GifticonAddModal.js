@@ -67,7 +67,6 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
 
             const formData = new FormData();
             formData.append('imageFile', imageFile);
-            console.log("1")
 
             const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/storage/file/add`,
                 formData,
@@ -90,7 +89,6 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
     };
 
     const handleFileChange = e => {
-        console.log(e.target.files[0]);
         handleFileAddButtonClick();
     }
 
