@@ -81,10 +81,11 @@ export default function GifticonAddForm({item, buttonText}) {
             })
     }
 
-    const sendToAdmin = (formData) => {
+    //기프티콘을 관리자 검수로 이동
+    const storageToAdmin = (formData) => {
         axios
             .post(
-                `${process.env.REACT_APP_API_ROOT}/api/gifticon/register/check`,
+                `${process.env.REACT_APP_SERVER_URL}/api/gifticon/register/check`,
                 formData,
                 {
                     headers: {'Content-Type': 'application/json', Authorization: localStorage.getItem('token')},

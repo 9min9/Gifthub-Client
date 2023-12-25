@@ -50,7 +50,7 @@ export default function GifticonItemContainer({item}) {
 
     const handleUseClick = () => {
         axios.post(
-            `${process.env.REACT_APP_API_ROOT}/api/gifticon/use/` + item.id,
+            `${process.env.REACT_APP_SERVER_URL}/api/gifticon/use/` + item.id,
             null,
             {headers: {Authorization: localStorage.getItem("token")}})
             .then(function (res) {
@@ -68,7 +68,7 @@ export default function GifticonItemContainer({item}) {
 
     const handleReUseClick = () => {
         axios.post(
-            `${process.env.REACT_APP_API_ROOT}/api/gifticon/reUse/` + item.id,
+            `${process.env.REACT_APP_SERVER_URL}/api/gifticon/reUse/` + item.id,
             null,
             {headers: {Authorization: localStorage.getItem("token")}})
             .then(function (res) {
