@@ -16,22 +16,7 @@ export default function GifticonAddForm({item, buttonText}) {
     //todo : 카테고리 , 거절 이유 세팅하기
     const [category, setCategory] = useState([]);
     const [FailureReason, setFailureReason] = useState([]);
-
-    useEffect(() => {
-        getCategory()
-
-    }, []);
-
-    const getCategory = () => {
-        axios
-            .post(`${process.env.REACT_APP_SERVER_URL}/api/product/get/category`, null, {headers: {Authorization: localStorage.getItem("token")}})
-            .then(function (response) {
-                console.log(response);
-                setCategory(response.data);
-            })
-    }
-
-
+    const [error, setError] = useState([]);
     const input = useGifticonAddFormInput({
         productName: item.productName || '',
         brandName: item.brand || '',
@@ -39,6 +24,23 @@ export default function GifticonAddForm({item, buttonText}) {
         barcode: item.barcode || '',
         price: '',
     });
+
+    useEffect(() => {
+        if (item.isAdmin === true) {
+            getCategory()
+        }
+    }, []);
+
+    /** admin */
+    const getCategory = () => {
+        axios
+            .post(`${process.env.REACT_APP_SERVER_URL}/api/product/get/category`, null, {headers: {Authorization: localStorage.getItem("token")}})
+            .then(function (response) {
+                setCategory(response.data);
+            })
+    }
+
+    //todo getCancelReason
 
     const handleGifticonAddModalClick = () => {
         const formData = new FormData();
@@ -49,20 +51,24 @@ export default function GifticonAddForm({item, buttonText}) {
 
         formData.append('storageId', item.gifticonStorageId);
 
+        if(item.isAdmin === true) {
+            gifticonAddByAdmin(formData);
+        }
+
         if (item.flagInDb === true) {
             gifticonAdd(formData);
         }
 
         if (item.flagInDb === false) {
-            sendToAdmin(formData);
+            storageToAdmin(formData);
         }
 
         if (item.flagInDb === false && item.status === "NEED_APPROVAL") {
-            sendToAdmin(formData);
+            storageToAdmin(formData);
         }
 
         if (item.status === "FAIL_REGISTRATION") {
-            sendToAdmin(formData);
+            storageToAdmin(formData);
         }
     }
 
@@ -75,9 +81,15 @@ export default function GifticonAddForm({item, buttonText}) {
                     headers: {'Content-Type': 'application/json', Authorization: localStorage.getItem('token')},
                 })
             .then(function (response) {
+                alert("기프티콘 등록 완료")
                 console.log(response);
-                alert(`등록 실패\n\n${response.data.message}`);
+            })
+            .catch(function (error) {
+                let errorList = error.response.data;
 
+                for (const err of errorList) {
+                    alert(err.message);
+                }
             })
     }
 
@@ -97,6 +109,23 @@ export default function GifticonAddForm({item, buttonText}) {
 
 
     }
+
+    // 관리자 검수 후 기프티콘 등록
+    const gifticonAddByAdmin = (formData) => {
+        axios
+            .post(
+                `${process.env.REACT_APP_SERVER_URL}/api/admin/gifticon/confirm/register`,
+                formData,
+                {headers: {Authorization: localStorage.getItem('token')}})
+            .then(function (response) {
+                console.log(response);
+            })
+    }
+
+    //관리자 검수 거절 시 Storage로 이동
+    // const adminToStorage = (formData) => {
+    //     axios.post(`${process.env.REACT_APP_SERVER_URL}/api/admin/`)
+    // }
 
     if (item.isAdmin === true) {
         return (
