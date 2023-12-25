@@ -22,7 +22,7 @@ export default function GifticonAddForm({item, buttonText}) {
         brandName: item.brand || '',
         due: item.due || '',
         barcode: item.barcode || '',
-        price: '',
+        price: item.price || '',
     });
 
     useEffect(() => {
@@ -184,7 +184,7 @@ export default function GifticonAddForm({item, buttonText}) {
                                         name={"price"}
                                         value={input.values.price}
                                         type={"number"}
-                                        placeholder={item.price}
+                                        placeholder={"가격을 입력해주세요"}
                                         _onChange={(e) => input.onChange(`price`, e.target.value)}
                 />
 
