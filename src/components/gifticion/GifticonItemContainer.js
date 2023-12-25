@@ -29,7 +29,7 @@ export default function GifticonItemContainer({item}) {
             .then(function (response) {
                 alert("삭제가 완료되었습니다");
                 console.log(response.data.message);
-                navigate("/gifticon/my/refresh");
+                navigate("/gifticon/add/refresh");
 
             });
     }
