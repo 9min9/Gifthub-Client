@@ -116,9 +116,14 @@ export default function GifticonAddForm({item, buttonText}) {
             .post(
                 `${process.env.REACT_APP_SERVER_URL}/api/admin/gifticon/confirm/register`,
                 formData,
-                {headers: {Authorization: localStorage.getItem('token')}})
+                {headers: {'Content-Type': 'application/json', Authorization: localStorage.getItem('token')}})
             .then(function (response) {
                 console.log(response);
+                alert("검수가 완료되었습니다.")
+            })
+            .catch(function (error) {
+                alert("검수에 실패했습니다")
+                console.log(error);
             })
     }
 
