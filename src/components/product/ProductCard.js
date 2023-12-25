@@ -22,7 +22,7 @@ function ProductCard({product, index, products, increasePage, handleOpenModalCli
                 <div className="product-o product-o--radius product-o--hover-off u-h-100">
                     <a className="aspect aspect--bg-grey aspect--square u-d-block">
                         <img className="aspect__img"
-                             src={`/images/noproductimage/${product.category.replaceAll("-", "_")}.png`}
+                             src={`/images/noproductimage/${product.category.replaceAll("-", "_").toUpperCase()}.png`}
                              onClick={handleOpenModalClick} data-product-name={product.name}
                              data-product-id={product.id}/>
                     </a>
