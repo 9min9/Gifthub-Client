@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from 'react-router-dom';
-import OutlineButton from "../ui/button/OutlineButton";
 
 export default function NotFound(props) {
     const {target, innerText} = props;
@@ -22,17 +21,15 @@ export default function NotFound(props) {
     }, [navigate]);
 
     let id = target + "-btn";
+    const imageUrl = `${process.env.REACT_APP_SERVER_HOME_URL}/images/logo/NotFoundLogo.png`
     return (
         <div style={{display: 'flex', justifyContent: 'center'}}>
             <button id={id} className="btn--icon" type="button">
                 <div>
-                    <img src="/images/logo/NotFoundLOgo.png" className="btn u-img-fluid"/>
+                    <img src={imageUrl} className="btn u-img-fluid"/>
                     <div style={{margin: '10px'}}> {counter}초 후에 메인 페이지로 이동합니다.</div>
-
                 </div>
-
             </button>
-
         </div>
     )
 }

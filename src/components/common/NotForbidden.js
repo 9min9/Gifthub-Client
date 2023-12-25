@@ -22,17 +22,16 @@ export default function NotForbidden(props) {
     }, [navigate]);
 
     let id = target + "-btn";
+    const imageUrl = `${process.env.REACT_APP_SERVER_HOME_URL}/images/logo/NotForbiddenLogo.png`
+
     return (
         <div style={{display: 'flex', justifyContent: 'center'}}>
             <button id={id} className="btn--icon" type="button">
                 <div>
-                    <img src="/images/logo/NotForbiddenLogo.png" className="btn u-img-fluid"/>
+                    <img src={imageUrl} className="btn u-img-fluid"/>
                     <div style={{margin: '10px'}}> {counter}초 후에 메인 페이지로 이동합니다.</div>
-
                 </div>
-
             </button>
-
         </div>
     )
 }

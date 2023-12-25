@@ -118,6 +118,8 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
         overlay: {background: "rgba(0, 0, 0, 0.75)"}
     }
 
+    let imageUrl = `${process.env.REACT_APP_SERVER_HOME_URL}/images/giftibot.jpeg`
+
     return (
         <StyledModal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} style={modalStyle}>
             <div className="modal-dialog modal-dialog-centered">
@@ -131,8 +133,7 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
                                         <span>기프티콘 올리기</span>
                                     </div>
                                     <div className="success__img-wrap">
-
-                                        <img className="u-img-fluid" src="/images/giftibot.jpeg" alt=""/>
+                                        <img className="u-img-fluid" src={imageUrl} alt=""/>
                                     </div>
                                     <div className="success__info-wrap">
                                         <span className="success__price">최대 10장까지 올릴 수 있습니다~</span>

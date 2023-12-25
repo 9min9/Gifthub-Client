@@ -5,7 +5,7 @@ import GiftiBotContainer from "./GiftiBotContainer";
 
 export default function GifticonItemSection({itemList}) {
 
-    const giftiBot = {imageUrl: "/images/giftibot.jpeg", intro: "기프티콘을 추가해주세요"};
+    const giftiBot = {imageUrl: `${process.env.REACT_APP_SERVER_HOME_URL}/images/giftibot.jpeg`, intro: "기프티콘을 추가해주세요"};
 
     return (
         <div className="u-s-p-y-60">
