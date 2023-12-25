@@ -1,7 +1,4 @@
-import MiniCartContainer from "../../cart/mini-cart/MiniCartContainer";
-
-
-export default function ConfirmResultSelector({item, title}) {
+export default function ConfirmResultSelector({item, title, handleCategoryChange}) {
     let name;
 
     if (title === "카테고리") {
@@ -12,10 +9,16 @@ export default function ConfirmResultSelector({item, title}) {
         name = "cancelReason";
     }
 
+    const handleSelectChange = (e) => {
+        const selectedCategory = e.target.value;
+        handleCategoryChange(selectedCategory);
+    };
+
     return (
         <div id="confirm-result-div">
             <select id="result-select" name={name}
-                    className="select-box select-box--primary-style u-w-100">
+                    className="select-box select-box--primary-style u-w-100"
+                    onChange={handleSelectChange}>
                 <option selected="" value="">{title}</option>
                 {Object.entries(item).map(([key, value]) => (
                     <option key={key} value={key}>{value}</option>

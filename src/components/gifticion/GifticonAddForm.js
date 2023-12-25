@@ -13,8 +13,12 @@ export default function GifticonAddForm({item, buttonText}) {
     let navigate = useNavigate();
     const [isConfirm, setIsConfirm] = useState(true);
 
+    console.log("Add form")
+    console.log(item);
+
     //todo : 카테고리 , 거절 이유 세팅하기
     const [category, setCategory] = useState([]);
+    const [selectCategory, setSelectCategory] = useState("");
     const [FailureReason, setFailureReason] = useState([]);
     const [error, setError] = useState([]);
     const input = useGifticonAddFormInput({
@@ -42,6 +46,11 @@ export default function GifticonAddForm({item, buttonText}) {
 
     //todo getCancelReason
 
+    const handleCategoryChange = (selectedCategory) => {
+        setSelectCategory(selectedCategory);
+    };
+
+
     const handleGifticonAddModalClick = () => {
         const formData = new FormData();
 
@@ -49,7 +58,9 @@ export default function GifticonAddForm({item, buttonText}) {
             formData.append(key, value);
         }
 
-        formData.append('storageId', item.gifticonStorageId);
+        formData.append('storageId', item.gifticonStorageId ? item.gifticonStorageId : item.id);
+        formData.append('isConfirm', isConfirm);
+        formData.append("category", selectCategory);
 
         if(item.isAdmin === true) {
             gifticonAddByAdmin(formData);
@@ -86,7 +97,6 @@ export default function GifticonAddForm({item, buttonText}) {
             })
             .catch(function (error) {
                 let errorList = error.response.data;
-
                 for (const err of errorList) {
                     alert(err.message);
                 }
@@ -112,6 +122,7 @@ export default function GifticonAddForm({item, buttonText}) {
 
     // 관리자 검수 후 기프티콘 등록
     const gifticonAddByAdmin = (formData) => {
+
         axios
             .post(
                 `${process.env.REACT_APP_SERVER_URL}/api/admin/gifticon/confirm/register`,
@@ -199,7 +210,7 @@ export default function GifticonAddForm({item, buttonText}) {
 
                 <div className="gl-inline u-s-m-y-15">
                     {isConfirm === true ?
-                        <ConfirmResultSelector title={"카테고리"} item={category}></ConfirmResultSelector>
+                        <ConfirmResultSelector title={"카테고리"} item={category} handleCategoryChange={handleCategoryChange}></ConfirmResultSelector>
                         :
                         <ConfirmResultSelector title={"거절사유"} item={""}></ConfirmResultSelector>
                     }
