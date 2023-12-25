@@ -60,7 +60,21 @@ export default function LoginForm() {
     };
 
     const kakaoLoginHandler = async () => {
+        const code = urlParams.get('code');                 //Kakao 로그인이 성공했을 때 얻는 인가 코드를 URL에서 추출
+        let param = '?code=' + code;                       //Kakao 로그인이 성공했을 때 얻는 인가 코드를 URL에서 추출
 
+        axios
+            .post(`${process.env.REACT_APP_SERVER_URL}/api/kakao/login` + param)
+            .then(function (response) {
+                let token = convertToken(response);
+                let userRole = response.data.userRole;
+                loginHandler(token, userRole);
+                alert("카카오 로그인 성공");
+                navigate("/");
+            })
+            .catch(function (error) {
+                alert("카카오 로그인 실패");
+            });
     }
 
     const naverLoginHandler = () => {
