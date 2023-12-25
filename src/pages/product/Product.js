@@ -71,11 +71,13 @@ export default function Product({fetchCart}) {
 
 
     const fetchPriceList = (productId) => {
-        axios.get(`${process.env.REACT_APP_SERVER_URL}/api/gifticon/products/${productId}`,
-            {headers: {Authorization: localStorage.getItem("token")}})
-            .then((result) => {
-                setPriceList(result.data.content);
-            })
+        if (localStorage.getItem("token")) {
+            axios.get(`${process.env.REACT_APP_SERVER_URL}/api/gifticon/products/${productId}`,
+                {headers: {Authorization: localStorage.getItem("token")}})
+                .then((result) => {
+                    setPriceList(result.data.content);
+                });
+        }
     }
 
     const getCategory = async () => {
