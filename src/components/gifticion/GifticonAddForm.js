@@ -69,7 +69,7 @@ export default function GifticonAddForm({item, buttonText}) {
     const gifticonAdd = (formData) => {
         axios
             .post(
-                `${process.env.REACT_APP_API_ROOT}/api/gifticon/register`,
+                `${process.env.REACT_APP_SERVER_URL}/api/gifticon/register`,
                 formData,
                 {
                     headers: {'Content-Type': 'application/json', Authorization: localStorage.getItem('token')},

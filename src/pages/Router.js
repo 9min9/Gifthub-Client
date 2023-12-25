@@ -50,8 +50,11 @@ export default function Router({carts, setCarts, originalPrice, totalPrice, fetc
                 <>
                     <Route path="/payments" element={<Payment/>}/>
                     <Route path="/mypage" element={<MyPage/>}/>
+                    {/*<Route path="/mypage/refresh" element={<Navigate replace to="/mypage"/>}/>*/}
                     <Route path="/gifticon/add" element={<GifticonStorage/>}/>
+                    <Route path="/gifticon/add/refresh" element={<Navigate replace to="/gifticon/add"/>}/>
                     <Route path="/gifticon/my" element={<MyGifticon/>}/>
+                    <Route path="/gifticon/my/refresh" element={<Navigate replace to="/gifticon/my"/>}/>
                     <Route path="/carts" element={<Cart carts={carts} setCarts={setCarts} totalPrice={totalPrice}
                                                         originalPrice={originalPrice} fetchCart={fetchCart}
                                                         trashHandleClick={trashHandleClick}/>}/>
