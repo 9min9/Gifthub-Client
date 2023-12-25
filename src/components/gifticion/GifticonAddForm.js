@@ -69,7 +69,7 @@ export default function GifticonAddForm({item, buttonText}) {
     const gifticonAdd = (formData) => {
         axios
             .post(
-                `${process.env.REACT_APP_API_ROOT}/api/gifticon/register`,
+                `${process.env.REACT_APP_SERVER_URL}/api/gifticon/register`,
                 formData,
                 {
                     headers: {'Content-Type': 'application/json', Authorization: localStorage.getItem('token')},
@@ -84,7 +84,7 @@ export default function GifticonAddForm({item, buttonText}) {
     const sendToAdmin = (formData) => {
         axios
             .post(
-                `${process.env.REACT_APP_API_ROOT}/api/gifticon/register/check`,
+                `${process.env.REACT_APP_SERVER_URL}/api/gifticon/register/check`,
                 formData,
                 {
                     headers: {'Content-Type': 'application/json', Authorization: localStorage.getItem('token')},

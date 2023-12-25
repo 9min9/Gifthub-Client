@@ -18,7 +18,7 @@ export default function MyGifticon () {
     }, [gifticonList]);
 
     const getMyGifticons = async () =>{
-        await axios.get(`${process.env.REACT_APP_API_ROOT}/api/gifticons`,
+        await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/gifticons`,
             {headers : {Authorization : localStorage.getItem('token')}})
             .then(function (res){
                 console.log(res.data.content)
