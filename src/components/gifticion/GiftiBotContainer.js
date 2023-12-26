@@ -7,8 +7,6 @@ export default function GiftiBotContainer({item}) {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleOpenModalClick = () => {
-        console.log("handleOpenModalClick is triggered")
-
         setIsOpen(!isOpen);
     }
 

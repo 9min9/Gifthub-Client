@@ -52,9 +52,6 @@ export default function NewsletterModal({item, isOpen, closeModal}) {
 
     return (
         <StyledModal isOpen={isOpen} onRequestClose={closeModal} style={modalStyle}>
-
-            {/*<div id="newsletter-modal" className="modal fade new-l">*/}
-            {/*<div id="newsletter-modal" className="modal-dialog modal-dialog-centered">*/}
                 <div className="modal-content modal--shadow">
                     <button className="btn dismiss-button fas fa-times" type="button" onClick={closeModal}/>
                     <div className="modal-body">
@@ -64,12 +61,9 @@ export default function NewsletterModal({item, isOpen, closeModal}) {
 
                             {/*info section*/}
                             <NewsletterInfoSection item={item}/>
-
                         </div>
                     </div>
                 </div>
-            {/*</div>*/}
-            {/*</div>*/}
         </StyledModal>
     );
 }

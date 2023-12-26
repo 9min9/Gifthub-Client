@@ -38,7 +38,6 @@ export default function PaymentHistory() {
     }, []);
 
     useEffect(() => {
-        console.log(page);
         if (page !== 0) {
             fetchPayments(false);
         }

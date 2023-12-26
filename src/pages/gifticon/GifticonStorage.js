@@ -13,7 +13,6 @@ export default function GifticonStorage() {
     }, []);
 
     useEffect(() => {
-        console.log(storageList);
     }, [storageList]);
 
     const getStorage = async () => {
@@ -21,7 +20,6 @@ export default function GifticonStorage() {
             .post(`${process.env.REACT_APP_SERVER_URL}/api/storage/list`, null, {headers: {Authorization: localStorage.getItem("token")}})
 
             .then(function (response) {
-                console.log(response.data.content)
                 setStorageList(response.data.content);
             })
     }

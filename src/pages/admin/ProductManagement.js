@@ -10,7 +10,6 @@ export default function ProductManagement() {
         axios
             .post(`${process.env.REACT_APP_SERVER_URL}/api/admin/gifticon/confirm/list`, null ,{headers: {Authorization: localStorage.getItem("token")}})
             .then(function (response) {
-                console.log(response.data.content);
                 setStorageList(response.data.content);
             })
 

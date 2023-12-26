@@ -88,7 +88,6 @@ export default function Product({fetchCart}) {
             {headers: {Authorization: localStorage.getItem("token")}})
             .then(function (result) {
                 data = result.data;
-                console.log("카테고리 불러옴")
             })
             .catch((result) => alert(result.response.data.message));
 
@@ -112,8 +111,6 @@ export default function Product({fetchCart}) {
 
             let category = (categoryContent.filter((category) => category.checked)[0].name.engName.replaceAll("/", "-").toLowerCase());
             let url = `${process.env.REACT_APP_SERVER_URL}/api/product/${category}/brands`;
-
-            console.log("category(categoryContainer) : " + category)
 
             await axios
                 .get(url, {headers: {Authorization: localStorage.getItem("token")}})

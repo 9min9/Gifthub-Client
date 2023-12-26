@@ -40,8 +40,6 @@ export default function GifticonItemContainer({item}) {
             null,
             {headers: {Authorization: localStorage.getItem("token")}})
             .then(function (res) {
-                console.log("기프티콘 삭제")
-                console.log(res.data);
                 alert("기프티콘 삭제 완료");
                 navigate("/gifticon/my/refresh");
 
@@ -57,9 +55,6 @@ export default function GifticonItemContainer({item}) {
             null,
             {headers: {Authorization: localStorage.getItem("token")}})
             .then(function (res) {
-                console.log("사용하기")
-                console.log(res.data);
-                console.log(res);
                 navigate("/gifticon/my/refresh");
             })
             .catch(function (error) {
@@ -76,9 +71,6 @@ export default function GifticonItemContainer({item}) {
             null,
             {headers: {Authorization: localStorage.getItem("token")}})
             .then(function (res) {
-                console.log("재사용하기")
-                console.log(res.data);
-                console.log(res);
                 alert("메세지 발송 성공")
                 navigate("/gifticon/my/refresh");
 
@@ -91,13 +83,11 @@ export default function GifticonItemContainer({item}) {
     }
 
     const handleSellClick = () => {
-        console.log("판매하기 클릭");
         axios.post(
             `${process.env.REACT_APP_SERVER_URL}/api/gifticon/forSale/` + item.id,
             null,
             {headers: {Authorization: localStorage.getItem("token")}})
             .then(function (res) {
-                console.log("판매중")
                 alert("판매중으로 처리 완료");
                 navigate("/gifticon/my/refresh");
 
@@ -108,18 +98,15 @@ export default function GifticonItemContainer({item}) {
     }
 
     const handleChangePriceClick = () => {
-        console.log("가격 변경 클릭");
 
     }
 
     const handleCancelSaleClick = () => {
-        console.log("판매취소 클릭");
         axios.post(
             `${process.env.REACT_APP_SERVER_URL}/api/gifticon/notForSale/` + item.id,
             null,
             {headers: {Authorization: localStorage.getItem("token")}})
             .then(function (res) {
-                console.log("판매취소")
                 alert("판매취소 완료");
                 navigate("/gifticon/my/refresh");
 

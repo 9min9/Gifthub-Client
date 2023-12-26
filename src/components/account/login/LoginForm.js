@@ -55,7 +55,6 @@ export default function LoginForm() {
                 setField(result.field);
                 setStyle("red");
                 console.log(result);
-                console.log("로그인 실패");
             });
     };
 
@@ -73,6 +72,7 @@ export default function LoginForm() {
                 navigate("/");
             })
             .catch(function (error) {
+                console.log(error)
                 alert("카카오 로그인 실패");
             });
     }

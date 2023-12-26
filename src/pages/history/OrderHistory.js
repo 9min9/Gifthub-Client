@@ -38,7 +38,6 @@ export default function OrderHistory() {
     }, []);
 
     useEffect(() => {
-        console.log(page);
         if (page !== 0) {
             fetchOrders(false);
         }
