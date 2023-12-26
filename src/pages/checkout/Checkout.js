@@ -67,7 +67,8 @@ export default function Checkout() {
         })
 
         axios.post(`${process.env.REACT_APP_SERVER_URL}/api/points/buy`, sendData, {headers: {Authorization: localStorage.getItem("token")}})
-            .then(navigate("/"));
+            .then(() => navigate("/"))
+            .catch((result) => alert(result.response.data.message));
     };
 
     return (<div className="app-content">

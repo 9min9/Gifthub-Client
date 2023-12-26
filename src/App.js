@@ -28,7 +28,8 @@ function App() {
                         setTotalPrice(totalSum);
                         setOriginalPrice(originalSum);
                     }
-                });
+                }).catch((result) => alert(result.response.data.message));
+            ;
         }
 
     }

@@ -12,7 +12,7 @@ export default function Cart({carts, setCarts, originalPrice, totalPrice, fetchC
 
         axios.post(`${process.env.REACT_APP_SERVER_URL}/api/carts/delete`, {},
             {headers: {Authorization: localStorage.getItem("token")}})
-            .then(() => setCarts([]));
+            .then(() => setCarts([])).catch((result) => alert(result.response.data.message));
     }
 
     const checkoutHandleClick = (event) => {
