@@ -76,7 +76,8 @@ export default function Product({fetchCart}) {
                 {headers: {Authorization: localStorage.getItem("token")}})
                 .then((result) => {
                     setPriceList(result.data.content);
-                });
+                }).catch((result) => alert(result.response.data.message));
+            ;
         }
     }
 
@@ -87,10 +88,9 @@ export default function Product({fetchCart}) {
             {headers: {Authorization: localStorage.getItem("token")}})
             .then(function (result) {
                 data = result.data;
+                console.log("카테고리 불러옴")
             })
-            .catch(function (error) {
-                console.log(error);
-            })
+            .catch((result) => alert(result.response.data.message));
 
         return data;
     }
@@ -162,7 +162,7 @@ export default function Product({fetchCart}) {
 
                     setProductList(updateProductList.concat(result.data.content));
                 }
-            })
+            }).catch((result) => alert(result.response.data.message));
     }
 
     const handleBrandClick = (event) => {
@@ -220,7 +220,8 @@ export default function Product({fetchCart}) {
             {headers: {Authorization: localStorage.getItem("token")}, params: {gifticonId: parseInt(event.target.id)}})
             .then((result) => {
                 fetchCart();
-            });
+            }).catch((result) => alert(result.response.data.message));
+        ;
     }
 
     return (

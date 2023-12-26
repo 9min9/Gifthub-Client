@@ -21,7 +21,7 @@ export default function Attendance({isOpen, handleCloseModalClick, isAuthenticat
                 event.target.classList.add(`attendance`);
 
                 setAttendance(true);
-            })
+            }).catch((result) => alert(result.response.data.message));
     }
 
     const setDaysByCalendar = () => {
@@ -46,7 +46,8 @@ export default function Attendance({isOpen, handleCloseModalClick, isAuthenticat
                 for (let i = 1; i <= lastDay.getDate(); i++) {
                     updateDays.push({day: i, checked: checkList.includes(i)});
                 }
-            });
+            }).catch((result) => alert(result.response.data.message));
+        ;
 
         setDays(updateDays);
     }

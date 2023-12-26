@@ -26,7 +26,7 @@ export default function OrderHistory() {
 
                     setOrders(updateOrders.concat(result.data.content));
                 }
-            });
+            }).catch((result) => alert(result.response.data.message));
     }
 
     const increasePage = () => {

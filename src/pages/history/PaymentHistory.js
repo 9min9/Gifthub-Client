@@ -26,7 +26,7 @@ export default function PaymentHistory() {
 
                     setPayments(updatePayments.concat(result.data.content));
                 }
-            });
+            }).catch((result) => alert(result.response.data.message));
     };
 
     const increasePage = () => {
