@@ -25,9 +25,9 @@ export default function Router({carts, setCarts, originalPrice, totalPrice, fetc
         <Routes>
             <Route exact path="/" element={<Product fetchCart={fetchCart}/>}></Route>
             <Route path="/signup" element={<Signup/>}></Route>
-            <Route path="/login" element={<Login/>}></Route>
             <Route path="/redirect" element={<PageRedirect/>}></Route>
             <Route path="/notForbidden" element={<NotForbidden/>}></Route>
+
 
             {!isAuthenticated ? (
                 <>
@@ -38,6 +38,7 @@ export default function Router({carts, setCarts, originalPrice, totalPrice, fetc
                     <Route path="/gifticon/add" element={<Navigate to="/login"/>}/>,
                     <Route path="/carts" element={<Navigate to="/login"/>}/>,
                     <Route path="/order" element={<Navigate to="/login"/>}/>
+
 
                 </>
             ) : (
@@ -50,7 +51,8 @@ export default function Router({carts, setCarts, originalPrice, totalPrice, fetc
                 <>
                     <Route path="/payments" element={<Payment/>}/>
                     <Route path="/mypage" element={<MyPage/>}/>
-                    {/*<Route path="/mypage/refresh" element={<Navigate replace to="/mypage"/>}/>*/}
+                    <Route path="/mypage/refresh" element={<Navigate replace to="/mypage"/>}/>
+                    <Route path="/login" element={<Navigate to="/"/>}/>
                     <Route path="/gifticon/add" element={<GifticonStorage/>}/>
                     <Route path="/gifticon/add/refresh" element={<Navigate replace to="/gifticon/add"/>}/>
                     <Route path="/gifticon/my" element={<MyGifticon/>}/>
@@ -69,6 +71,7 @@ export default function Router({carts, setCarts, originalPrice, totalPrice, fetc
 
             )}
 
+
             {userRole === "ADMIN" ? (
                 <>
                     <Route path="/admin/index" element={<AdminIndex/>}/>
@@ -81,7 +84,10 @@ export default function Router({carts, setCarts, originalPrice, totalPrice, fetc
             )}
 
             <Route path="/*" element={<NotFound/>}/>
+            <Route path="/login" element={<Login/>}></Route>
+
         </Routes>
 
     );
+
 }
