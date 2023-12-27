@@ -11,6 +11,7 @@ import {useEffect, useState} from "react";
 
 export default function GifticonAddForm({item, buttonText}) {
     let navigate = useNavigate();
+    let screen;
     const [isConfirm, setIsConfirm] = useState(true);
 
     //todo : 카테고리 , 거절 이유 세팅하기
@@ -129,14 +130,6 @@ export default function GifticonAddForm({item, buttonText}) {
                 alert("검수에 실패했습니다")
                 console.log(error);
             })
-    }
-
-    let screen;
-
-    if(item.isAdmin === true) {
-        screen = renderAdminAddForm();
-    } else {
-        screen = renderCommonAddForm();
     }
 
     const renderAdminAddForm = () => {
@@ -277,6 +270,12 @@ export default function GifticonAddForm({item, buttonText}) {
                 <NewsletterFormButton innerText={buttonText} _onClick={handleGifticonAddModalClick}></NewsletterFormButton>
             </form>
         );
+    }
+
+    screen = renderCommonAddForm();
+
+    if(item.isAdmin === true) {
+        screen = renderAdminAddForm();
     }
 
     return (screen);
