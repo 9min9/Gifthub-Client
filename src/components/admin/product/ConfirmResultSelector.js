@@ -6,7 +6,7 @@ export default function ConfirmResultSelector({item, title, handleChange}) {
     }
 
     if(title === "거절사유") {
-        name = "cancelReason";
+        name = "rejectReason";
     }
 
     const handleSelectChange = (e) => {
