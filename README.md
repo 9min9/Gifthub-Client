@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+# Web Project
+# GiftHub Frontend Server
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> **KOSTA 266기 최종 프로젝트** <br/> **개발기간: 2023.11 ~ 2023.12**
 
-## Available Scripts
 
-In the project directory, you can run:
+## 프로젝트 소개
+- 기프티콘을 등록하여 사용하는 통합관리를 서비스.
+- 바코드로 결제가 가능한 모바일 상품권을 대상으로 함. 3사(카카오톡, kt기프티쇼, sk기프티콘)
+- 웹 프로젝트의 프론트엔드 서버
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Bankend server github : https://github.com/9min9/Gifthub
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Notion :
 
-### `npm test`
+---
+#### 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Stacks 🐈
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Environment
+![intellij](https://img.shields.io/badge/intellij-000000?style=for-the-badge&logo=intellijidea&logoColor=white)
+![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-007ACC?style=for-the-badge&logo=Visual%20Studio%20Code&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white)
+![Github](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Config
+![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)        
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Front-end
+![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=Bootstrap&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=Javascript&logoColor=white)
+![jQuery](https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jQuery&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 
-### `npm run eject`
+### Server
+![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS_S3-569A31?style=for-the-badge&logo=amazons3&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS_RDS-527FFF?style=for-the-badge&logo=amazonrds&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS_EC2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Communication
+![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white)
+![Discord](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=Discord&logoColor=white)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
+## 주요 기능 🎁
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 🛒 소셜 회원가입 및 Jwt토큰을 사용하여 보안강화
+- 소셜 로그인 시 API를 통해 받은 토큰을 사용하여 프로젝트 자체의 JWT를 구현
+- 소셜 로그인의 인증 토큰을 사용하지 않으므로 보안부담 감소
 
-## Learn More
+### 🛒 기프티콘 등록 및 거래, 선물
+- 카카오 챗봇, 파일로 등록시 Naver Cloud Ocr을 호출하여 db의 상품과 mapping
+- 기프티콘 등록 시 DB의 Product 테이블에 존재하는 상품이면 바로 기프티콘 등록, 존재하지 않는 상품이면 관리자의 검수를 통해 등록 처리
+- 등록 처리된 기프티콘은 판매 가능
+- 카카오 페이를 통해 포인트 충전. 충전된 포인트로 기프티콘을 구매
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 🛒 기프티콘 목록 및 사용
+- 기프티콘으로 등록되면 입력했던 사진은 보안상 이유로 서버에서 삭제
+- 사용 시 기프티콘 바코드 이미지를 생성하고 SMS를 통해 전송
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 관리자
+- 검수 상태의 기프티콘을 확인하여 검수 완료 및 거절
 
-### Code Splitting
+---
+## 아키텍쳐
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 디렉토리 구조
+```bash
 
-### Analyzing the Bundle Size
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+---
+## 화면 구성 📺
+| 메인 페이지  |  소개 페이지   |
+| :-------------------------------------------: | :------------: |
+|  <img width="329" src=""/> |  <img width="329" src=""/>|  
+| 강좌 소개 페이지   |  강의 영상 페이지   |  
+| <img width="329" src=""/>   |  <img width="329" src=""/>     |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
