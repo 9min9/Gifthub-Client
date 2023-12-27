@@ -1,4 +1,4 @@
-export default function ConfirmResultSelector({item, title, handleCategoryChange}) {
+export default function ConfirmResultSelector({item, title, handleChange}) {
     let name;
 
     if (title === "카테고리") {
@@ -10,8 +10,8 @@ export default function ConfirmResultSelector({item, title, handleCategoryChange
     }
 
     const handleSelectChange = (e) => {
-        const selectedCategory = e.target.value;
-        handleCategoryChange(selectedCategory);
+        const select = e.target.value;
+        handleChange(select);
     };
 
     return (
