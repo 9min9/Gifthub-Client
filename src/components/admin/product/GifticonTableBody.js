@@ -11,7 +11,7 @@ export default function GifticonTableBody({item}) {
         <>
             <tr>
                 <th>{item.productName}</th>
-                <th>{item.brandName}</th>
+                <th>{item.brand}</th>
                 <th>{item.userName}</th>
                 <th>{item.modifiedDate}</th>
                 <th><DashTextButton innerText={"확인"} _onClick={() => openModal()}></DashTextButton></th>
