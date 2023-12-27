@@ -14,13 +14,11 @@ function enableScroll() {
 }
 
 export default function GifticonAddModal({isOpen, setIsOpen}) {
-    console.log("GifticonAddModal is rendered");
-
     const fileAdd = React.useRef(null);
     let navigate = useNavigate();
 
     useEffect(() => {
-        if(isOpen) {
+        if (isOpen) {
             disableScroll();
         } else {
             enableScroll();
@@ -40,6 +38,8 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
     }, []);
 
     const openChat = () => {
+        contextInit();
+
         // chatChannel();
         if (window.Kakao) {
             const kakao = window.Kakao
@@ -55,12 +55,20 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
         }
     };
 
+    function contextInit() {
+        axios
+            .post(`${process.env.REACT_APP_SERVER_URL}/api/jwt/context/init`, null, {headers: {Authorization: localStorage.getItem("token")}})
+            .then(function (response) {
+                console.log(response);
+            })
+    }
+
     const handleFileAddButtonClick = async () => {
         try {
             fileAdd.current.click();
             const imageFile = fileAdd.current.files[0];
 
-            if(!imageFile){
+            if (!imageFile) {
                 console.error("no file selected");
                 // return;
             }
@@ -68,24 +76,21 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
             const formData = new FormData();
             formData.append('imageFile', imageFile);
 
-            const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/storage/file/add`,
-                formData,
-        {headers:{
-                        'Content-Type': 'multipart/form-data',
-                        Authorization : localStorage.getItem('token')
-                    },
-                }
+            const res = await axios
+                .post(
+                    `${process.env.REACT_APP_SERVER_URL}/api/storage/file/add`,
+                    formData,
+                    { headers: {'Content-Type': 'multipart/form-data', Authorization: localStorage.getItem('token')},}
                 );
-            console.log("fileupload success:", res.data);
+
             alert("등록 성공");
             setIsOpen(false);
             navigate("/gifticon/add/refresh");
 
-        }catch (error){
-            console.log("error: "+ error);
+        } catch (error) {
+            console.log("error: " + error);
             alert(`등록 실패\n\n${error.response.data.message}`);
         }
-
     };
 
     const handleFileChange = e => {
@@ -122,7 +127,8 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
         <StyledModal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} style={modalStyle}>
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content modal-radius modal-shadow">
-                    <button className="btn dismiss-button fas fa-times" type="button" onClick={() => setIsOpen(false)}></button>
+                    <button className="btn dismiss-button fas fa-times" type="button"
+                            onClick={() => setIsOpen(false)}></button>
                     <div className="modal-body">
                         <div className="row">
                             <div className="col-lg-6 col-md-12">
@@ -145,17 +151,13 @@ export default function GifticonAddModal({isOpen, setIsOpen}) {
                                         <a id="open-chat-button" className="s-option__link btn--e-white-brand-shadow"
                                            onClick={openChat} data-dismiss="modal">카카오톡으로 추가하기</a>
                                         <React.Fragment>
-                                        <label
-                                            className="s-option__link btn--e-white-brand-shadow"
-                                            htmlFor="fileInput"
-                                            // onClick={handleFileAddButtonClick}
-                                        >파일로 추가하기</label>
-                                        <input type="file"
-                                               id="fileInput"
-                                               style={{display: `none`} }
-                                               ref={fileAdd}
-                                               onChange={handleFileChange}
-                                       />
+                                            <label className="s-option__link btn--e-white-brand-shadow" htmlFor="fileInput">파일로 추가하기</label>
+                                            <input type="file"
+                                                   id="fileInput"
+                                                   style={{display: `none`}}
+                                                   ref={fileAdd}
+                                                   onChange={handleFileChange}
+                                            />
                                         </React.Fragment>
                                     </div>
                                 </div>

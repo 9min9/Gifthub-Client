@@ -15,9 +15,10 @@ export default function GifticonAddForm({item, buttonText}) {
     const [isConfirm, setIsConfirm] = useState(true);
 
     //todo : 카테고리 , 거절 이유 세팅하기
-    const [category, setCategory] = useState([]);
+    const [categoryList, setCategoryList] = useState([]);
     const [selectCategory, setSelectCategory] = useState("");
-    const [FailureReason, setFailureReason] = useState([]);
+    const [rejectReasonList, setRejectReasonList] = useState([]);
+    const [selectRejectReason, setSelectRejectReason] = useState()
     const [error, setError] = useState([]);
     const input = useGifticonAddFormInput({
         productName: item.productName || '',
@@ -30,6 +31,7 @@ export default function GifticonAddForm({item, buttonText}) {
     useEffect(() => {
         if (item.isAdmin === true) {
             getCategory()
+            getRejectReason();
         }
     }, []);
 
@@ -38,13 +40,25 @@ export default function GifticonAddForm({item, buttonText}) {
         axios
             .post(`${process.env.REACT_APP_SERVER_URL}/api/product/get/category`, null, {headers: {Authorization: localStorage.getItem("token")}})
             .then(function (response) {
-                setCategory(response.data);
+                setCategoryList(response.data);
             })
     }
 
     //todo getCancelReason
+    const getRejectReason = () => {
+        axios
+            .post(`${process.env.REACT_APP_SERVER_URL}/api/admin/gifticon/confirm/reject/reason`,null, {headers: {Authorization: localStorage.getItem("token")}})
+            .then(function (response) {
+                setRejectReasonList(response.data);
+            })
+    }
+
     const handleCategoryChange = (selectedCategory) => {
         setSelectCategory(selectedCategory);
+    };
+
+    const handleRejectReasonChange = (selectedReason) => {
+        setSelectRejectReason(selectedReason);
     };
 
 
@@ -58,6 +72,7 @@ export default function GifticonAddForm({item, buttonText}) {
         formData.append('storageId', item.gifticonStorageId ? item.gifticonStorageId : item.id);
         formData.append('isConfirm', isConfirm);
         formData.append("category", selectCategory);
+        formData.append("rejectReason", selectRejectReason);
 
         if(item.isAdmin === true) {
             gifticonAddByAdmin(formData);
@@ -199,9 +214,9 @@ export default function GifticonAddForm({item, buttonText}) {
 
                 <div className="gl-inline u-s-m-y-15">
                     {isConfirm === true ?
-                        <ConfirmResultSelector title={"카테고리"} item={category} handleCategoryChange={handleCategoryChange}></ConfirmResultSelector>
+                        <ConfirmResultSelector title={"카테고리"} item={categoryList} handleChange={handleCategoryChange}></ConfirmResultSelector>
                         :
-                        <ConfirmResultSelector title={"거절사유"} item={""}></ConfirmResultSelector>
+                        <ConfirmResultSelector title={"거절사유"} item={rejectReasonList} handleChange={handleRejectReasonChange}></ConfirmResultSelector>
                     }
                 </div>
 
