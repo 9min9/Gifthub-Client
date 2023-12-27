@@ -116,7 +116,6 @@ export default function GifticonItemContainer({item}) {
             })
     }
 
-
     const renderWaitRegistrationState = () => {
         return (
             <div className="w-r u-s-m-b-30">
@@ -218,6 +217,7 @@ export default function GifticonItemContainer({item}) {
                     </div>
 
                     <div id="gifticon-btn-wrap" className="w-r__wrap-2">
+                        <span>상품 검수가 취소되었습니다</span>
                         <WhiteButton innerText="삭제" _onClick={deleteStorage}/>
                         <PrimaryButton innerText="등록 하기" _onClick={() => openModal()}/>
                     </div>
@@ -337,7 +337,7 @@ export default function GifticonItemContainer({item}) {
         screen = renderNeedApprovalState();
     } else if (item.status === "ADMIN_APPROVAL") {
         screen = renderAdminApprovalState();
-    } else if (item.status === "FAIL_REGISTARTION") {
+    } else if (item.status === "FAIL_REGISTRATION") {
         screen = renderFailRegistrationState();
     }
 

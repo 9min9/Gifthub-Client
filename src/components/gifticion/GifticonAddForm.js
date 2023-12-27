@@ -44,7 +44,6 @@ export default function GifticonAddForm({item, buttonText}) {
             })
     }
 
-    //todo getCancelReason
     const getRejectReason = () => {
         axios
             .post(`${process.env.REACT_APP_SERVER_URL}/api/admin/gifticon/confirm/reject/reason`,null, {headers: {Authorization: localStorage.getItem("token")}})
@@ -60,7 +59,6 @@ export default function GifticonAddForm({item, buttonText}) {
     const handleRejectReasonChange = (selectedReason) => {
         setSelectRejectReason(selectedReason);
     };
-
 
     const handleGifticonAddModalClick = () => {
         const formData = new FormData();
@@ -109,9 +107,9 @@ export default function GifticonAddForm({item, buttonText}) {
             })
             .catch(function (error) {
                 let errorList = error.response.data;
-                for (const err of errorList) {
-                    alert(err.message);
-                }
+                // for (const err of errorList) {
+                //     alert(err.message);
+                // }
             })
     }
 

@@ -61,7 +61,7 @@ export default function NewsletterInfoSection({item}) {
                 <div className="new-l__section u-s-m-t-30">
                     <NewsletterModalHead>
                         <NewsletterModalTitleWrapper innerText={"기프티콘 검수 요청하기"}/>
-                        <NewsletterModalSubSubTitleWrapper errorText={"등록 검수가 취소되었습니다"} errorDetail={"정보를 다시 확인 해주세요"}/>
+                        <NewsletterModalSubSubTitleWrapper errorText={"등록 검수가 취소되었습니다"} errorDetail={item.approvalRejectReason}/>
                     </NewsletterModalHead>
 
                     <GifticonAddForm item={item} buttonText={buttonText}/>
@@ -72,7 +72,7 @@ export default function NewsletterInfoSection({item}) {
 
     if(item.isAdmin === true) {
         screen = renderAdminScreen();
-    } else if(item.flagInDb === true && item.status === "WAIT_REGISTRATION") {
+    } else if(item.status === "WAIT_REGISTRATION" && item.flagInDb === true) {
         screen =renderRegistrationScreen();
     } else if (item.status === "NEED_APPROVAL"){
         screen = renderApprovalScreen();
