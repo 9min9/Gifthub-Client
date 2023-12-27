@@ -1,8 +1,9 @@
 import {Link} from "react-router-dom";
 import {AuthContext} from "../account/AuthContextProvider";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import MiniCart from "../../pages/cart/MiniCart";
 import Attendance from "../attendance/Attendance";
+import axios from "axios";
 
 export default function Header({trashHandleClick, carts, totalPrice}) {
     const {isAuthenticated, userRole, logoutHandler} = useContext(AuthContext);
@@ -10,12 +11,27 @@ export default function Header({trashHandleClick, carts, totalPrice}) {
 
     const [isAttendanceOpen, setIsAttendanceOpen] = useState(false);
 
+    const [point, setPoint] = useState(-1);
+
     const handleOpenAttendanceModalClick = (event) => {
         setIsAttendanceOpen(true);
     }
 
     const handleCloseAttendanceModalClick = (event) => {
         setIsAttendanceOpen(false);
+    }
+
+    const fetchPoint = () => {
+        if (localStorage.getItem("token")) {
+            axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/points`,
+                {
+                    headers: {Authorization: localStorage.getItem("token")}
+                })
+                .then((result) => {
+                    setPoint(result.data);
+                })
+                .catch((result) => alert(result.response.data.message));
+        }
     }
 
     if (isAuthenticated) {
@@ -81,6 +97,10 @@ export default function Header({trashHandleClick, carts, totalPrice}) {
         </>
     }
 
+    useEffect(() => {
+        fetchPoint();
+    }, [localStorage.getItem("token")]);
+
     return (
         <>
             <Attendance isOpen={isAttendanceOpen}
@@ -134,7 +154,9 @@ export default function Header({trashHandleClick, carts, totalPrice}) {
                             <div className="ah-lg-mode">
                                 <span className="ah-close">✕ Close</span>
                                 <ul className="ah-list ah-list--design1 ah-list--link-color-secondary" id="side-header">
+                                    {isAuthenticated && <li>포인트: <span id="show-point-span">{point}</span></li>}
                                     <li className="has-dropdown">
+
                                         {isAuthenticated && <MiniCart totalPrice={totalPrice} carts={carts}
                                                                       trashHandleClick={trashHandleClick}/>}
                                     </li>
