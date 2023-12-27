@@ -217,6 +217,7 @@ export default function Product({fetchCart}) {
             {headers: {Authorization: localStorage.getItem("token")}, params: {gifticonId: parseInt(event.target.id)}})
             .then((result) => {
                 fetchCart();
+                alert("장바구니에 담겼습니다.")
             }).catch((result) => alert(result.response.data.message));
         ;
     }
