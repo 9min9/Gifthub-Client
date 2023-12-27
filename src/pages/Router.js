@@ -76,6 +76,7 @@ export default function Router({carts, setCarts, originalPrice, totalPrice, fetc
                 <>
                     <Route path="/admin/index" element={<AdminIndex/>}/>
                     <Route path="/admin/product/config" element={<ProductManagement/>}/>
+                    <Route path="/admin/product/config/refresh" element={<Navigate replace to="/admin/product/config"/>}/>
 
                 </>
             ) : (
