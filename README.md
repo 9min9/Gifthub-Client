@@ -87,7 +87,7 @@ Notion :
 ---
 
 ### 기프티콘 거래 및 포인트 충전
-![gifticonSales](https://github.com/9min9/Gifthub-Client/assets/130825350/748320c2-9d5c-42b7-989d-ae85cfbee120)
+![gifticonSales](https://github.com/9min9/GiftHub/assets/130825350/6bfb0b87-d8c1-49c8-bc45-54478f35b542)
 
 [자세히 보기](https://github.com/9min9/Gifthub-Client/wiki/%EA%B8%B0%ED%94%84%ED%8B%B0%EC%BD%98-%EA%B1%B0%EB%9E%98-%EB%B0%8F-%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EC%B6%A9%EC%A0%84)
 
