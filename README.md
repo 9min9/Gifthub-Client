@@ -71,17 +71,28 @@ Notion :
 ---
 ## 화면 구성 📺
 
+### 메인 화면
+
+![index](https://github.com/9min9/GiftHub/assets/130825350/cd347e71-0894-40c1-8a1f-33bb185702c9)
+
+---
+
+
+
 
 ### 회원가입 / 로그인
 ![1 signup-login](https://github.com/9min9/GiftHub/assets/130825350/dfb73814-6e4c-4fb6-ba3c-f485fd1aa8e0)
 
-[자세히 보기](https://github.com/9min9/Gifthub-Client/wiki/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85,-%EB%A1%9C%EA%B7%B8%EC%9D%B8)
+ 👉 [자세히 보기](https://github.com/9min9/Gifthub-Client/wiki/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85,-%EB%A1%9C%EA%B7%B8%EC%9D%B8)
 
 ---
 
 ### 기프티콘 등록 및 사용
 
-[자세히 보기](https://github.com/9min9/Gifthub-Client/wiki/%EA%B8%B0%ED%94%84%ED%8B%B0%EC%BD%98-%EB%93%B1%EB%A1%9D-%EB%B0%8F-%EC%82%AC%EC%9A%A9)
+![기프티콘 등록 화면](https://github.com/9min9/GiftHub/assets/130825350/55414ea3-fac4-4b3c-9607-456fcb099e3a)
+
+
+ 👉 [자세히 보기](https://github.com/9min9/Gifthub-Client/wiki/%EA%B8%B0%ED%94%84%ED%8B%B0%EC%BD%98-%EB%93%B1%EB%A1%9D-%EB%B0%8F-%EC%82%AC%EC%9A%A9)
 
 
 ---
@@ -89,7 +100,7 @@ Notion :
 ### 기프티콘 거래 및 포인트 충전
 ![gifticonSales](https://github.com/9min9/GiftHub/assets/130825350/6bfb0b87-d8c1-49c8-bc45-54478f35b542)
 
-[자세히 보기](https://github.com/9min9/Gifthub-Client/wiki/%EA%B8%B0%ED%94%84%ED%8B%B0%EC%BD%98-%EA%B1%B0%EB%9E%98-%EB%B0%8F-%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EC%B6%A9%EC%A0%84)
+ 👉 [자세히 보기](https://github.com/9min9/Gifthub-Client/wiki/%EA%B8%B0%ED%94%84%ED%8B%B0%EC%BD%98-%EA%B1%B0%EB%9E%98-%EB%B0%8F-%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EC%B6%A9%EC%A0%84)
 
 ---
 ## 아키텍쳐
