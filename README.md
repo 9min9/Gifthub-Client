@@ -103,10 +103,212 @@ Notion :
  👉 [자세히 보기](https://github.com/9min9/Gifthub-Client/wiki/%EA%B8%B0%ED%94%84%ED%8B%B0%EC%BD%98-%EA%B1%B0%EB%9E%98-%EB%B0%8F-%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EC%B6%A9%EC%A0%84)
 
 ---
+
+### 내 정보
+
+![내 정보](https://github.com/9min9/GiftHub/assets/130825350/00e18772-c17c-4037-8338-7c7ffc765c30)
+
+
+
+---
+
+
 ## 아키텍쳐
 
 ### 디렉토리 구조
 ```bash
+
+src
+ ┣ components
+ ┃ ┣ account
+ ┃ ┃ ┣ login
+ ┃ ┃ ┃ ┣ LoginForm.js
+ ┃ ┃ ┃ ┣ LoginInBtnWrapper.js
+ ┃ ┃ ┃ ┣ LoginInputWrapper.js
+ ┃ ┃ ┃ ┗ SocialLoginWrapper.js
+ ┃ ┃ ┣ signup
+ ┃ ┃ ┃ ┣ MesseageWrapper.js
+ ┃ ┃ ┃ ┣ SignupForm.js
+ ┃ ┃ ┃ ┗ SignupInputWrapper.js
+ ┃ ┃ ┣ AuthContextProvider.js
+ ┃ ┃ ┗ UserProfile.js
+ ┃ ┣ admin
+ ┃ ┃ ┣ product
+ ┃ ┃ ┃ ┣ ConfirmResultSelector.js
+ ┃ ┃ ┃ ┣ GifticonTableBody.js
+ ┃ ┃ ┃ ┣ IsConfrimRadioWrapper.js
+ ┃ ┃ ┃ ┗ ProductManagementSection.js
+ ┃ ┃ ┣ AdminIndexSection.js
+ ┃ ┃ ┗ AdminSidebar.js
+ ┃ ┣ attendance
+ ┃ ┃ ┣ Attendance.js
+ ┃ ┃ ┗ DayComponent.js
+ ┃ ┣ cart
+ ┃ ┃ ┣ cart
+ ┃ ┃ ┃ ┣ CartContainer.js
+ ┃ ┃ ┃ ┣ CartPriceContainer.js
+ ┃ ┃ ┃ ┣ CartSection.js
+ ┃ ┃ ┃ ┣ CartTableWrapper.js
+ ┃ ┃ ┃ ┣ CartWrapper.js
+ ┃ ┃ ┃ ┣ ClearCartWrapper.js
+ ┃ ┃ ┃ ┣ CurrentPositionContainer.js
+ ┃ ┃ ┃ ┗ UpdateCartWrapper.js
+ ┃ ┃ ┗ mini-cart
+ ┃ ┃ ┃ ┣ MiniCartButtonContainer.js
+ ┃ ┃ ┃ ┣ MiniCartContainer.js
+ ┃ ┃ ┃ ┣ MiniCartDeleteIcon.js
+ ┃ ┃ ┃ ┣ MiniCartImageWrapper.js
+ ┃ ┃ ┃ ┣ MiniCartInfoWrapper.js
+ ┃ ┃ ┃ ┗ MiniCartTotalPriceContainer.js
+ ┃ ┣ checkout
+ ┃ ┃ ┣ CheckoutListContainer.js
+ ┃ ┃ ┣ CheckoutListWrapper.js
+ ┃ ┃ ┣ CheckoutPayContainer.js
+ ┃ ┃ ┗ CheckoutSection.js
+ ┃ ┣ common
+ ┃ ┃ ┣ Footer.js
+ ┃ ┃ ┣ Header.js
+ ┃ ┃ ┣ NotForbidden.js
+ ┃ ┃ ┣ NotFound.js
+ ┃ ┃ ┣ Preloader.js
+ ┃ ┃ ┗ Sidebar.js
+ ┃ ┣ gifticion
+ ┃ ┃ ┣ GiftiBotContainer.js
+ ┃ ┃ ┣ GifticonAddForm.js
+ ┃ ┃ ┣ GifticonAddModal.js
+ ┃ ┃ ┣ GifticonHiddenInfo.js
+ ┃ ┃ ┣ GifticonIntroContainer.js
+ ┃ ┃ ┣ GifticonItemContainer.js
+ ┃ ┃ ┣ GifticonItemImage.js
+ ┃ ┃ ┣ GifticonItemInfo.js
+ ┃ ┃ ┣ GifticonItemIntro.js
+ ┃ ┃ ┗ GifticonItemSection.js
+ ┃ ┣ history
+ ┃ ┃ ┣ order
+ ┃ ┃ ┃ ┣ OrderContainer.js
+ ┃ ┃ ┃ ┗ OrderHistorySection.js
+ ┃ ┃ ┗ payment
+ ┃ ┃ ┃ ┣ PaymentContainer.js
+ ┃ ┃ ┃ ┗ PaymentHistorySection.js
+ ┃ ┣ modal
+ ┃ ┃ ┗ newsletter
+ ┃ ┃ ┃ ┣ NewsletterFormButton.js
+ ┃ ┃ ┃ ┣ NewsletterFormErrorWrapper.js
+ ┃ ┃ ┃ ┣ NewsletterH3.js
+ ┃ ┃ ┃ ┣ NewsletterInfoSection.js
+ ┃ ┃ ┃ ┣ NewsletterInputWrapper.js
+ ┃ ┃ ┃ ┣ NewsletterModal.js
+ ┃ ┃ ┃ ┣ NewsletterModalHead.js
+ ┃ ┃ ┃ ┣ NewsletterModalImageSection.js
+ ┃ ┃ ┃ ┣ NewsletterModalSubSubTitleWrapper.js
+ ┃ ┃ ┃ ┗ NewsletterModalTitleWrapper.js
+ ┃ ┣ mypage
+ ┃ ┃ ┣ dashboard
+ ┃ ┃ ┃ ┣ DashboardButtonWrapper.js
+ ┃ ┃ ┃ ┣ DashboardContentWrapper.js
+ ┃ ┃ ┃ ┗ DashboardTitleContainer.js
+ ┃ ┃ ┣ MyPageContentSection.js
+ ┃ ┃ ┗ MyPageTitleContainer.js
+ ┃ ┣ payment
+ ┃ ┃ ┣ OrderSummaryContainer.js
+ ┃ ┃ ┣ OrderSummaryWrapper.js
+ ┃ ┃ ┣ PaymentSection.js
+ ┃ ┃ ┣ PriceSelectorWrapper.js
+ ┃ ┃ ┗ RadioBox.js
+ ┃ ┣ product
+ ┃ ┃ ┣ BrandComponent.js
+ ┃ ┃ ┣ BrandContainer.js
+ ┃ ┃ ┣ CategoryComponent.js
+ ┃ ┃ ┣ CategoryContainer.js
+ ┃ ┃ ┣ ImageModalTableContainer.js
+ ┃ ┃ ┣ ModalInfoSection.js
+ ┃ ┃ ┣ ProductCard.js
+ ┃ ┃ ┣ ProductListContainer.js
+ ┃ ┃ ┗ ProductSection.js
+ ┃ ┗ ui
+ ┃ ┃ ┣ button
+ ┃ ┃ ┃ ┣ DashOutlineButton.js
+ ┃ ┃ ┃ ┣ DashTextButton.js
+ ┃ ┃ ┃ ┣ KakaoLoginButton.js
+ ┃ ┃ ┃ ┣ KakaoPayButton.js
+ ┃ ┃ ┃ ┣ NaverLoginButton.js
+ ┃ ┃ ┃ ┣ OutlineButton.js
+ ┃ ┃ ┃ ┣ PrimaryBtn.js
+ ┃ ┃ ┃ ┣ PrimaryButton.js
+ ┃ ┃ ┃ ┣ SelectorButton.js
+ ┃ ┃ ┃ ┗ WhiteButton.js
+ ┃ ┃ ┣ dashboard
+ ┃ ┃ ┃ ┣ DashboardH1.js
+ ┃ ┃ ┃ ┣ DashboardH2.js
+ ┃ ┃ ┃ ┗ DashboardSpan.js
+ ┃ ┃ ┣ form
+ ┃ ┃ ┃ ┣ Input.js
+ ┃ ┃ ┃ ┣ InputNumber.js
+ ┃ ┃ ┃ ┣ InputWithLabel.js
+ ┃ ┃ ┃ ┣ Label.js
+ ┃ ┃ ┃ ┣ MessageDiv.js
+ ┃ ┃ ┃ ┣ RadioButton.js
+ ┃ ┃ ┃ ┗ SelectorButton.js
+ ┃ ┃ ┣ image-card
+ ┃ ┃ ┃ ┣ Image.js
+ ┃ ┃ ┃ ┗ ImageContent.js
+ ┃ ┃ ┣ link
+ ┃ ┃ ┃ ┣ GlLink.js
+ ┃ ┃ ┃ ┣ RouteBox.js
+ ┃ ┃ ┃ ┗ RouteBoxLink.js
+ ┃ ┃ ┣ logo
+ ┃ ┃ ┃ ┗ TextLogo.js
+ ┃ ┃ ┣ modal
+ ┃ ┃ ┃ ┗ image-modal
+ ┃ ┃ ┃ ┃ ┣ ImageSection.js
+ ┃ ┃ ┃ ┃ ┗ Modal.js
+ ┃ ┃ ┣ Image.js
+ ┃ ┃ ┗ useIntersectionObserver.js
+ ┣ css
+ ┃ ┣ custom
+ ┃ ┃ ┣ attendance.css
+ ┃ ┃ ┣ custom.css
+ ┃ ┃ ┣ index.css
+ ┃ ┃ ┗ payment.css
+ ┃ ┣ utility.css
+ ┃ ┗ vendor.css
+ ┣ dev
+ ┣ hooks
+ ┃ ┣ useGifticonAddFormInput.js
+ ┃ ┗ useNewsletterModal.js
+ ┣ pages
+ ┃ ┣ account
+ ┃ ┃ ┣ Login.js
+ ┃ ┃ ┣ MyPage.js
+ ┃ ┃ ┗ Signup.js
+ ┃ ┣ admin
+ ┃ ┃ ┣ AdminIndex.js
+ ┃ ┃ ┗ ProductManagement.js
+ ┃ ┣ cart
+ ┃ ┃ ┣ Cart.js
+ ┃ ┃ ┗ MiniCart.js
+ ┃ ┣ checkout
+ ┃ ┃ ┗ Checkout.js
+ ┃ ┣ gifticon
+ ┃ ┃ ┣ GifticonStorage.js
+ ┃ ┃ ┗ MyGifticon.js
+ ┃ ┣ history
+ ┃ ┃ ┣ OrderHistory.js
+ ┃ ┃ ┗ PaymentHistory.js
+ ┃ ┣ payment
+ ┃ ┃ ┗ Payment.js
+ ┃ ┣ product
+ ┃ ┃ ┗ Product.js
+ ┃ ┣ PageRedirect.js
+ ┃ ┗ Router.js
+ ┣ App.css
+ ┣ App.js
+ ┣ App.test.js
+ ┣ index.css
+ ┣ index.js
+ ┣ logo.svg
+ ┣ reportWebVitals.js
+ ┗ setupTests.js
 
 ```
 
