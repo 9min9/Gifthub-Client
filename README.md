@@ -89,7 +89,8 @@ Notion :
 
 ### 기프티콘 등록 및 사용
 
-![기프티콘 등록 화면](https://github.com/9min9/GiftHub/assets/130825350/55414ea3-fac4-4b3c-9607-456fcb099e3a)
+![리드미_기프티콘등록](https://github.com/9min9/Gifthub-Client/assets/130825350/be48d746-bbab-4d5a-8503-8c8a0a4049f7)
+![기프티콘 사용](https://github.com/9min9/Gifthub-Client/assets/130825350/a4dc35a2-5edb-4449-877a-3c274948513f)
 
 
  👉 [자세히 보기](https://github.com/9min9/Gifthub-Client/wiki/%EA%B8%B0%ED%94%84%ED%8B%B0%EC%BD%98-%EB%93%B1%EB%A1%9D-%EB%B0%8F-%EC%82%AC%EC%9A%A9)
