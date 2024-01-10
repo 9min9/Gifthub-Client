@@ -9,14 +9,10 @@
 - 바코드로 결제가 가능한 모바일 상품권을 대상으로 함. 3사(카카오톡, kt기프티쇼, sk기프티콘)
 - 웹 프로젝트의 프론트엔드 서버
 
-
-Bankend server github : https://github.com/9min9/Gifthub
-
-Notion :
+👉 [Bankend Server](https://github.com/9min9/Gifthub)
 
 ---
 #### 
-
 
 ## Stacks 🐈
 
@@ -48,6 +44,7 @@ Notion :
 ![Discord](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=Discord&logoColor=white)
 
 ---
+
 ## 주요 기능 🎁
 
 ### 🛒 소셜 회원가입 및 Jwt 사용
@@ -77,11 +74,8 @@ Notion :
 
 ---
 
-
-
-
 ### 회원가입 / 로그인
-![1 signup-login](https://github.com/9min9/GiftHub/assets/130825350/dfb73814-6e4c-4fb6-ba3c-f485fd1aa8e0)
+![회원가입,로그인](https://github.com/9min9/Gifthub-Client/assets/130825350/058b2afa-45e0-4d1d-97ab-1d325dd0ec2e)
 
  👉 [자세히 보기](https://github.com/9min9/Gifthub-Client/wiki/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85,-%EB%A1%9C%EA%B7%B8%EC%9D%B8)
 
@@ -92,14 +86,13 @@ Notion :
 ![리드미_기프티콘등록](https://github.com/9min9/Gifthub-Client/assets/130825350/be48d746-bbab-4d5a-8503-8c8a0a4049f7)
 ![기프티콘 사용](https://github.com/9min9/Gifthub-Client/assets/130825350/a4dc35a2-5edb-4449-877a-3c274948513f)
 
-
  👉 [자세히 보기](https://github.com/9min9/Gifthub-Client/wiki/%EA%B8%B0%ED%94%84%ED%8B%B0%EC%BD%98-%EB%93%B1%EB%A1%9D-%EB%B0%8F-%EC%82%AC%EC%9A%A9)
-
 
 ---
 
 ### 기프티콘 거래 및 포인트 충전
-![gifticonSales](https://github.com/9min9/GiftHub/assets/130825350/6bfb0b87-d8c1-49c8-bc45-54478f35b542)
+
+![판매,결제](https://github.com/9min9/Gifthub-Client/assets/130825350/264ff2c7-8ba2-452b-a4ce-92b78969ac26)
 
  👉 [자세히 보기](https://github.com/9min9/Gifthub-Client/wiki/%EA%B8%B0%ED%94%84%ED%8B%B0%EC%BD%98-%EA%B1%B0%EB%9E%98-%EB%B0%8F-%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EC%B6%A9%EC%A0%84)
 
@@ -107,18 +100,16 @@ Notion :
 
 ### 내 정보
 
-![내 정보](https://github.com/9min9/GiftHub/assets/130825350/00e18772-c17c-4037-8338-7c7ffc765c30)
-
-
+![내정보](https://github.com/9min9/Gifthub-Client/assets/130825350/00ebe7f9-ec40-45b6-b0e3-828625b06b33)
 
 ---
 
-
 ## 아키텍쳐
 
-### 디렉토리 구조
-```bash
+<details><summary>프로젝트 구조</summary>
+<div markdown="1">
 
+```
 src
  ┣ components
  ┃ ┣ account
@@ -312,6 +303,9 @@ src
  ┗ setupTests.js
 
 ```
+</div>
+</details>
+
 
 
 
