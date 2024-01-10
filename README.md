@@ -1,4 +1,3 @@
-# Web Project
 # GiftHub Frontend Server
 
 > **KOSTA 266기 최종 프로젝트** <br/> **개발기간: 2023.12 ~ 2023.12** <br/> 팀원 : 4명
@@ -105,6 +104,16 @@
 ---
 
 ## 아키텍쳐
+
+
+```
+Page        >    Section    >    Container    >    Wrapper (card, row, box ...)    >    Component
+UseState         UseState
+UesEffect        UesEffect
+```
+- 상태관리를 용이하게 하기 위해 Page와 Section 단위에서 UseState와 UseEffect를 사용
+
+
 
 <details><summary>프로젝트 구조</summary>
 <div markdown="1">
